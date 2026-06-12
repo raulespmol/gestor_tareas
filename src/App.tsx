@@ -1,18 +1,47 @@
 import { Button } from "@/components/ui/button"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { placeholderData } from "@/assets/data_placeholder";
 
 export function App() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
+    <div className="flex w-full min-h-svh p-6">
+      <div className="flex min-w-0 w-full flex-col gap-4 text-sm leading-loose">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold">Gestor de Tareas</h1>
+          <Button>Agregar Tarea</Button>
         </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-25">Fecha</TableHead>
+              <TableHead>Cliente</TableHead>
+              <TableHead>Estado</TableHead>
+              <TableHead className="text-right">Total</TableHead>
+              <TableHead className="text-right">Pagado</TableHead>
+              <TableHead className="text-right">Pendiente</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {placeholderData.map((item) => (
+              <TableRow key={item.numeroCotizacion}>
+                <TableCell className="font-medium">{item.fecha}</TableCell>
+                <TableCell>{item.clienteEmpresa}</TableCell>
+                <TableCell>{item.estado}</TableCell>
+                <TableCell className="text-right">${item.montoTotal.toLocaleString('es-CL')}</TableCell>
+                <TableCell className="text-right">${item.montoPagado.toLocaleString('es-CL')}</TableCell>
+                <TableCell className="text-right">${(item.montoTotal - item.montoPagado).toLocaleString('es-CL')}</TableCell>
+                <TableCell>{item.medioPago}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   )
