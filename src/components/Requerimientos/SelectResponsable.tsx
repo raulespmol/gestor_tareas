@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-import { trabajadores } from "@/assets/data_placeholder";
+import { trabajadores } from "@/data/data_placeholder";
 
 const SelectResponsable = () => {
   return (
