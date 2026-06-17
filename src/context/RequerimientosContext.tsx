@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { placeholderData } from "@/data/data_placeholder";
 import type { Requerimiento } from "@/types/requerimiento";
 
@@ -14,8 +14,30 @@ type ProviderProps = {
 
 const RequerimientosContext = createContext<RequerimientosContextType | null>(null);
 
+const cargarRequerimientos = (): Requerimiento[] => {
+  try {
+    const data = localStorage.getItem("requerimientos");
+    return data ? JSON.parse(data) : placeholderData;
+  } catch (error) {
+    console.error("Error al cargar requerimientos:", error);
+    return placeholderData;
+  }
+}
+
+const guardarRequerimientos = (requerimientos: Requerimiento[]) => {
+  try {
+    localStorage.setItem("requerimientos", JSON.stringify(requerimientos));
+  } catch (error) {
+    console.error("Error al guardar requerimientos:", error);
+  }
+}
+
 export const RequerimientosProvider = ({children}: ProviderProps) => {
-  const [requerimientos, setRequerimientos] = useState<Requerimiento[]>(placeholderData);
+  const [requerimientos, setRequerimientos] = useState<Requerimiento[]>(cargarRequerimientos);
+
+  useEffect(() => {
+    guardarRequerimientos(requerimientos);
+  }, [requerimientos])
 
   const actualizarEstado = (idRequerimiento: number, nuevoEstadoId: number) => {
     setRequerimientos((prev) => 
