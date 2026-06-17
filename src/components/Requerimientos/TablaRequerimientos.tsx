@@ -41,7 +41,7 @@ const TablaRequerimientos = () => {
               <SelectEstado estadoId={item.estadoId} requerimientoId={item.id} />
             </TableCell>
             <TableCell className="text-center w-50">
-              <SelectResponsable />
+              <SelectResponsable responsableId={item.responsableId} requerimientoId={item.id} />
             </TableCell>
             <TableCell className="text-center">${item.montoTotal.toLocaleString('es-CL')}</TableCell>
             <TableCell className="text-center">${item.montoPagado.toLocaleString('es-CL')}</TableCell>

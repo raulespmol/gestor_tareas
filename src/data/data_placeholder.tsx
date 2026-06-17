@@ -69,7 +69,7 @@ const placeholderData: Requerimiento[] = [
     clienteEmpresa: "Alpha Seguridad",
     numeroCotizacion: "1005",
     detalleDescripcion: "Impresión de señalética",
-    responsableId: 4,
+    responsableId: 0,
     estadoId: 3,
     montoTotal: 125000,
     montoPagado: 125000,

@@ -7,13 +7,23 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import { useRequerimientos } from "@/context/RequerimientosContext.tsx"
 import { trabajadores } from "@/data/data_placeholder";
 
-const SelectResponsable = () => {
+const SelectResponsable = ( {responsableId, requerimientoId}: {responsableId: number, requerimientoId: number}) => {
+  const { actualizarResponsable } = useRequerimientos();
+
+  const handleChange = (nuevoResponsableId: number) => {
+    actualizarResponsable(requerimientoId, nuevoResponsableId);
+  }
+
   return (
-    <Select>
+    <Select 
+      value={responsableId.toString()}
+      onValueChange={(e) => handleChange(parseInt(e))}
+    >
       <SelectTrigger className="w-full">
-        <SelectValue placeholder="Asignar Responsable" />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
