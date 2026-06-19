@@ -20,8 +20,8 @@ const TablaRequerimientos = () => {
           <TableHead className="text-center">Cliente</TableHead>
           <TableHead className="w-10 text-center">Cotización</TableHead>
           <TableHead className="text-center">Descripción</TableHead>
-          <TableHead className="w-25 text-center">Estado</TableHead>
           <TableHead className="text-center">Responsable</TableHead>
+          <TableHead className="w-25 text-center">Estado</TableHead>
           <TableHead className="text-center">Total</TableHead>
           <TableHead className="text-center">Pagado</TableHead>
           <TableHead className="text-center">Pendiente</TableHead>
@@ -37,11 +37,11 @@ const TablaRequerimientos = () => {
             <TableCell className="text-left">{item.clienteEmpresa}</TableCell>
             <TableCell className="text-center">{item.numeroCotizacion}</TableCell>
             <TableCell className="max-w-xs text-left overflow-hidden">{item.detalleDescripcion}</TableCell>
-            <TableCell className="text-center">
-              <SelectEstado estadoId={item.estadoId} requerimientoId={item.id} />
-            </TableCell>
             <TableCell className="text-center w-50">
               <SelectResponsable responsableId={item.responsableId} requerimientoId={item.id} />
+            </TableCell>
+            <TableCell className="text-center">
+              <SelectEstado estadoId={item.estadoId} requerimientoId={item.id} />
             </TableCell>
             <TableCell className="text-center">${item.montoTotal.toLocaleString('es-CL')}</TableCell>
             <TableCell className="text-center">${item.montoPagado.toLocaleString('es-CL')}</TableCell>

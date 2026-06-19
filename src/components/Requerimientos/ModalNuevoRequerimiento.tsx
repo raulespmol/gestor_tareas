@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -27,6 +28,9 @@ const ModalNuevoRequerimiento = ({ open, onOpenChange }: Props) => {
 
         <RequerimientoForm />
       </DialogContent>
+      <DialogDescription className="sr-only">
+        Ingrese la información del nuevo requerimiento.
+      </DialogDescription>
     </Dialog>
   );
 };
