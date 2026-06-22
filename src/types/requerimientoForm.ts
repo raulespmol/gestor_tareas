@@ -3,4 +3,5 @@ export interface RequerimientoFormData {
   numeroCotizacion: string;
   detalleDescripcion: string;
   montoTotal: number;
+  montoPagado: number;
 }

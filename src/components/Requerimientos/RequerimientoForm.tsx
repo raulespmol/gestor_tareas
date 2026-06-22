@@ -7,20 +7,27 @@ import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import { Textarea } from "../ui/textarea";
 
+import {useRequerimientos} from "@/context/RequerimientosContext";
+
 export const RequerimientoForm = () => {
   const { register, 
     handleSubmit, 
+    reset,
     formState: { errors } } = useForm<RequerimientoFormData>({
       defaultValues: {
         clienteEmpresa: "",
         numeroCotizacion: "",
         detalleDescripcion: "",
         montoTotal: 0,
+        montoPagado: 0
       }
     });
 
+  const { agregarRequerimiento } = useRequerimientos();
+
   const onSubmit = (data: RequerimientoFormData) => {
-    console.log("Datos del formulario:", data);
+    agregarRequerimiento(data);
+    reset();
   }
 
   return (
@@ -76,6 +83,22 @@ export const RequerimientoForm = () => {
         />
 
         <FieldError errors={[errors.montoTotal]} />
+      </Field>
+
+      <Field>
+        <FieldLabel>
+          Monto Pagado
+        </FieldLabel>
+
+        <Input
+          type="number"
+          {...register("montoPagado", {
+            valueAsNumber: true,
+            min: {value: 0, message: "El monto no puede ser negativo"}
+          })}
+        />
+
+        <FieldError errors={[errors.montoPagado]} />
       </Field>
 
       <Button type="submit">

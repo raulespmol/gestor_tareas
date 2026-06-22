@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { placeholderData } from "@/data/data_placeholder";
 import type { Requerimiento } from "@/types/requerimiento";
+import type { RequerimientoFormData } from "@/types/requerimientoForm";
 
 type RequerimientosContextType = {
   requerimientos: Requerimiento[];
   actualizarEstado: (idRequerimiento: number, nuevoEstadoId: number) => void;
   actualizarResponsable: (idRequerimiento: number, nuevoResponsableId: number) => void;
+  agregarRequerimiento: (data: RequerimientoFormData) => void;
 }
 
 type ProviderProps = {
@@ -51,8 +53,28 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
     );
   };
 
+  const agregarRequerimiento = (data: RequerimientoFormData) => {
+    const nuevoRequerimiento: Requerimiento = {
+      id: Date.now(), // TEMPORAL
+      fecha: new Date().toISOString().split("T")[0],
+      responsableId: 0,
+      estadoId: 1,
+      montoPendiente: (data.montoTotal - data.montoPagado),
+      numeroFactura: "",
+      medioPago: "",
+      otrosDatos: "",
+      ...data
+    };
+    setRequerimientos((prev) => [...prev, nuevoRequerimiento]);
+  };
+
   return (
-    <RequerimientosContext.Provider value={{ requerimientos, actualizarEstado, actualizarResponsable }}>
+    <RequerimientosContext.Provider value={{ 
+      requerimientos, 
+      actualizarEstado, 
+      actualizarResponsable, 
+      agregarRequerimiento 
+    }}>
       {children}
     </RequerimientosContext.Provider>
   );
