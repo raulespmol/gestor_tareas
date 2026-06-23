@@ -26,7 +26,7 @@ const ModalNuevoRequerimiento = ({ open, onOpenChange }: Props) => {
           </DialogTitle>
         </DialogHeader>
 
-        <RequerimientoForm />
+        <RequerimientoForm onSuccess={() => onOpenChange(false)} />
       </DialogContent>
       <DialogDescription className="sr-only">
         Ingrese la información del nuevo requerimiento.

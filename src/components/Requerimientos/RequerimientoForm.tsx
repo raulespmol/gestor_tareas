@@ -9,7 +9,11 @@ import { Textarea } from "../ui/textarea";
 
 import {useRequerimientos} from "@/context/RequerimientosContext";
 
-export const RequerimientoForm = () => {
+type RequerimientoFormProps = {
+  onSuccess: () => void;
+};
+
+export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
   const { register, 
     handleSubmit, 
     reset,
@@ -28,6 +32,7 @@ export const RequerimientoForm = () => {
   const onSubmit = (data: RequerimientoFormData) => {
     agregarRequerimiento(data);
     reset();
+    onSuccess();
   }
 
   return (
