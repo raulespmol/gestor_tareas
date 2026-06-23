@@ -19,7 +19,7 @@ const ModalNuevoRequerimiento = ({ open, onOpenChange }: Props) => {
       open={open}
       onOpenChange={onOpenChange}
     >
-      <DialogContent>
+      <DialogContent className="sm:max-w-4xl">
         <DialogHeader>
           <DialogTitle>
             Nuevo Requerimiento

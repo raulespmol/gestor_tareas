@@ -13,7 +13,7 @@ import SelectEstado from "./SelectEstado";
 const TablaRequerimientos = () => {
   const { requerimientos } = useRequerimientos();
   return (
-    <Table className="w-full max-h-[calc(100vh-12rem)] overflow-hidden">
+    <Table className="w-full max-h-[calc(100vh-12rem)] overflow-hidden border">
       <TableHeader>
         <TableRow className="text-sm sticky top-0 z-10 bg-muted">
           <TableHead className="w-25 text-center">Fecha</TableHead>

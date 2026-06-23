@@ -388,8 +388,8 @@ const trabajadores: Trabajador[] = [
 ];
 
 const estados: Estado[] = [
-  { id: 0, nombre: "Cotizar" },
-  { id: 1, nombre: "En proceso" },
+  { id: 0, nombre: "En proceso" },
+  { id: 1, nombre: "Cotizar" },
   { id: 2, nombre: "Diseño" },
   { id: 3, nombre: "Impresión" },
   { id: 4, nombre: "Taller" },
