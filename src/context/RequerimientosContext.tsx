@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { placeholderData } from "@/data/data_placeholder";
-import type { Requerimiento } from "@/types/requerimiento";
-import type { RequerimientoFormData } from "@/types/requerimientoForm";
+import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
+import type { RequerimientoFormData } from "@/features/requerimientos/types/requerimientoForm.type";
 
 type RequerimientosContextType = {
   requerimientos: Requerimiento[];

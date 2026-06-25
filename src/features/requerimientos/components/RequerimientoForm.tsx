@@ -1,11 +1,11 @@
 import { useForm, Controller } from "react-hook-form";
 
-import type { RequerimientoFormData } from "@/types/requerimientoForm";
+import type { RequerimientoFormData } from "@/features/requerimientos/types/requerimientoForm.type";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Field, FieldError, FieldLabel } from "../ui/field";
-import { Textarea } from "../ui/textarea";
+import { Field, FieldError, FieldLabel } from "../../../components/ui/field";
+import { Textarea } from "../../../components/ui/textarea";
 
 import {useRequerimientos} from "@/context/RequerimientosContext";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"

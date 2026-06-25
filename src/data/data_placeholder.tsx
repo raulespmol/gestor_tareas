@@ -1,6 +1,6 @@
-import type { Requerimiento } from "@/types/requerimiento";
-import type { Estado } from "@/types/estado";
-import type { Trabajador } from "@/types/trabajador";
+import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
+import type { Estado } from "@/features/requerimientos/types/estado.type";
+import type { Trabajador } from "@/features/requerimientos/types/trabajador";
 
 const placeholderData: Requerimiento[] = [
   {
