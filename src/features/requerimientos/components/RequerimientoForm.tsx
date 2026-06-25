@@ -68,17 +68,19 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
           <Input
             type="text"
             {...register("numeroCotizacion")}
+            placeholder="01234"
           />
           <FieldError errors={[errors.numeroCotizacion]} />
         </Field>
         
         <Field className="col-span-2">
           <FieldLabel>
-            Cliente / Empresa
+            Cliente
           </FieldLabel>
 
           <Input
             {...register("clienteEmpresa")}
+            placeholder="Nombre / Razón Social"
           />
 
           <FieldError errors={[errors.clienteEmpresa]} />
@@ -216,6 +218,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
             <Input
               type="text"
               {...register("medioPago")}
+              placeholder="Transf. / Efectivo / Debito"
             />
           </Field>
           <Field className="col-span-1">
@@ -225,6 +228,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
             <Input
               type="text"
               {...register("numeroFactura")}
+              placeholder="01234"
             />
           </Field>
         </div>
