@@ -5,11 +5,15 @@ import type { Requerimiento } from "@/features/requerimientos/types/requerimient
 import SelectEstado from "@/features/requerimientos/components/SelectEstado"
 import SelectResponsable from "@/features/requerimientos/components/SelectResponsable";
 import { formatearMoneda } from "@/utils/formatearMoneda";
+import { formatearFecha } from "@/utils/formatearFecha";
 
 export const columns: ColumnDef<Requerimiento>[] = [
   {
     accessorKey: "fecha",
     header: "Fecha",
+    cell: ({ getValue }) =>
+      formatearFecha(String(getValue())
+    )
   },
   {
     accessorKey: "clienteEmpresa",
