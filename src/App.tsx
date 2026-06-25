@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import TablaRequerimientos from "@/components/Requerimientos/TablaRequerimientos"
+import TablaRequerimientos from "@/components/Requerimientos/Tabla/TablaRequerimientos"
 import { useState } from "react";
 import ModalNuevoRequerimiento from "./components/Requerimientos/ModalNuevoRequerimiento";
 

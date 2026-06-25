@@ -56,14 +56,8 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
   const agregarRequerimiento = (data: RequerimientoFormData) => {
     const nuevoRequerimiento: Requerimiento = {
       id: Date.now(), // TEMPORAL
-      fecha: new Date().toISOString().split("T")[0],
-      responsableId: 0,
-      estadoId: 1,
-      montoPendiente: (data.montoTotal - data.montoPagado),
-      numeroFactura: "",
-      medioPago: "",
-      otrosDatos: "",
-      ...data
+      ...data,
+      montoPendiente: (data.montoTotal - data.montoPagado)
     };
     setRequerimientos((prev) => [...prev, nuevoRequerimiento]);
   };
