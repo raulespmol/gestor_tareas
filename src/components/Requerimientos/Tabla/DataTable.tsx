@@ -1,9 +1,13 @@
 import {
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
   type ColumnDef,
+  type SortingState,
 } from "@tanstack/react-table";
+
+import { useState } from "react";
 
 import {
   Table,
@@ -23,11 +27,23 @@ export function DataTable<TData>({
   columns,
   data,
 }: DataTableProps<TData>) {
+  const [sorting, setSorting] = useState<SortingState>([]);
+
   const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
+  data,
+  columns,
+
+  getCoreRowModel: getCoreRowModel(),
+  getSortedRowModel: getSortedRowModel(),
+
+  state: {
+    sorting,
+  },
+
+  onSortingChange: setSorting,
+});
+
+
 
   return (
     <div className="rounded-md border overflow-auto">
@@ -36,13 +52,31 @@ export function DataTable<TData>({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
+                <TableHead
+                  key={header.id}
+                  onClick={header.column.getCanSort()
+                    ? header.column.getToggleSortingHandler()
+                    : undefined}
+                  className={
+                    header.column.getCanSort()
+                    ? "cursor-pointer select-none"
+                    : ""
+                  }
+                >
                   {header.isPlaceholder
                     ? null
-                    : flexRender(
+                    : <>
+                      {flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
+
+                      {{
+                        asc: " ↑",
+                        desc: " ↓",
+                      }[header.column.getIsSorted() as string] ?? null}
+                    </>
+                  }
                 </TableHead>
               ))}
             </TableRow>

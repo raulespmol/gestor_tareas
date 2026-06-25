@@ -4,6 +4,7 @@ import type { Requerimiento } from "@/types/requerimiento";
 
 import SelectEstado from "@/components/Requerimientos/SelectEstado"
 import SelectResponsable from "@/components/Requerimientos/SelectResponsable";
+import { formatearMoneda } from "@/utils/formatearMoneda";
 
 export const columns: ColumnDef<Requerimiento>[] = [
   {
@@ -25,10 +26,11 @@ export const columns: ColumnDef<Requerimiento>[] = [
       <div className="max-w-xs truncate">
         {row.original.detalleDescripcion}
       </div>
-    )
+    ),
+    enableSorting: false
   },
   {
-    id: "estado",
+    accessorKey: "estadoId",
     header: "Estado",
     cell: ({ row }) => (
       <SelectEstado
@@ -36,9 +38,10 @@ export const columns: ColumnDef<Requerimiento>[] = [
         requerimientoId={row.original.id}
       />
     ),
+    enableSorting: false
   },
   {
-    id: "responsable",
+    accessorKey: "responsableId",
     header: "Responsable",
     cell: ({ row }) => (
       <SelectResponsable
@@ -46,28 +49,30 @@ export const columns: ColumnDef<Requerimiento>[] = [
         requerimientoId={row.original.id}
       />
     ),
+    enableSorting: false
   },
   {
     accessorKey: "montoTotal",
     header: "Total",
-    cell: ({ row }) =>
-      `$${row.original.montoTotal.toLocaleString("es-CL")}`,
+    cell: ({ getValue }) =>
+      formatearMoneda(Number(getValue()))
   },
   {
     accessorKey: "montoPagado",
     header: "Pagado",
-    cell: ({ row }) =>
-      `$${row.original.montoPagado.toLocaleString("es-CL")}`,
+    cell: ({ getValue }) =>
+      formatearMoneda(Number(getValue()))
   },
   {
     accessorKey: "montoPendiente",
     header: "Pendiente",
-    cell: ({ row }) =>
-      `$${row.original.montoPendiente.toLocaleString("es-CL")}`,
+    cell: ({ getValue }) =>
+      formatearMoneda(Number(getValue()))
   },
   {
     accessorKey: "medioPago",
     header: "Medio Pago",
+    enableSorting: false
   },
   {
     accessorKey: "numeroFactura",
@@ -76,5 +81,6 @@ export const columns: ColumnDef<Requerimiento>[] = [
   {
     accessorKey: "otrosDatos",
     header: "Otros Datos",
+    enableSorting: false
   },
 ];
