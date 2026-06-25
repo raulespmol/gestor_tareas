@@ -32,7 +32,6 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
         estadoId: 0,
         montoTotal: 0,
         montoPagado: 0,
-        montoPendiente: 0,
         medioPago: "",
         numeroFactura: "",
         otrosDatos: ""
@@ -52,19 +51,16 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
   const montoPendiente = Math.max(montoTotal - montoPagado, 0);
 
   const onSubmit = (data: RequerimientoFormData) => {
-    const total = Number(data.montoTotal || 0);
-    const pagado = Number(data.montoPagado || 0);
-
-    const pendiente = total - pagado;
+    const pendiente = data.montoTotal - data.montoPagado
 
     if (pendiente < 0) {
-      alert("El monto pagado no puede ser mayor al monto total");
+      alert("El monto pagado no puede ser mayor al monto total"); //reemplazar por error
       return;
     }
 
-  agregarRequerimiento(data);
-  reset();
-  onSuccess();
+    agregarRequerimiento(data);
+    reset();
+    onSuccess();
 };
 
   return (
@@ -114,7 +110,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
           <Textarea
             {...register("detalleDescripcion")}
             className="resize-none h-27.5"
-
+            placeholder="Adhesivo / Tela / Greyback ..."
           />
         </Field>
       </div>
@@ -203,7 +199,6 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
                 required: "Este campo es obligatorio",
                 min: {value: 0, message: "El monto total no puede ser negativo"}
               })}
-              min={0}
             />
 
             <FieldError errors={[errors.montoTotal]} />
@@ -221,7 +216,6 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
                 valueAsNumber: true,
                 min: {value: 0, message: "El monto no puede ser negativo"}
               })}
-              min={0}
             />
 
             <FieldError errors={[errors.montoPagado]} />
@@ -232,9 +226,8 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
               Pendiente
             </FieldLabel>
             <Input 
-              value={montoPendiente} 
+              value={montoPendiente}
               disabled/>
-            <FieldError errors={[errors.montoPendiente]} />
           </Field>
         </div>
 
@@ -266,6 +259,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
           <Input
             type="text"
             {...register("otrosDatos")}
+            placeholder="Telefono / OC / RUT"
           />
         </Field>
         
