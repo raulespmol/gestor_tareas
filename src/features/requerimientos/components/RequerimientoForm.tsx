@@ -1,65 +1,49 @@
 import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import type { RequerimientoFormData } from "@/types/requerimientoForm";
+import {
+  requerimientoSchema,
+  type RequerimientoFormData
+} from "@/features/requerimientos/schemas/requerimiento.schema";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Field, FieldError, FieldLabel } from "../ui/field";
-import { Textarea } from "../ui/textarea";
+import { Field, FieldError, FieldLabel } from "../../../components/ui/field";
+import { Textarea } from "../../../components/ui/textarea";
 
 import {useRequerimientos} from "@/context/RequerimientosContext";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
 
 import { trabajadores, estados } from "@/data/data_placeholder";
+import { defaultRequerimientoForm } from "@/features/requerimientos/constants/defaultRequerimientoForm"
 
 type RequerimientoFormProps = {
   onSuccess: () => void;
 };
 
 export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
-  const { register, 
-    handleSubmit, 
+  const {
+    register,
+    handleSubmit,
     reset,
     control,
     watch,
-    formState: { errors } } = useForm<RequerimientoFormData>({
-      defaultValues: {
-        fecha: new Date().toISOString().split("T")[0], 
-        clienteEmpresa: "",
-        numeroCotizacion: "",
-        detalleDescripcion: "",
-        responsableId: 0,
-        estadoId: 0,
-        montoTotal: 0,
-        montoPagado: 0,
-        medioPago: "",
-        numeroFactura: "",
-        otrosDatos: ""
-      }
-    });
+    formState: { errors }
+  } = useForm<RequerimientoFormData>({
+    resolver: zodResolver(requerimientoSchema),
+
+    defaultValues: defaultRequerimientoForm,
+  });
 
   const { agregarRequerimiento } = useRequerimientos();
 
-  const toSafeNumber = (value: unknown) => {
-    const num = Number(value);
-    return isNaN(num) ? 0 : num;
-  };
-
-  const montoTotal = toSafeNumber(watch("montoTotal"));
-  const montoPagado = toSafeNumber(watch("montoPagado"));
-
-  const montoPendiente = Math.max(montoTotal - montoPagado, 0);
+  const montoTotal = watch("montoTotal");
+  const montoPagado = watch("montoPagado");
+  const montoPendiente = montoTotal - montoPagado
 
   const onSubmit = (data: RequerimientoFormData) => {
-    const pendiente = data.montoTotal - data.montoPagado
-
-    if (pendiente < 0) {
-      alert("El monto pagado no puede ser mayor al monto total"); //reemplazar por error
-      return;
-    }
-
     agregarRequerimiento(data);
-    reset();
+    reset(defaultRequerimientoForm);
     onSuccess();
 };
 
@@ -72,7 +56,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
           </FieldLabel>
           <Input
             type="date"
-            {...register("fecha", { required: "Este campo es obligatorio" })}
+            {...register("fecha")}
           />
           <FieldError errors={[errors.fecha]} />
         </Field>
@@ -84,19 +68,19 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
           <Input
             type="text"
             {...register("numeroCotizacion")}
+            placeholder="01234"
           />
           <FieldError errors={[errors.numeroCotizacion]} />
         </Field>
         
         <Field className="col-span-2">
           <FieldLabel>
-            Cliente / Empresa
+            Cliente
           </FieldLabel>
 
           <Input
-            {...register("clienteEmpresa",
-              { required: "Este campo es obligatorio" }
-            )}
+            {...register("clienteEmpresa")}
+            placeholder="Nombre / Razón Social"
           />
 
           <FieldError errors={[errors.clienteEmpresa]} />
@@ -124,7 +108,6 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
             <Controller
               control={control}
               name="responsableId"
-              rules={{required: "Debe seleccionar un responsable"}}
               render={({ field }) => (
                 <Select
                   value={field.value?.toString()}
@@ -159,7 +142,6 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
             <Controller
               control={control}
               name="estadoId"
-              rules={{required: "Debe seleccionar un estado"}}
               render={({ field }) => (
                 <Select
                   value={field.value?.toString()}
@@ -195,9 +177,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
               type="text"
               inputMode="numeric"
               {...register("montoTotal", {
-                valueAsNumber: true,
-                required: "Este campo es obligatorio",
-                min: {value: 0, message: "El monto total no puede ser negativo"}
+                setValueAs: (v) => Number(v || 0),
               })}
             />
 
@@ -213,8 +193,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
               type="text"
               inputMode="numeric"
               {...register("montoPagado", {
-                valueAsNumber: true,
-                min: {value: 0, message: "El monto no puede ser negativo"}
+                setValueAs: (v) => Number(v || 0),
               })}
             />
 
@@ -239,6 +218,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
             <Input
               type="text"
               {...register("medioPago")}
+              placeholder="Transf. / Efectivo / Debito"
             />
           </Field>
           <Field className="col-span-1">
@@ -248,6 +228,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
             <Input
               type="text"
               {...register("numeroFactura")}
+              placeholder="01234"
             />
           </Field>
         </div>

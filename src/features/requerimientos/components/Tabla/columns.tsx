@@ -1,15 +1,19 @@
 import type { ColumnDef } from "@tanstack/react-table";
 
-import type { Requerimiento } from "@/types/requerimiento";
+import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
 
-import SelectEstado from "@/components/Requerimientos/SelectEstado"
-import SelectResponsable from "@/components/Requerimientos/SelectResponsable";
+import SelectEstado from "@/features/requerimientos/components/SelectEstado"
+import SelectResponsable from "@/features/requerimientos/components/SelectResponsable";
 import { formatearMoneda } from "@/utils/formatearMoneda";
+import { formatearFecha } from "@/utils/formatearFecha";
 
 export const columns: ColumnDef<Requerimiento>[] = [
   {
     accessorKey: "fecha",
     header: "Fecha",
+    cell: ({ getValue }) =>
+      formatearFecha(String(getValue())
+    )
   },
   {
     accessorKey: "clienteEmpresa",

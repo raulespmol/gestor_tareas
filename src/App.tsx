@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
-import TablaRequerimientos from "@/components/Requerimientos/Tabla/TablaRequerimientos"
+import TablaRequerimientos from "@/features/requerimientos/components/Tabla/TablaRequerimientos"
 import { useState } from "react";
-import ModalNuevoRequerimiento from "./components/Requerimientos/ModalNuevoRequerimiento";
+import ModalNuevoRequerimiento from "./features/requerimientos/components/ModalNuevoRequerimiento";
 
 export function App() {
   const [modalAbierto, setModalAbierto] = useState(false);

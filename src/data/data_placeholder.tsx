@@ -1,11 +1,11 @@
-import type { Requerimiento } from "@/types/requerimiento";
-import type { Estado } from "@/types/estado";
-import type { Trabajador } from "@/types/trabajador";
+import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
+import type { Estado } from "@/features/requerimientos/types/estado.type";
+import type { Trabajador } from "@/features/requerimientos/types/trabajador.type";
 
 const placeholderData: Requerimiento[] = [
   {
     id: 143245,
-    fecha: "01-06-26",
+    fecha: "2026-06-01",
     clienteEmpresa: "Constructora Andes SpA",
     numeroCotizacion: "1001",
     detalleDescripcion: "Diseño e impresión de material corporativo para evento anual de la empresa (brochures, tarjetas de presentación, banners) con entrega programada para el 15 de junio. El proyecto incluye la creación de un diseño cohesivo que refleje la identidad de la empresa, así como la impresión de alta calidad para garantizar una presentación profesional en el evento.",
@@ -20,7 +20,7 @@ const placeholderData: Requerimiento[] = [
   },
   {
     id: 153795,
-    fecha: "02-06-26",
+    fecha: "2026-06-02",
     clienteEmpresa: "Innova Tech Ltda",
     numeroCotizacion: "1002",
     detalleDescripcion: "Desarrollo landing page promocional",
@@ -35,7 +35,7 @@ const placeholderData: Requerimiento[] = [
   },
   {
     id: 164895,
-    fecha: "03-06-26",
+    fecha: "2026-06-03",
     clienteEmpresa: "Pet House Chile",
     numeroCotizacion: "1003",
     detalleDescripcion: "Sesión fotográfica para mascotas",
@@ -50,7 +50,7 @@ const placeholderData: Requerimiento[] = [
   },
   {
     id: 175995,
-    fecha: "04-06-26",
+    fecha: "2026-06-04",
     clienteEmpresa: "Green Market",
     numeroCotizacion: "1004",
     detalleDescripcion: "Diseño de catálogo digital",
@@ -65,7 +65,7 @@ const placeholderData: Requerimiento[] = [
   },
   {
     id: 186095,
-    fecha: "05-06-26",
+    fecha: "2026-06-05",
     clienteEmpresa: "Alpha Seguridad",
     numeroCotizacion: "1005",
     detalleDescripcion: "Impresión de señalética",
@@ -80,7 +80,7 @@ const placeholderData: Requerimiento[] = [
   },
 //   {
 //     id: 197195,
-//     fecha: "06-06-26",
+//     fecha: "2026-06-06",
 //     clienteEmpresa: "Nova Retail",
 //     numeroCotizacion: "1006",
 //     detalleDescripcion: "Diseño UX/UI aplicación móvil",
@@ -95,7 +95,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //     id: 208295,
-//     fecha: "07-06-26",
+//     fecha: "2026-06-07",
 //     clienteEmpresa: "Café Urbano",
 //     numeroCotizacion: "1007",
 //     detalleDescripcion: "Branding completo cafetería",
@@ -110,7 +110,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //     id: 219395,
-//     fecha: "08-06-26",
+//     fecha: "2026-06-08",
 //     clienteEmpresa: "Logística Sur",
 //     numeroCotizacion: "1008",
 //     detalleDescripcion: "Desarrollo sistema inventario",
@@ -125,7 +125,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //     id: 230495,
-//     fecha: "09-06-26",
+//     fecha: "2026-06-09",
 //     clienteEmpresa: "Studio Vision",
 //     numeroCotizacion: "1009",
 //     detalleDescripcion: "Animación publicitaria 15 segundos",
@@ -140,7 +140,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //     id: 241595,
-//     fecha: "10-06-26",
+//     fecha: "2026-06-10",
 //     clienteEmpresa: "Clínica Dental Norte",
 //     numeroCotizacion: "1010",
 //     detalleDescripcion: "Diseño sitio web corporativo",
@@ -155,7 +155,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //     id: 252695,
-//     fecha: "11-06-26",
+//     fecha: "2026-06-11",
 //     clienteEmpresa: "Electro Hogar",
 //     numeroCotizacion: "1011",
 //     detalleDescripcion: "Campaña gráfica Cyber",
@@ -170,7 +170,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //     id: 263795,
-//     fecha: "12-06-26",
+//     fecha: "2026-06-12",
 //     clienteEmpresa: "Editorial Horizonte",
 //     numeroCotizacion: "1012",
 //     detalleDescripcion: "Plataforma de venta de libros usados",
@@ -185,7 +185,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //     id: 274895,
-//     fecha: "13-06-26",
+//     fecha: "2026-06-13",
 //     clienteEmpresa: "Agencia de Marketing Digital",
 //     numeroCotizacion: "1013",
 //     detalleDescripcion: "Desarrollo de aplicación móvil",
@@ -200,7 +200,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //     id: 285995,
-//     fecha: "14-06-26",
+//     fecha: "2026-06-14",
 //     clienteEmpresa: "Tienda de Ropa Urbana",
 //     numeroCotizacion: "1014",
 //     detalleDescripcion: "Diseño de logotipo",
@@ -215,7 +215,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //     id: 296095,
-//     fecha: "15-06-26",
+//     fecha: "2026-06-15",
 //     clienteEmpresa: "Empresa de Tecnología",
 //     numeroCotizacion: "1015",
 //     detalleDescripcion: "Desarrollo de sitio web",
@@ -230,7 +230,7 @@ const placeholderData: Requerimiento[] = [
 //   },
 //   {
 //   id: 307195,
-//   fecha: "16-06-26",
+//   fecha: "2026-06-16",
 //   clienteEmpresa: "Arquitectura Moderna SpA",
 //   numeroCotizacion: "1016",
 //   detalleDescripcion: "Diseño de identidad visual corporativa y papelería institucional",
@@ -245,7 +245,7 @@ const placeholderData: Requerimiento[] = [
 // },
 // {
 //   id: 318295,
-//   fecha: "17-06-26",
+//   fecha: "2026-06-17",
 //   clienteEmpresa: "Fit Center Chile",
 //   numeroCotizacion: "1017",
 //   detalleDescripcion: "Desarrollo de plataforma de reservas online para gimnasio",
@@ -260,7 +260,7 @@ const placeholderData: Requerimiento[] = [
 // },
 // {
 //   id: 329395,
-//   fecha: "18-06-26",
+//   fecha: "2026-06-18",
 //   clienteEmpresa: "Eventos Premium",
 //   numeroCotizacion: "1018",
 //   detalleDescripcion: "Diseño e impresión de credenciales y material gráfico para conferencia empresarial",
@@ -275,7 +275,7 @@ const placeholderData: Requerimiento[] = [
 // },
 // {
 //   id: 340495,
-//   fecha: "19-06-26",
+//   fecha: "2026-06-19",
 //   clienteEmpresa: "Startup FoodTech",
 //   numeroCotizacion: "1019",
 //   detalleDescripcion: "Diseño UX/UI para aplicación de delivery",
@@ -290,7 +290,7 @@ const placeholderData: Requerimiento[] = [
 // },
 // {
 //   id: 351595,
-//   fecha: "20-06-26",
+//   fecha: "2026-06-20",
 //   clienteEmpresa: "Distribuidora Central",
 //   numeroCotizacion: "1020",
 //   detalleDescripcion: "Sistema interno de gestión de inventario y facturación",
@@ -305,7 +305,7 @@ const placeholderData: Requerimiento[] = [
 // },
 // {
 //   id: 362695,
-//   fecha: "21-06-26",
+//   fecha: "2026-06-21",
 //   clienteEmpresa: "Clínica Veterinaria Sur",
 //   numeroCotizacion: "1021",
 //   detalleDescripcion: "Sesión fotográfica corporativa y renovación de branding",
@@ -320,7 +320,7 @@ const placeholderData: Requerimiento[] = [
 // },
 // {
 //   id: 373795,
-//   fecha: "22-06-26",
+//   fecha: "2026-06-22",
 //   clienteEmpresa: "Academia Online Pro",
 //   numeroCotizacion: "1022",
 //   detalleDescripcion: "Desarrollo de plataforma educativa con sistema de usuarios",
@@ -335,7 +335,7 @@ const placeholderData: Requerimiento[] = [
 // },
 // {
 //   id: 384895,
-//   fecha: "23-06-26",
+//   fecha: "2026-06-23",
 //   clienteEmpresa: "Restaurante La Terraza",
 //   numeroCotizacion: "1023",
 //   detalleDescripcion: "Diseño de menú digital interactivo y branding gastronómico",
@@ -350,7 +350,7 @@ const placeholderData: Requerimiento[] = [
 // },
 // {
 //   id: 395995,
-//   fecha: "24-06-26",
+//   fecha: "2026-06-24",
 //   clienteEmpresa: "Importadora TechVision",
 //   numeroCotizacion: "1024",
 //   detalleDescripcion: "Desarrollo ecommerce con catálogo y sistema de pagos",
@@ -365,7 +365,7 @@ const placeholderData: Requerimiento[] = [
 // },
 // {
 //   id: 407095,
-//   fecha: "25-06-26",
+//   fecha: "2026-06-25",
 //   clienteEmpresa: "Constructora del Pacífico",
 //   numeroCotizacion: "1025",
 //   detalleDescripcion: "Diseño de presentación corporativa y dossier comercial",
