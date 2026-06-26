@@ -1,15 +1,12 @@
 import {
   flexRender,
   getCoreRowModel,
-  getSortedRowModel,
   getFilteredRowModel,
   useReactTable,
   type ColumnDef,
-  type SortingState,
   type FilterFn,
 } from "@tanstack/react-table";
 
-import { useState } from "react";
 
 import {
   Table,
@@ -33,7 +30,6 @@ export function DataTable<TData>({
   data,
   globalFilter
 }: DataTableProps<TData>) {
-  const [sorting, setSorting] = useState<SortingState>([]);
 
   const globalFilterFn: FilterFn<TData> = (row, _, filterValue) => {
     const texto = normalizarTexto(String(filterValue)); 
@@ -45,19 +41,18 @@ export function DataTable<TData>({
   const table = useReactTable({
     data,
     columns,
-
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
 
     state: {
-      sorting,
-      globalFilter
+      globalFilter,
+    },
+
+    initialState: {
+      sorting: [{ id: "fecha", desc: false }],
     },
 
     globalFilterFn,
-
-    onSortingChange: setSorting,
   });
 
 
@@ -70,29 +65,11 @@ export function DataTable<TData>({
               {headerGroup.headers.map((header) => (
                 <TableHead
                   key={header.id}
-                  onClick={header.column.getCanSort()
-                    ? header.column.getToggleSortingHandler()
-                    : undefined}
-                  className={
-                    header.column.getCanSort()
-                    ? "cursor-pointer select-none"
-                    : ""
-                  }
                 >
-                  {header.isPlaceholder
-                    ? null
-                    : <>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-
-                      {{
-                        asc: " ↑",
-                        desc: " ↓",
-                      }[header.column.getIsSorted() as string] ?? null}
-                    </>
-                  }
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
                 </TableHead>
               ))}
             </TableRow>

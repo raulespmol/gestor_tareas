@@ -31,7 +31,6 @@ export const columns: ColumnDef<Requerimiento>[] = [
         {row.original.detalleDescripcion}
       </div>
     ),
-    enableSorting: false
   },
   {
     accessorKey: "estadoId",
@@ -42,7 +41,6 @@ export const columns: ColumnDef<Requerimiento>[] = [
         requerimientoId={row.original.id}
       />
     ),
-    enableSorting: false
   },
   {
     accessorKey: "responsableId",
@@ -53,7 +51,6 @@ export const columns: ColumnDef<Requerimiento>[] = [
         requerimientoId={row.original.id}
       />
     ),
-    enableSorting: false
   },
   {
     accessorKey: "montoTotal",
@@ -76,7 +73,6 @@ export const columns: ColumnDef<Requerimiento>[] = [
   {
     accessorKey: "medioPago",
     header: "Medio Pago",
-    enableSorting: false
   },
   {
     accessorKey: "numeroFactura",
@@ -85,6 +81,5 @@ export const columns: ColumnDef<Requerimiento>[] = [
   {
     accessorKey: "otrosDatos",
     header: "Otros Datos",
-    enableSorting: false
   },
 ];
