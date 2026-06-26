@@ -2,15 +2,25 @@ import { useRequerimientos } from "@/context/RequerimientosContext";
 
 import { DataTable } from "./DataTable";
 import { columns } from "./columns";
+import { useState } from "react";
+import BuscadorRequerimientos from "../Toolbar/BuscadorRequerimientos";
 
-const TablaRequerimientos = () => {
+const TablaRequerimientos = () => {  
+  const [globalFilter, setGlobalFilter] = useState("")
   const { requerimientos } = useRequerimientos();
 
   return (
-    <DataTable
-      columns={columns}
-      data={requerimientos}
-    />
+    <>
+      <BuscadorRequerimientos
+        value={globalFilter}
+        onChange={setGlobalFilter}
+      />
+      <DataTable
+        columns={columns}
+        data={requerimientos}
+        globalFilter={globalFilter}
+      />
+    </>
   );
 };
 

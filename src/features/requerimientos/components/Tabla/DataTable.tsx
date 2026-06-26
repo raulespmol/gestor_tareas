@@ -2,9 +2,11 @@ import {
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
+  getFilteredRowModel,
   useReactTable,
   type ColumnDef,
   type SortingState,
+  type FilterFn,
 } from "@tanstack/react-table";
 
 import { useState } from "react";
@@ -18,31 +20,45 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { normalizarTexto } from "@/utils/normalizarTexto";
+
 interface DataTableProps<TData> {
   columns: ColumnDef<TData>[];
   data: TData[];
+  globalFilter: string
 }
 
 export function DataTable<TData>({
   columns,
   data,
+  globalFilter
 }: DataTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
+  const globalFilterFn: FilterFn<TData> = (row, _, filterValue) => {
+    const texto = normalizarTexto(String(filterValue)); 
+    const contenido = normalizarTexto(JSON.stringify(row.original));
+
+    return contenido.includes(texto)
+  };
+
   const table = useReactTable({
-  data,
-  columns,
+    data,
+    columns,
 
-  getCoreRowModel: getCoreRowModel(),
-  getSortedRowModel: getSortedRowModel(),
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
 
-  state: {
-    sorting,
-  },
+    state: {
+      sorting,
+      globalFilter
+    },
 
-  onSortingChange: setSorting,
-});
+    globalFilterFn,
 
+    onSortingChange: setSorting,
+  });
 
 
   return (
