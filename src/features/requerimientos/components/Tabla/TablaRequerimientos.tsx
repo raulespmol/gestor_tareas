@@ -5,6 +5,7 @@ import { DataTable } from "./DataTable";
 import { createColumns } from "./columns";
 import { camposBusqueda } from "../../utils/camposBusqueda";
 import ModalEditarRequerimiento from "../ModalEditarRequerimiento";
+import ModalDetalleRequerimiento from "../ModalDetalleRequerimiento";
 
 import type { Requerimiento } from "../../types/requerimiento.type";
 
@@ -15,8 +16,12 @@ type TablaRequerimientosProps = {
 const TablaRequerimientos = ({ globalFilter }: TablaRequerimientosProps) => {  
   const { requerimientos } = useRequerimientos();
   const [requerimientoAEditar, setRequerimientoAEditar] = useState<Requerimiento | null>(null);
+  const [requerimientoDetalle, setRequerimientoDetalle] = useState<Requerimiento | null>(null);
 
-  const columns = createColumns((r) => setRequerimientoAEditar(r));
+  const columns = createColumns(
+    (r) => setRequerimientoAEditar(r),
+    (r) => setRequerimientoDetalle(r),
+  );
 
   return (
     <>
@@ -31,6 +36,10 @@ const TablaRequerimientos = ({ globalFilter }: TablaRequerimientosProps) => {
         onOpenChange={(open) => {
           if (!open) setRequerimientoAEditar(null);
         }}
+      />
+      <ModalDetalleRequerimiento
+        requerimiento={requerimientoDetalle}
+        onOpenChange={(open) => { if (!open) setRequerimientoDetalle(null); }}
       />
     </>
   );

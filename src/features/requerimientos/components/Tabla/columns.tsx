@@ -17,7 +17,8 @@ import { formatearMoneda } from "@/utils/formatearMoneda";
 import { formatearFecha } from "@/utils/formatearFecha";
 
 export const createColumns = (
-  onEditar: (requerimiento: Requerimiento) => void
+  onEditar: (requerimiento: Requerimiento) => void,
+  onVerDetalle: (requerimiento: Requerimiento) => void,
 ): ColumnDef<Requerimiento>[] => [
   {
     accessorKey: "fecha",
@@ -96,6 +97,9 @@ export const createColumns = (
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
+          <DropdownMenuItem onSelect={() => onVerDetalle(row.original)}>
+            Ver detalles
+          </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => onEditar(row.original)}>
             Editar
           </DropdownMenuItem>
