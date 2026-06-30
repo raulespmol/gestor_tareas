@@ -22,20 +22,22 @@ import { normalizarTexto } from "@/utils/normalizarTexto";
 interface DataTableProps<TData> {
   columns: ColumnDef<TData>[];
   data: TData[];
-  globalFilter: string
+  globalFilter: string;
+  getSearchText: (row: TData) => string;
 }
 
 export function DataTable<TData>({
   columns,
   data,
-  globalFilter
+  globalFilter,
+  getSearchText,
 }: DataTableProps<TData>) {
 
   const globalFilterFn: FilterFn<TData> = (row, _, filterValue) => {
-    const texto = normalizarTexto(String(filterValue)); 
-    const contenido = normalizarTexto(JSON.stringify(row.original));
+    const texto = normalizarTexto(String(filterValue));
+    const contenido = normalizarTexto(getSearchText(row.original));
 
-    return contenido.includes(texto)
+    return contenido.includes(texto);
   };
 
   const table = useReactTable({

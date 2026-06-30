@@ -4,6 +4,7 @@ import { DataTable } from "./DataTable";
 import { columns } from "./columns";
 import { useState } from "react";
 import BuscadorRequerimientos from "../Toolbar/BuscadorRequerimientos";
+import { camposBusqueda } from "../../utils/camposBusqueda";
 
 const TablaRequerimientos = () => {  
   const [globalFilter, setGlobalFilter] = useState("")
@@ -19,6 +20,7 @@ const TablaRequerimientos = () => {
         columns={columns}
         data={requerimientos}
         globalFilter={globalFilter}
+        getSearchText={camposBusqueda}
       />
     </>
   );
