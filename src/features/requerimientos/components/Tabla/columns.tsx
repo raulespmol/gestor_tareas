@@ -2,12 +2,23 @@ import type { ColumnDef } from "@tanstack/react-table";
 
 import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { MoreHorizontal } from "lucide-react";
+
 import SelectEstado from "@/features/requerimientos/components/SelectEstado"
 import SelectResponsable from "@/features/requerimientos/components/SelectResponsable";
 import { formatearMoneda } from "@/utils/formatearMoneda";
 import { formatearFecha } from "@/utils/formatearFecha";
 
-export const columns: ColumnDef<Requerimiento>[] = [
+export const createColumns = (
+  onEditar: (requerimiento: Requerimiento) => void
+): ColumnDef<Requerimiento>[] => [
   {
     accessorKey: "fecha",
     header: "Fecha",
@@ -71,15 +82,25 @@ export const columns: ColumnDef<Requerimiento>[] = [
       formatearMoneda(Number(getValue()))
   },
   {
-    accessorKey: "medioPago",
-    header: "Medio Pago",
-  },
-  {
     accessorKey: "numeroFactura",
     header: "Factura",
   },
   {
-    accessorKey: "otrosDatos",
-    header: "Otros Datos",
+  id: "acciones",
+    header: "Acciones",
+    cell: ({ row }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onSelect={() => onEditar(row.original)}>
+            Editar
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
   },
 ];

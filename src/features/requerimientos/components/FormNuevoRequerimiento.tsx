@@ -248,7 +248,7 @@ export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
 
       <div className="col-span-2 flex justify-end">
         <Button type="submit">
-          Guardar
+          Agregar
         </Button>
       </div>
 

@@ -9,6 +9,7 @@ type RequerimientosContextType = {
   actualizarEstado: (idRequerimiento: number, nuevoEstadoId: number) => void;
   actualizarResponsable: (idRequerimiento: number, nuevoResponsableId: number) => void;
   agregarRequerimiento: (data: RequerimientoFormData) => void;
+  editarRequerimiento: (actualizado: Requerimiento) => void;
 }
 
 type ProviderProps = {
@@ -66,12 +67,19 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
     setRequerimientos((prev) => ordenarFechaAsc([...prev, nuevoRequerimiento]))
   };
 
+  const editarRequerimiento = (actualizado: Requerimiento) => {
+    setRequerimientos((prev) =>
+      ordenarFechaAsc(prev.map((r) => (r.id === actualizado.id ? actualizado : r)))
+    );
+  };
+
   return (
     <RequerimientosContext.Provider value={{ 
       requerimientos, 
       actualizarEstado, 
       actualizarResponsable, 
-      agregarRequerimiento 
+      agregarRequerimiento,
+      editarRequerimiento
     }}>
       {children}
     </RequerimientosContext.Provider>
