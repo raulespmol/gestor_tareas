@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { placeholderData } from "@/data/data_placeholder";
+import { ordenarFechaAsc } from "@/features/requerimientos/utils/ordenarFecha";
 import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
 import type { RequerimientoFormData } from "@/features/requerimientos/schemas/requerimiento.schema";
 
@@ -19,10 +20,13 @@ const RequerimientosContext = createContext<RequerimientosContextType | null>(nu
 const cargarRequerimientos = (): Requerimiento[] => {
   try {
     const data = localStorage.getItem("requerimientos");
-    return data ? JSON.parse(data) : placeholderData;
+    const requerimientos = data ? JSON.parse(data) : placeholderData;
+
+    return ordenarFechaAsc(requerimientos)
   } catch (error) {
     console.error("Error al cargar requerimientos:", error);
-    return placeholderData;
+    return ordenarFechaAsc(placeholderData)
+
   }
 }
 
@@ -59,7 +63,7 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
       ...data,
       montoPendiente: (data.montoTotal - data.montoPagado)
     };
-    setRequerimientos((prev) => [...prev, nuevoRequerimiento]);
+    setRequerimientos((prev) => ordenarFechaAsc([...prev, nuevoRequerimiento]))
   };
 
   return (

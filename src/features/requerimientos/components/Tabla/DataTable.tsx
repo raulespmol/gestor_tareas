@@ -41,15 +41,12 @@ export function DataTable<TData>({
   const table = useReactTable({
     data,
     columns,
+
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
 
     state: {
       globalFilter,
-    },
-
-    initialState: {
-      sorting: [{ id: "fecha", desc: false }],
     },
 
     globalFilterFn,
