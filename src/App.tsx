@@ -20,7 +20,7 @@ export function App() {
             onChange={setGlobalFilter}
           />
           <Button onClick={() => setModalAbierto(true)}>
-            Agregar Tarea
+            Agregar Requerimiento
           </Button>
         </Toolbar>
 
