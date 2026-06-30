@@ -21,7 +21,7 @@ type RequerimientoFormProps = {
   onSuccess: () => void;
 };
 
-export const RequerimientoForm = ({ onSuccess }: RequerimientoFormProps) => {
+export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) => {
   const {
     register,
     handleSubmit,

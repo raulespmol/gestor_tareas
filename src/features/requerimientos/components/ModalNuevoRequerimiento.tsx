@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import { RequerimientoForm } from "@/features/requerimientos/components/FormNuevoRequerimiento";
+import { FormNuevoRequerimiento } from "@/features/requerimientos/components/FormNuevoRequerimiento";
 
 type Props = {
   open: boolean;
@@ -26,7 +26,7 @@ const ModalNuevoRequerimiento = ({ open, onOpenChange }: Props) => {
           </DialogTitle>
         </DialogHeader>
 
-        <RequerimientoForm onSuccess={() => onOpenChange(false)} />
+        <FormNuevoRequerimiento onSuccess={() => onOpenChange(false)} />
       </DialogContent>
       <DialogDescription className="sr-only">
         Ingrese la información del nuevo requerimiento.

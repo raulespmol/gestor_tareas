@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import type { Requerimiento } from "../types/requerimiento.type";
 
-import { EditarRequerimientoForm } from "./FormEditarRequerimiento";
+import { FormEditarRequerimiento } from "./FormEditarRequerimiento";
 
 type Props = {
   requerimiento: Requerimiento | null;
@@ -28,7 +28,7 @@ const ModalEditarRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
           </DialogDescription>
         </DialogHeader>
         {requerimiento && (
-          <EditarRequerimientoForm
+          <FormEditarRequerimiento
             requerimiento={requerimiento}
             onSuccess={() => onOpenChange(false)}
           />

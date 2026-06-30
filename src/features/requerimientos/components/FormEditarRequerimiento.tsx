@@ -17,7 +17,7 @@ type Props = {
   onSuccess: () => void;
 };
 
-export const EditarRequerimientoForm = ({ requerimiento, onSuccess }: Props) => {
+export const FormEditarRequerimiento = ({ requerimiento, onSuccess }: Props) => {
   const { editarRequerimiento } = useRequerimientos();
 
   const {
