@@ -11,14 +11,20 @@ import ModalConfirmarEliminar from "../ModalConfirmarEliminar";
 import type { Requerimiento } from "../../types/requerimiento.type";
 
 type TablaRequerimientosProps = {
-  globalFilter: string
+  globalFilter: string,
+  filtroEstados: number[],
 }
 
-const TablaRequerimientos = ({ globalFilter }: TablaRequerimientosProps) => {  
+const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimientosProps) => {  
   const { requerimientos, eliminarRequerimiento } = useRequerimientos();
+
   const [requerimientoAEditar, setRequerimientoAEditar] = useState<Requerimiento | null>(null);
   const [requerimientoDetalle, setRequerimientoDetalle] = useState<Requerimiento | null>(null);
   const [requerimientoAEliminar, setRequerimientoAEliminar] = useState<Requerimiento | null>(null);
+
+  const requerimientosFiltrados = filtroEstados.length === 0
+    ? requerimientos
+    : requerimientos.filter((r) => filtroEstados.includes(r.estadoId));
 
   const columns = createColumns(
     (r) => setRequerimientoAEditar(r),
@@ -30,7 +36,7 @@ const TablaRequerimientos = ({ globalFilter }: TablaRequerimientosProps) => {
     <>
       <DataTable
         columns={columns}
-        data={requerimientos}
+        data={requerimientosFiltrados}
         globalFilter={globalFilter}
         getSearchText={camposBusqueda}
         />

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Toolbar } from "@/features/requerimientos/components/Toolbar/Toolbar";
 import BuscadorRequerimientos from "./features/requerimientos/components/Toolbar/BuscadorRequerimientos";
+import FiltroEstado from "./features/requerimientos/components/Toolbar/FiltroEstado";
 import TablaRequerimientos from "@/features/requerimientos/components/Tabla/TablaRequerimientos"
 import { useState } from "react";
 import ModalNuevoRequerimiento from "./features/requerimientos/components/ModalNuevoRequerimiento";
@@ -8,6 +9,7 @@ import ModalNuevoRequerimiento from "./features/requerimientos/components/ModalN
 export function App() {
   const [globalFilter, setGlobalFilter] = useState("");
   const [modalAbierto, setModalAbierto] = useState(false);
+  const [filtroEstados, setFiltroEstados] = useState<number[]>([]);
 
   return (
     <div className="flex w-full min-h-svh p-6">
@@ -15,16 +17,22 @@ export function App() {
         <h1 className="text-2xl font-bold">Gestor de Tareas</h1>
 
         <Toolbar>
-          <BuscadorRequerimientos
-            value={globalFilter}
-            onChange={setGlobalFilter}
-          />
+          <div className="flex gap-2 flex-direction-row w-3xl">
+            <BuscadorRequerimientos
+              value={globalFilter}
+              onChange={setGlobalFilter}
+            />
+            <FiltroEstado 
+              value={filtroEstados} 
+              onChange={setFiltroEstados} 
+            />
+          </div>
           <Button onClick={() => setModalAbierto(true)}>
             Agregar Requerimiento
           </Button>
         </Toolbar>
 
-        <TablaRequerimientos globalFilter={globalFilter}/>
+        <TablaRequerimientos globalFilter={globalFilter} filtroEstados={filtroEstados}/>
 
         <ModalNuevoRequerimiento
           open={modalAbierto}
