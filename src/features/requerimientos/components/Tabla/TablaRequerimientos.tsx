@@ -1,5 +1,5 @@
 import { useRequerimientos } from "@/context/RequerimientosContext";
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 
 import { DataTable } from "./DataTable";
 import { createColumns } from "./columns";
@@ -11,25 +11,31 @@ import ModalConfirmarEliminar from "../ModalConfirmarEliminar";
 import type { Requerimiento } from "../../types/requerimiento.type";
 
 type TablaRequerimientosProps = {
-  globalFilter: string,
-  filtroEstados: number[],
-}
+  globalFilter: string;
+  filtroEstados: number[];
+};
 
-const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimientosProps) => {  
+const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimientosProps) => {
   const { requerimientos, eliminarRequerimiento } = useRequerimientos();
 
   const [requerimientoAEditar, setRequerimientoAEditar] = useState<Requerimiento | null>(null);
   const [requerimientoDetalle, setRequerimientoDetalle] = useState<Requerimiento | null>(null);
   const [requerimientoAEliminar, setRequerimientoAEliminar] = useState<Requerimiento | null>(null);
 
-  const requerimientosFiltrados = filtroEstados.length === 0
-    ? requerimientos
-    : requerimientos.filter((r) => filtroEstados.includes(r.estadoId));
+  const handleEditar = useCallback((r: Requerimiento) => setRequerimientoAEditar(r), []);
+  const handleVerDetalle = useCallback((r: Requerimiento) => setRequerimientoDetalle(r), []);
+  const handleEliminar = useCallback((r: Requerimiento) => setRequerimientoAEliminar(r), []);
 
-  const columns = createColumns(
-    (r) => setRequerimientoAEditar(r),
-    (r) => setRequerimientoDetalle(r),
-    (r) => setRequerimientoAEliminar(r),
+  const columns = useMemo(
+    () => createColumns(handleEditar, handleVerDetalle, handleEliminar),
+    [handleEditar, handleVerDetalle, handleEliminar]
+  );
+
+  const requerimientosFiltrados = useMemo(
+    () => filtroEstados.length === 0
+      ? requerimientos
+      : requerimientos.filter((r) => filtroEstados.includes(r.estadoId)),
+    [requerimientos, filtroEstados]
   );
 
   return (
@@ -39,18 +45,16 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
         data={requerimientosFiltrados}
         globalFilter={globalFilter}
         getSearchText={camposBusqueda}
-        />
+      />
       <ModalEditarRequerimiento
         requerimiento={requerimientoAEditar}
-        onOpenChange={(open) => {
-          if (!open) setRequerimientoAEditar(null);
-        }}
+        onOpenChange={(open) => { if (!open) setRequerimientoAEditar(null); }}
       />
       <ModalDetalleRequerimiento
         requerimiento={requerimientoDetalle}
         onOpenChange={(open) => { if (!open) setRequerimientoDetalle(null); }}
       />
-      <ModalConfirmarEliminar 
+      <ModalConfirmarEliminar
         requerimiento={requerimientoAEliminar}
         onConfirmar={(id) => {
           eliminarRequerimiento(id);
