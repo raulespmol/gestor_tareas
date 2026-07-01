@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/select"
 
 import { useRequerimientos } from "@/context/RequerimientosContext.tsx"
-import { estados } from "@/data/data_placeholder";
+import { estados } from "@/data/placeholder/estados";
 
 const SelectEstado = ( {estadoId, requerimientoId}: {estadoId: number, requerimientoId: number}) => {
   const { actualizarEstado } = useRequerimientos();

@@ -14,7 +14,8 @@ import { Textarea } from "../../../components/ui/textarea";
 import {useRequerimientos} from "@/context/RequerimientosContext";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
 
-import { trabajadores, estados } from "@/data/data_placeholder";
+import { trabajadores } from "@/data/placeholder/trabajadores";
+import { estados } from "@/data/placeholder/estados";
 import { defaultRequerimientoForm } from "@/features/requerimientos/constants/defaultRequerimientoForm"
 
 type RequerimientoFormProps = {

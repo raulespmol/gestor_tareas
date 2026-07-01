@@ -7,7 +7,8 @@ import {
 } from "@/components/ui/dialog";
 import { formatearFecha } from "@/utils/formatearFecha";
 import { formatearMoneda } from "@/utils/formatearMoneda";
-import { estados, trabajadores } from "@/data/data_placeholder";
+import { trabajadores } from "@/data/placeholder/trabajadores";
+import { estados } from "@/data/placeholder/estados";
 
 import type { Requerimiento } from "../types/requerimiento.type";
 

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/select"
 
 import { useRequerimientos } from "@/context/RequerimientosContext.tsx"
-import { trabajadores } from "@/data/data_placeholder";
+import { trabajadores } from "@/data/placeholder/trabajadores";
 
 const SelectResponsable = ( {responsableId, requerimientoId}: {responsableId: number, requerimientoId: number}) => {
   const { actualizarResponsable } = useRequerimientos();

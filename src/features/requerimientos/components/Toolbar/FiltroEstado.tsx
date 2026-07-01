@@ -3,7 +3,7 @@ import { Check, ChevronDown, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
-import { estados } from "@/data/data_placeholder";
+import { estados } from "@/data/placeholder/estados";
 import { cn } from "@/lib/utils";
 
 type Props = {
