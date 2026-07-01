@@ -19,6 +19,7 @@ import { formatearFecha } from "@/utils/formatearFecha";
 export const createColumns = (
   onEditar: (requerimiento: Requerimiento) => void,
   onVerDetalle: (requerimiento: Requerimiento) => void,
+  onEliminar: (requerimiento: Requerimiento) => void,
 ): ColumnDef<Requerimiento>[] => [
   {
     accessorKey: "fecha",
@@ -102,6 +103,12 @@ export const createColumns = (
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => onEditar(row.original)}>
             Editar
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onSelect={() => onEliminar(row.original)}
+            className="text-destructive focus:text-destructive"
+          >
+            Eliminar
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

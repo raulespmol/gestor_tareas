@@ -10,6 +10,7 @@ type RequerimientosContextType = {
   actualizarResponsable: (idRequerimiento: number, nuevoResponsableId: number) => void;
   agregarRequerimiento: (data: RequerimientoFormData) => void;
   editarRequerimiento: (actualizado: Requerimiento) => void;
+  eliminarRequerimiento: (id: number) => void;
 }
 
 type ProviderProps = {
@@ -73,13 +74,18 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
     );
   };
 
+  const eliminarRequerimiento = (id: number) => {
+    setRequerimientos((prev) => prev.filter((r) => r.id !== id));
+  };
+
   return (
     <RequerimientosContext.Provider value={{ 
       requerimientos, 
       actualizarEstado, 
       actualizarResponsable, 
       agregarRequerimiento,
-      editarRequerimiento
+      editarRequerimiento,
+      eliminarRequerimiento
     }}>
       {children}
     </RequerimientosContext.Provider>
