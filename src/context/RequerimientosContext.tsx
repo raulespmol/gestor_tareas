@@ -33,12 +33,14 @@ const cargarRequerimientos = (): Requerimiento[] => {
 }
 
 const guardarRequerimientos = (requerimientos: Requerimiento[]) => {
-  try {
-    localStorage.setItem("requerimientos", JSON.stringify(requerimientos));
-  } catch (error) {
-    console.error("Error al guardar requerimientos:", error);
-  }
-}
+  setTimeout(() => {
+    try {
+      localStorage.setItem("requerimientos", JSON.stringify(requerimientos));
+    } catch (error) {
+      console.error("Error al guardar requerimientos:", error);
+    }
+  }, 0);
+};
 
 export const RequerimientosProvider = ({children}: ProviderProps) => {
   const [requerimientos, setRequerimientos] = useState<Requerimiento[]>(cargarRequerimientos);
