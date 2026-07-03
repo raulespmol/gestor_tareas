@@ -16,7 +16,7 @@ type TablaRequerimientosProps = {
 };
 
 const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimientosProps) => {
-  const { requerimientos, eliminarRequerimiento } = useRequerimientos();
+  const { requerimientos, eliminarRequerimiento, actualizarEstado, actualizarResponsable } = useRequerimientos();
 
   const [requerimientoAEditar, setRequerimientoAEditar] = useState<Requerimiento | null>(null);
   const [requerimientoDetalle, setRequerimientoDetalle] = useState<Requerimiento | null>(null);
@@ -25,11 +25,23 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
   const handleEditar = useCallback((r: Requerimiento) => setRequerimientoAEditar(r), []);
   const handleVerDetalle = useCallback((r: Requerimiento) => setRequerimientoDetalle(r), []);
   const handleEliminar = useCallback((r: Requerimiento) => setRequerimientoAEliminar(r), []);
-
-  const columns = useMemo(
-    () => createColumns(handleEditar, handleVerDetalle, handleEliminar),
-    [handleEditar, handleVerDetalle, handleEliminar]
+  const handleActualizarEstado = useCallback(
+    (id: number, estadoId: number) => actualizarEstado(id, estadoId), []
   );
+  const handleActualizarResponsable = useCallback(
+    (id: number, responsableId: number) => actualizarResponsable(id, responsableId), []
+  );  
+
+ const columns = useMemo(
+  () => createColumns(
+    handleEditar,
+    handleVerDetalle,
+    handleEliminar,
+    handleActualizarEstado,
+    handleActualizarResponsable,
+  ),
+  [handleEditar, handleVerDetalle, handleEliminar, handleActualizarEstado, handleActualizarResponsable]
+);
 
   const requerimientosFiltrados = useMemo(
     () => filtroEstados.length === 0

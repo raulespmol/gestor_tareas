@@ -1,26 +1,25 @@
+import { memo } from "react";
 import {
-  Select,
-  SelectContent,
+  Select, 
+  SelectContent, 
   SelectGroup,
-  SelectItem,
-  SelectTrigger,
+  SelectItem, 
+  SelectTrigger, 
   SelectValue,
-} from "@/components/ui/select"
-
-import { useRequerimientos } from "@/context/RequerimientosContext.tsx"
+} from "@/components/ui/select";
 import { trabajadores } from "@/data/placeholder/trabajadores";
 
-const SelectResponsable = ( {responsableId, requerimientoId}: {responsableId: number, requerimientoId: number}) => {
-  const { actualizarResponsable } = useRequerimientos();
+type Props = {
+  responsableId: number;
+  requerimientoId: number;
+  onChange: (requerimientoId: number, nuevoResponsableId: number) => void;
+};
 
-  const handleChange = (nuevoResponsableId: number) => {
-    actualizarResponsable(requerimientoId, nuevoResponsableId);
-  }
-
+const SelectResponsable = memo(({ responsableId, requerimientoId, onChange }: Props) => {
   return (
-    <Select 
+    <Select
       value={responsableId.toString()}
-      onValueChange={(e) => handleChange(parseInt(e))}
+      onValueChange={(e) => onChange(requerimientoId, parseInt(e))}
     >
       <SelectTrigger className="w-full">
         <SelectValue />
@@ -35,7 +34,7 @@ const SelectResponsable = ( {responsableId, requerimientoId}: {responsableId: nu
         </SelectGroup>
       </SelectContent>
     </Select>
-  )
-}
+  );
+});
 
-export default SelectResponsable
+export default SelectResponsable;

@@ -1,26 +1,25 @@
+import { memo } from "react";
 import {
-  Select,
-  SelectContent,
+  Select, 
+  SelectContent, 
   SelectGroup,
-  SelectItem,
-  SelectTrigger,
+  SelectItem, 
+  SelectTrigger, 
   SelectValue,
-} from "@/components/ui/select"
-
-import { useRequerimientos } from "@/context/RequerimientosContext.tsx"
+} from "@/components/ui/select";
 import { estados } from "@/data/placeholder/estados";
 
-const SelectEstado = ( {estadoId, requerimientoId}: {estadoId: number, requerimientoId: number}) => {
-  const { actualizarEstado } = useRequerimientos();
+type Props = {
+  estadoId: number;
+  requerimientoId: number;
+  onChange: (requerimientoId: number, nuevoEstadoId: number) => void;
+};
 
-  const handleChange = (nuevoEstadoId: number) => {
-    actualizarEstado(requerimientoId, nuevoEstadoId);
-  }
-
+const SelectEstado = memo(({ estadoId, requerimientoId, onChange }: Props) => {
   return (
-    <Select 
+    <Select
       value={estadoId.toString()}
-      onValueChange={(e) => handleChange(parseInt(e))}
+      onValueChange={(e) => onChange(requerimientoId, parseInt(e))}
     >
       <SelectTrigger className="w-full">
         <SelectValue />
@@ -35,7 +34,7 @@ const SelectEstado = ( {estadoId, requerimientoId}: {estadoId: number, requerimi
         </SelectGroup>
       </SelectContent>
     </Select>
-  )
-}
+  );
+});
 
-export default SelectEstado
+export default SelectEstado;
