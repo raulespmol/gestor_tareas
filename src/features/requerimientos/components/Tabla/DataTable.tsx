@@ -86,7 +86,7 @@ export function DataTable<TData>({
                   key={header.id}
                   style={getCellStyle(
                     header.getSize(),
-                    Boolean((header.column.columnDef.meta as { flex?: boolean })?.flex)
+                    Boolean((header.column.columnDef.meta?.flex))
                   )}
                   className="flex items-center"
                 >
@@ -119,7 +119,7 @@ export function DataTable<TData>({
                         key={cell.id}
                         style={getCellStyle(
                           cell.column.getSize(),
-                          Boolean((cell.column.columnDef.meta as { flex?: boolean })?.flex)
+                          Boolean((cell.column.columnDef.meta?.flex))
                         )}
                         className="overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center"
                       >
