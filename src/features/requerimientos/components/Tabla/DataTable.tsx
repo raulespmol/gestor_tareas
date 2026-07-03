@@ -61,11 +61,14 @@ export function DataTable<TData>({
     count: rows.length,
     getScrollElement: () => containerRef.current,
     estimateSize: () => 48,
-    overscan: 10,
+    overscan: 20,
+    getItemKey: (index) => rows[index].id,
   });
 
   const virtualRows = virtualizer.getVirtualItems();
   const totalHeight = virtualizer.getTotalSize();
+
+  const centeredColumns = ["numeroCotizacion", "numeroFactura"];
 
   const getCellStyle = (
     size: number,
@@ -78,21 +81,38 @@ export function DataTable<TData>({
   return (
     <div ref={containerRef} className="rounded-md border overflow-auto flex-1">
       <Table className="w-full">
-        <TableHeader className="sticky top-0 z-10 bg-background">
+        <TableHeader className="sticky top-0 z-20 bg-background">
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} style={{ display: "flex", width: "100%" }}> 
-              {headerGroup.headers.map((header) => (
-                <TableHead
-                  key={header.id}
-                  style={getCellStyle(
-                    header.getSize(),
-                    Boolean((header.column.columnDef.meta?.flex))
-                  )}
-                  className="flex items-center"
-                >
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                </TableHead>
-              ))}
+            <TableRow
+              key={headerGroup.id}
+              style={{
+                display: "flex",
+                width: "100%",
+                position: "sticky",
+                top: 0,
+                zIndex: 20,
+              }}
+            >
+              {headerGroup.headers.map((header) => {
+                const isCentered = centeredColumns.includes(header.column.id);
+                return (
+                  <TableHead
+                    key={header.id}
+                    style={{
+                      ...getCellStyle(
+                        header.getSize(),
+                        Boolean((header.column.columnDef.meta?.flex))
+                      ),
+                      position: "sticky",
+                      top: 0,
+                      zIndex: 20,
+                    }}
+                    className={`bg-background flex items-center ${isCentered ? "text-center" : ""}`}
+                  >
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                );
+              })}
             </TableRow>
           ))}
         </TableHeader>
@@ -114,18 +134,21 @@ export function DataTable<TData>({
                       display: "flex",
                     }}
                   >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell
-                        key={cell.id}
-                        style={getCellStyle(
-                          cell.column.getSize(),
-                          Boolean((cell.column.columnDef.meta?.flex))
-                        )}
-                        className="overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center"
-                      >
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
-                    ))}
+                    {row.getVisibleCells().map((cell) => {
+                      const isCentered = centeredColumns.includes(cell.column.id);
+                      return (
+                        <TableCell
+                          key={cell.id}
+                          style={getCellStyle(
+                            cell.column.getSize(),
+                            Boolean((cell.column.columnDef.meta?.flex))
+                          )}
+                          className={`overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center ${isCentered ? "justify-center" : ""}`}
+                        >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      );
+                    })}
                   </TableRow>
                 );
               })}
