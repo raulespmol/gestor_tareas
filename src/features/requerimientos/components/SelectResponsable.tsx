@@ -21,7 +21,7 @@ const SelectResponsable = memo(({ responsableId, requerimientoId, onChange }: Pr
       value={responsableId.toString()}
       onValueChange={(e) => onChange(requerimientoId, parseInt(e))}
     >
-      <SelectTrigger className="w-full">
+      <SelectTrigger size="sm" className="w-full text-xs">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

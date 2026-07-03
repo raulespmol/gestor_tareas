@@ -26,6 +26,7 @@ export const createColumns = (
   {
     accessorKey: "fecha",
     header: "Fecha",
+    size: 80,
     cell: ({ getValue }) =>
       formatearFecha(String(getValue())
     )
@@ -33,16 +34,19 @@ export const createColumns = (
   {
     accessorKey: "clienteEmpresa",
     header: "Cliente",
+    size: 300,
   },
   {
     accessorKey: "numeroCotizacion",
     header: "Cotización",
+    size: 80,
   },
   {
     accessorKey: "detalleDescripcion",
     header: "Descripción",
+    meta: { flex: true },
     cell: ({ row }) => (
-      <div className="max-w-xs truncate">
+      <div className="w-full truncate">
         {row.original.detalleDescripcion}
       </div>
     ),
@@ -50,6 +54,7 @@ export const createColumns = (
   {
     accessorKey: "estadoId",
     header: "Estado",
+    size: 150,
     cell: ({ row }) => (
       <SelectEstado
         estadoId={row.original.estadoId}
@@ -61,6 +66,7 @@ export const createColumns = (
   {
     accessorKey: "responsableId",
     header: "Responsable",
+    size: 200,
     cell: ({ row }) => (
       <SelectResponsable
         responsableId={row.original.responsableId}
@@ -72,28 +78,33 @@ export const createColumns = (
   {
     accessorKey: "montoTotal",
     header: "Total",
+    size: 100,
     cell: ({ getValue }) =>
       formatearMoneda(Number(getValue()))
   },
   {
     accessorKey: "montoPagado",
     header: "Pagado",
+    size: 100,
     cell: ({ getValue }) =>
       formatearMoneda(Number(getValue()))
   },
   {
     accessorKey: "montoPendiente",
     header: "Pendiente",
+    size: 100,
     cell: ({ getValue }) =>
       formatearMoneda(Number(getValue()))
   },
   {
     accessorKey: "numeroFactura",
     header: "Factura",
+    size: 80,
   },
   {
-  id: "acciones",
-    header: "Acciones",
+    id: "acciones",
+    header: "",
+    size: 50,
     cell: ({ row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

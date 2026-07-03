@@ -21,7 +21,7 @@ const SelectEstado = memo(({ estadoId, requerimientoId, onChange }: Props) => {
       value={estadoId.toString()}
       onValueChange={(e) => onChange(requerimientoId, parseInt(e))}
     >
-      <SelectTrigger className="w-full">
+      <SelectTrigger size="sm" className="w-full text-xs">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
