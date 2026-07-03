@@ -2,14 +2,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 
 import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import DropdownAcciones from "./DropdownAcciones";
 
 import SelectEstado from "@/features/requerimientos/components/SelectEstado"
 import SelectResponsable from "@/features/requerimientos/components/SelectResponsable";
@@ -106,27 +99,12 @@ export const createColumns = (
     header: "",
     size: 50,
     cell: ({ row }) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon">
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem onSelect={() => onVerDetalle(row.original)}>
-            Ver detalles
-          </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => onEditar(row.original)}>
-            Editar
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => onEliminar(row.original)}
-            className="text-destructive focus:text-destructive"
-          >
-            Eliminar
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <DropdownAcciones
+        requerimiento={row.original}
+        onEditar={onEditar}
+        onVerDetalle={onVerDetalle}
+        onEliminar={onEliminar}
+      />
     ),
   },
 ];
