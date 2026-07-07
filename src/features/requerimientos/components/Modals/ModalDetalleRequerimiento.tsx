@@ -5,6 +5,16 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
 import { formatearFecha } from "@/utils/formatearFecha";
 import { formatearMoneda } from "@/utils/formatearMoneda";
 import { trabajadores } from "@/data/placeholder/trabajadores";
@@ -39,31 +49,60 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
     <Dialog open={requerimiento !== null} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle>{requerimiento.clienteEmpresa}</DialogTitle>
+          <DialogTitle>Requerimiento {requerimiento.id}</DialogTitle>
           <DialogDescription className="sr-only">
             Detalle del requerimiento seleccionado.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="flex flex-col gap-6 py-2">
 
-          {/* Columna izquierda */}
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-3 gap-6">
             <Campo label="Fecha" valor={formatearFecha(requerimiento.fecha)} />
+            <Campo label="Cliente" valor={requerimiento.clienteEmpresa} />
             <Campo label="N° Cotización" valor={requerimiento.numeroCotizacion} />
-            <Campo label="Descripción" valor={requerimiento.detalleDescripcion} />
-            <Campo label="Estado" valor={estado} />
-            <Campo label="Responsable" valor={responsable} />
           </div>
 
-          {/* Columna derecha */}
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-3 gap-6">
+            <Campo label="Estado" valor={estado} />
+            <Campo label="Responsable" valor={responsable} />
+            <Campo label="N° Factura" valor={requerimiento.numeroFactura} />
+          </div>
+
+          <div>
+            <Campo label="Descripción" valor={requerimiento.detalleDescripcion} />
+          </div>
+          
+          <div className="grid grid-cols-4 gap-6">
             <Campo label="Total" valor={formatearMoneda(requerimiento.montoTotal)} />
             <Campo label="Pagado" valor={formatearMoneda(requerimiento.montoPagado)} />
             <Campo label="Pendiente" valor={formatearMoneda(requerimiento.montoPendiente)} />
-            <Campo label="Medio de Pago" valor={requerimiento.medioPago} />
-            <Campo label="N° Factura" valor={requerimiento.numeroFactura} />
             <Campo label="Otros Datos" valor={requerimiento.otrosDatos} />
+          </div>
+
+          <div>
+            <h4 className="text-md mb-2 font-semibold">Historial de Pagos</h4>
+            <Table className="border">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Fecha</TableHead>
+                  <TableHead>Monto</TableHead>
+                  <TableHead>Medio de Pago</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow >
+                  <TableCell>{formatearFecha("01-01-26")}</TableCell>
+                  <TableCell>{formatearMoneda(0)}</TableCell>
+                  <TableCell>Débito #123</TableCell>
+                </TableRow>
+                <TableRow >
+                  <TableCell>{formatearFecha("02-02-26")}</TableCell>
+                  <TableCell>{formatearMoneda(0)}</TableCell>
+                  <TableCell>Débito #456</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
 
         </div>

@@ -2,7 +2,7 @@ import type { Requerimiento } from '@/features/requerimientos/types/requerimient
 
 export const requerimientosData: Requerimiento[] = [
   {
-    id: 1,
+    id: 16690740,
     fecha: "2026-06-01",
     clienteEmpresa: 'CRISTIAN LEIVA / FULLGEO',
     numeroCotizacion: '7075',
@@ -17,7 +17,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '569 9938 6935',
   },
   {
-    id: 2,
+    id: 74364961,
     fecha: "2026-06-01",
     clienteEmpresa: 'PATRICIO OBREQUE',
     numeroCotizacion: '7078',
@@ -32,7 +32,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 3,
+    id: 41910015,
     fecha: "2026-06-01",
     clienteEmpresa: 'KIU',
     numeroCotizacion: '7077',
@@ -47,7 +47,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 4,
+    id: 54989298,
     fecha: "2026-06-02",
     clienteEmpresa: 'JOHANA VEGA / CORPORACIÓN DE APOYO A LA NIÑEZ',
     numeroCotizacion: '7088',
@@ -62,7 +62,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 5,
+    id: 65342616,
     fecha: "2026-06-02",
     clienteEmpresa: 'LUISA SALAZAR',
     numeroCotizacion: '',
@@ -77,7 +77,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 6,
+    id: 76710211,
     fecha: "2026-06-02",
     clienteEmpresa: 'LUISA SALAZAR',
     numeroCotizacion: '',
@@ -92,7 +92,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 7,
+    id: 50558651,
     fecha: "2026-06-02",
     clienteEmpresa: 'VICTOR',
     numeroCotizacion: '',
@@ -107,7 +107,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '56 9 9167 7078',
   },
   {
-    id: 8,
+    id: 83001360,
     fecha: "2026-06-02",
     clienteEmpresa: 'SOFIA ZURITA',
     numeroCotizacion: '7084',
@@ -122,7 +122,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 9,
+    id: 26368980,
     fecha: "2026-06-02",
     clienteEmpresa: 'ANDRES MALDONADO',
     numeroCotizacion: '7090',
@@ -137,7 +137,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 10,
+    id: 14167658,
     fecha: "2026-06-02",
     clienteEmpresa: 'JAIR SOTO',
     numeroCotizacion: '7109',
@@ -152,7 +152,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 11,
+    id: 38086015,
     fecha: "2026-06-02",
     clienteEmpresa: 'REGULO LOPEZ / INNERGEX',
     numeroCotizacion: '7095',
@@ -167,7 +167,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 12,
+    id: 57710208,
     fecha: "2026-06-02",
     clienteEmpresa: 'ICAFAL / ROBERTO DURÁN',
     numeroCotizacion: '7091',
@@ -182,7 +182,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 13,
+    id: 36224241,
     fecha: "2026-06-02",
     clienteEmpresa: 'GUILLERMO MORALES',
     numeroCotizacion: '',
@@ -197,7 +197,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 14,
+    id: 15703050,
     fecha: "2026-06-02",
     clienteEmpresa: 'CARLOS GARRIDO',
     numeroCotizacion: '',
@@ -212,7 +212,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 15,
+    id: 55718894,
     fecha: "2026-06-02",
     clienteEmpresa: 'RICHARD / CHINA FIRTS HIGHWAY',
     numeroCotizacion: '7085',
@@ -227,7 +227,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 16,
+    id: 10922117,
     fecha: "2026-06-02",
     clienteEmpresa: '---',
     numeroCotizacion: '',
@@ -242,7 +242,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 17,
+    id: 92561820,
     fecha: "2026-06-02",
     clienteEmpresa: 'SERGIO RAFAEL SILVA ROZAS',
     numeroCotizacion: '7089',
@@ -257,7 +257,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: 'NETO 569 6545 8191',
   },
   {
-    id: 18,
+    id: 63964934,
     fecha: "2026-06-02",
     clienteEmpresa: 'CIAL ALIMENTOS',
     numeroCotizacion: '',
@@ -272,7 +272,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 19,
+    id: 51403973,
     fecha: "2026-06-02",
     clienteEmpresa: 'DON PELLETS',
     numeroCotizacion: '7097',
@@ -287,7 +287,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 20,
+    id: 72657812,
     fecha: "2026-06-02",
     clienteEmpresa: 'FEDERICO VALENZUELA',
     numeroCotizacion: '',
@@ -302,7 +302,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 21,
+    id: 70448058,
     fecha: "2026-06-02",
     clienteEmpresa: 'OBRATEC',
     numeroCotizacion: '',
@@ -317,7 +317,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 22,
+    id: 23957746,
     fecha: "2026-06-02",
     clienteEmpresa: 'LUIS MEDINA',
     numeroCotizacion: '7100',
@@ -332,7 +332,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 23,
+    id: 47390121,
     fecha: "2026-06-03",
     clienteEmpresa: 'MEVI RIDE',
     numeroCotizacion: '7101',
@@ -347,7 +347,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 24,
+    id: 59446810,
     fecha: "2026-06-03",
     clienteEmpresa: 'IGNACIO / mapase',
     numeroCotizacion: '7103',
@@ -362,7 +362,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 25,
+    id: 79466361,
     fecha: "2026-06-03",
     clienteEmpresa: 'BONET LAINE',
     numeroCotizacion: '',
@@ -377,7 +377,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 26,
+    id: 33959422,
     fecha: "2026-06-03",
     clienteEmpresa: 'SEBASTIAN FUENTES /CHAVA',
     numeroCotizacion: '',
@@ -392,7 +392,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 27,
+    id: 97076429,
     fecha: "2026-06-03",
     clienteEmpresa: 'GINO / PROSEGUR',
     numeroCotizacion: '7107',
@@ -407,7 +407,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 28,
+    id: 76555112,
     fecha: "2026-06-04",
     clienteEmpresa: 'NICOLAS SALDIAS',
     numeroCotizacion: '7112',
@@ -422,7 +422,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 29,
+    id: 75074660,
     fecha: "2026-06-04",
     clienteEmpresa: 'NEUBAT',
     numeroCotizacion: '7116',
@@ -437,7 +437,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 30,
+    id: 15129843,
     fecha: "2026-06-04",
     clienteEmpresa: 'CAMANCHACA',
     numeroCotizacion: '6907',
@@ -452,7 +452,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 31,
+    id: 70040166,
     fecha: "2026-06-04",
     clienteEmpresa: '---',
     numeroCotizacion: '',
@@ -467,7 +467,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 32,
+    id: 41990438,
     fecha: "2026-06-04",
     clienteEmpresa: 'COPELLI VECINO',
     numeroCotizacion: '',
@@ -482,7 +482,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 33,
+    id: 87297167,
     fecha: "2026-06-04",
     clienteEmpresa: 'RENE GUERRERO / QUINSAC',
     numeroCotizacion: '7115',
@@ -497,7 +497,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 34,
+    id: 90683093,
     fecha: "2026-06-04",
     clienteEmpresa: 'EVER TORRES',
     numeroCotizacion: '',
@@ -512,7 +512,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '569 5216 7896',
   },
   {
-    id: 35,
+    id: 18934718,
     fecha: "2026-06-04",
     clienteEmpresa: 'NEUBAT',
     numeroCotizacion: '',
@@ -527,7 +527,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 36,
+    id: 94863001,
     fecha: "2026-06-04",
     clienteEmpresa: 'LIQUI MOLY',
     numeroCotizacion: '6880',
@@ -542,7 +542,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: 'SOM 2388',
   },
   {
-    id: 37,
+    id: 42613780,
     fecha: "2026-06-04",
     clienteEmpresa: 'RODRIGO FERNANDEZ',
     numeroCotizacion: '',
@@ -557,7 +557,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '77 041 924-7',
   },
   {
-    id: 38,
+    id: 41077049,
     fecha: "2026-06-05",
     clienteEmpresa: 'VICKY',
     numeroCotizacion: '',
@@ -572,7 +572,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 39,
+    id: 57602488,
     fecha: "2026-06-05",
     clienteEmpresa: 'OVANDO, ACUÑA Y JAQUE LIMITADA',
     numeroCotizacion: '7126',
@@ -587,7 +587,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 40,
+    id: 16506382,
     fecha: "2026-06-05",
     clienteEmpresa: 'CERVEZA GATO BRUJO',
     numeroCotizacion: '7117',
@@ -602,7 +602,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 41,
+    id: 66150383,
     fecha: "2026-06-05",
     clienteEmpresa: 'EDITH ROSALES',
     numeroCotizacion: '',
@@ -617,7 +617,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 42,
+    id: 34981287,
     fecha: "2026-06-05",
     clienteEmpresa: 'CLAUDIO',
     numeroCotizacion: '',
@@ -632,7 +632,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 43,
+    id: 96483582,
     fecha: "2026-06-05",
     clienteEmpresa: 'O Y C',
     numeroCotizacion: '',
@@ -647,7 +647,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 44,
+    id: 79234986,
     fecha: "2026-06-05",
     clienteEmpresa: 'NOELIA',
     numeroCotizacion: '7130',
@@ -662,7 +662,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '9 8678 3627',
   },
   {
-    id: 45,
+    id: 26955466,
     fecha: "2026-06-05",
     clienteEmpresa: 'DANDIS',
     numeroCotizacion: '7133',
@@ -677,7 +677,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 46,
+    id: 16001259,
     fecha: "2026-06-05",
     clienteEmpresa: 'RADIO SUR',
     numeroCotizacion: '',
@@ -692,7 +692,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 47,
+    id: 61670328,
     fecha: "2026-06-06",
     clienteEmpresa: 'FREDDY BERTHET',
     numeroCotizacion: '',
@@ -707,7 +707,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 48,
+    id: 93930798,
     fecha: "2026-06-08",
     clienteEmpresa: 'PATRICIO POBLETE / GLOBAL SURV',
     numeroCotizacion: '',
@@ -722,7 +722,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 49,
+    id: 33528425,
     fecha: "2026-06-08",
     clienteEmpresa: 'HERNAN ZAPATA',
     numeroCotizacion: '',
@@ -737,7 +737,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 50,
+    id: 27044103,
     fecha: "2026-06-08",
     clienteEmpresa: 'SEBASTIAN FUENTES /CHAVA',
     numeroCotizacion: '',
@@ -752,7 +752,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 51,
+    id: 22518548,
     fecha: "2026-06-08",
     clienteEmpresa: 'MARIO ERICES',
     numeroCotizacion: '',
@@ -767,7 +767,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 52,
+    id: 40682242,
     fecha: "2026-06-08",
     clienteEmpresa: 'RODRIGO GODOY',
     numeroCotizacion: '',
@@ -782,7 +782,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 53,
+    id: 53332825,
     fecha: "2026-06-08",
     clienteEmpresa: 'MARIA HERNDANDEZ',
     numeroCotizacion: '',
@@ -797,7 +797,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 54,
+    id: 48656106,
     fecha: "2026-06-08",
     clienteEmpresa: 'DIEZ DE JULIO / TARJETAS',
     numeroCotizacion: '',
@@ -812,7 +812,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 55,
+    id: 15447127,
     fecha: "2026-06-08",
     clienteEmpresa: 'BIOAMBIENTE',
     numeroCotizacion: '7147',
@@ -827,7 +827,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 56,
+    id: 15927439,
     fecha: "2026-06-08",
     clienteEmpresa: 'BENJA AGUILERA',
     numeroCotizacion: '',
@@ -842,7 +842,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: 'POR FACTURAR "PUBLICIDAD"',
   },
   {
-    id: 57,
+    id: 14184461,
     fecha: "2026-06-08",
     clienteEmpresa: 'LA POSADA / NICOLE',
     numeroCotizacion: '7096',
@@ -857,7 +857,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 58,
+    id: 34020880,
     fecha: "2026-06-08",
     clienteEmpresa: 'MEVI RIDE',
     numeroCotizacion: '7143',
@@ -872,7 +872,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 59,
+    id: 68312939,
     fecha: "2026-06-08",
     clienteEmpresa: 'CONTRASTE',
     numeroCotizacion: '',
@@ -887,7 +887,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 60,
+    id: 83178195,
     fecha: "2026-06-08",
     clienteEmpresa: '----',
     numeroCotizacion: '',
@@ -902,7 +902,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 61,
+    id: 32668927,
     fecha: "2026-06-09",
     clienteEmpresa: 'DANDIS',
     numeroCotizacion: '7154',
@@ -917,7 +917,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 62,
+    id: 10779230,
     fecha: "2026-06-09",
     clienteEmpresa: 'LUIS ZAMBRANO',
     numeroCotizacion: '',
@@ -932,7 +932,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 63,
+    id: 91760303,
     fecha: "2026-06-09",
     clienteEmpresa: 'CAÑADA',
     numeroCotizacion: '',
@@ -947,7 +947,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 64,
+    id: 98784016,
     fecha: "2026-06-09",
     clienteEmpresa: 'CPM',
     numeroCotizacion: '7007',
@@ -962,7 +962,7 @@ export const requerimientosData: Requerimiento[] = [
     otrosDatos: '',
   },
   {
-    id: 65,
+    id: 74750683,
     fecha: "2026-06-09",
     clienteEmpresa: 'CPM',
     numeroCotizacion: '7142',

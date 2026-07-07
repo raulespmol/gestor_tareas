@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import type { Requerimiento } from "../../types/requerimiento.type";
 
-import { FormEditarRequerimiento } from "../FormEditarRequerimiento";
+import { FormEditarRequerimiento } from "@/features/requerimientos/components/Forms/FormEditarRequerimiento";
 
 type Props = {
   requerimiento: Requerimiento | null;

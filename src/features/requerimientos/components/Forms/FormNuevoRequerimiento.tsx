@@ -8,8 +8,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Field, FieldError, FieldLabel } from "../../../components/ui/field";
-import { Textarea } from "../../../components/ui/textarea";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Textarea } from "@/components/ui/textarea";
 
 import {useRequerimientos} from "@/context/RequerimientosContext";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
