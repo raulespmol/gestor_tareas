@@ -1,5 +1,6 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 
 import {
   registrarPagoSchema,
@@ -12,17 +13,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
+import type { Requerimiento } from "../../types/requerimiento.type";
 
 type RegistrarPagoFormProps = {
+  requerimiento: Requerimiento;
   onSuccess: () => void;
 };
 
-export const FormRegistrarPago = ({ onSuccess }: RegistrarPagoFormProps) => {
+export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFormProps) => {
   const {
     register,
     handleSubmit,
     reset,
     control,
+    watch,
+    setValue,
     formState: { errors }
   } = useForm<RegistrarPagoFormData>({
     resolver: zodResolver(registrarPagoSchema),
@@ -36,7 +41,7 @@ export const FormRegistrarPago = ({ onSuccess }: RegistrarPagoFormProps) => {
   })
 
   const onSubmit = (data: RegistrarPagoFormData) => {
-    console.log("Pago Registrado:", data)
+    console.log("Pago Registrado:", requerimiento.id, data)
     reset({
       fecha: new Date().toISOString().split("T")[0],
       monto: 0,
@@ -45,6 +50,15 @@ export const FormRegistrarPago = ({ onSuccess }: RegistrarPagoFormProps) => {
     })
     onSuccess();
   }
+
+  const medioPagoValue = watch("medioPago");
+  const isVoucherEnabled = medioPagoValue === "debito" || medioPagoValue === "credito"
+
+  useEffect(() => {
+    if (!isVoucherEnabled) {
+      setValue("voucher", "");
+    }
+  }, [isVoucherEnabled, setValue]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -106,14 +120,14 @@ export const FormRegistrarPago = ({ onSuccess }: RegistrarPagoFormProps) => {
           <FieldError errors={[errors.medioPago]} />
         </Field>
         
-        <Field className="col-span-2">
+        <Field className="col-span-1">
           <FieldLabel>
             N° Voucher
           </FieldLabel>
 
           <Input
             {...register("voucher")}
-            placeholder="0123"
+            disabled={!isVoucherEnabled}
           />
           <FieldError errors={[errors.voucher]} />
         </Field>
