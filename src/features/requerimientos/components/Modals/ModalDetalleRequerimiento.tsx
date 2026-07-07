@@ -10,7 +10,7 @@ import { formatearMoneda } from "@/utils/formatearMoneda";
 import { trabajadores } from "@/data/placeholder/trabajadores";
 import { estados } from "@/data/placeholder/estados";
 
-import type { Requerimiento } from "../types/requerimiento.type";
+import type { Requerimiento } from "../../types/requerimiento.type";
 
 type Props = {
   requerimiento: Requerimiento | null;

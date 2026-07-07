@@ -117,42 +117,47 @@ export function DataTable<TData>({
           ))}
         </TableHeader>
 
-        <TableBody style={{ display: "block", width: "100%" }}>
+        <TableBody
+          style={{
+            display: "block",
+            width: "100%",
+            height: `${totalHeight}px`,
+            position: "relative",
+          }}
+        >
           {rows.length ? (
-            <tr style={{ height: `${totalHeight}px`, display: "block", position: "relative", width: "100%" }}>
-              {virtualRows.map((virtualRow) => {
-                const row = rows[virtualRow.index];
-                return (
-                  <TableRow
-                    key={row.id}
-                    data-index={virtualRow.index}
-                    ref={virtualizer.measureElement}
-                    style={{
-                      position: "absolute",
-                      top: `${virtualRow.start}px`,
-                      width: "100%",
-                      display: "flex",
-                    }}
-                  >
-                    {row.getVisibleCells().map((cell) => {
-                      const isCentered = centeredColumns.includes(cell.column.id);
-                      return (
-                        <TableCell
-                          key={cell.id}
-                          style={getCellStyle(
-                            cell.column.getSize(),
-                            Boolean((cell.column.columnDef.meta?.flex))
-                          )}
-                          className={`overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center ${isCentered ? "justify-center" : ""}`}
-                        >
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-            </tr>
+            virtualRows.map((virtualRow) => {
+              const row = rows[virtualRow.index];
+              return (
+                <TableRow
+                  key={row.id}
+                  data-index={virtualRow.index}
+                  ref={virtualizer.measureElement}
+                  style={{
+                    position: "absolute",
+                    top: `${virtualRow.start}px`,
+                    width: "100%",
+                    display: "flex",
+                  }}
+                >
+                  {row.getVisibleCells().map((cell) => {
+                    const isCentered = centeredColumns.includes(cell.column.id);
+                    return (
+                      <TableCell
+                        key={cell.id}
+                        style={getCellStyle(
+                          cell.column.getSize(),
+                          Boolean((cell.column.columnDef.meta?.flex))
+                        )}
+                        className={`overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center ${isCentered ? "justify-center" : ""}`}
+                      >
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="text-center h-24">

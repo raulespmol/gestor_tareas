@@ -5,9 +5,9 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import type { Requerimiento } from "../types/requerimiento.type";
+import type { Requerimiento } from "../../types/requerimiento.type";
 
-import { FormEditarRequerimiento } from "./FormEditarRequerimiento";
+import { FormEditarRequerimiento } from "../FormEditarRequerimiento";
 
 type Props = {
   requerimiento: Requerimiento | null;

@@ -7,13 +7,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { Eye, Edit3, Trash2, MoreHorizontal, DollarSign } from "lucide-react";
 
 type DropdownAccionesProps = {
   requerimiento: Requerimiento;
   onEditar: (requerimiento: Requerimiento) => void;
   onVerDetalle: (requerimiento: Requerimiento) => void;
   onEliminar: (requerimiento: Requerimiento) => void;
+  onRegistrarPago: (requerimiento: Requerimiento) => void;
 };
 
 export default function DropdownAcciones({
@@ -21,28 +22,39 @@ export default function DropdownAcciones({
   onEditar,
   onVerDetalle,
   onEliminar,
+  onRegistrarPago,
 }: DropdownAccionesProps) {
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <MoreHorizontal className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onSelect={() => onVerDetalle(requerimiento)}>
-          Ver detalles
-        </DropdownMenuItem>
-        <DropdownMenuItem onSelect={() => onEditar(requerimiento)}>
-          Editar
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onSelect={() => onEliminar(requerimiento)}
-          className="text-destructive focus:text-destructive"
-        >
-          Eliminar
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onSelect={() => onVerDetalle(requerimiento)}>
+            <Eye className="mr-2 h-4 w-4" />
+            Ver detalles
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => onEditar(requerimiento)}>
+            <Edit3 className="mr-2 h-4 w-4" />
+            Editar
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => onRegistrarPago(requerimiento)}>
+            <DollarSign className="mr-2 h-4 w-4" />
+            Registrar pago
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onSelect={() => onEliminar(requerimiento)}
+            className="text-destructive focus:text-destructive"
+          >
+            <Trash2 className="mr-2 h-4 w-4" />
+            Eliminar
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 }

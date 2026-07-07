@@ -8,7 +8,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import type { Requerimiento } from "../types/requerimiento.type";
+import type { Requerimiento } from "../../types/requerimiento.type";
 
 type Props = {
   requerimiento: Requerimiento | null;

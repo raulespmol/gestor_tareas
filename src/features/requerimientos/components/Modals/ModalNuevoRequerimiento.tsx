@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import { FormNuevoRequerimiento } from "@/features/requerimientos/components/FormNuevoRequerimiento";
+import { FormNuevoRequerimiento } from "@/features/requerimientos/components/Forms/FormNuevoRequerimiento";
 
 type Props = {
   open: boolean;

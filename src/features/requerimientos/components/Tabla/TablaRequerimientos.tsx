@@ -4,9 +4,10 @@ import { useState, useMemo, useCallback } from "react";
 import { DataTable } from "./DataTable";
 import { createColumns } from "./columns";
 import { camposBusqueda } from "../../utils/camposBusqueda";
-import ModalEditarRequerimiento from "../ModalEditarRequerimiento";
-import ModalDetalleRequerimiento from "../ModalDetalleRequerimiento";
-import ModalConfirmarEliminar from "../ModalConfirmarEliminar";
+import ModalEditarRequerimiento from "../Modals/ModalEditarRequerimiento";
+import ModalDetalleRequerimiento from "../Modals/ModalDetalleRequerimiento";
+import ModalConfirmarEliminar from "../Modals/ModalConfirmarEliminar";
+import ModalRegistrarPago from "../Modals/ModalRegistrarPago";
 
 import type { Requerimiento } from "../../types/requerimiento.type";
 
@@ -21,10 +22,12 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
   const [requerimientoAEditar, setRequerimientoAEditar] = useState<Requerimiento | null>(null);
   const [requerimientoDetalle, setRequerimientoDetalle] = useState<Requerimiento | null>(null);
   const [requerimientoAEliminar, setRequerimientoAEliminar] = useState<Requerimiento | null>(null);
+  const [pagoARegistrar, setPagoARegistrar] = useState<Requerimiento | null>(null);
 
   const handleEditar = useCallback((r: Requerimiento) => setRequerimientoAEditar(r), []);
   const handleVerDetalle = useCallback((r: Requerimiento) => setRequerimientoDetalle(r), []);
   const handleEliminar = useCallback((r: Requerimiento) => setRequerimientoAEliminar(r), []);
+  const handleRegistrarPago = useCallback((r: Requerimiento) => setPagoARegistrar(r), []);
   const handleActualizarEstado = useCallback(
     (id: number, estadoId: number) => actualizarEstado(id, estadoId), []
   );
@@ -37,10 +40,11 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
     handleEditar,
     handleVerDetalle,
     handleEliminar,
+    handleRegistrarPago,
     handleActualizarEstado,
     handleActualizarResponsable,
   ),
-  [handleEditar, handleVerDetalle, handleEliminar, handleActualizarEstado, handleActualizarResponsable]
+  [handleEditar, handleVerDetalle, handleEliminar, handleRegistrarPago, handleActualizarEstado, handleActualizarResponsable]
 );
 
   const requerimientosFiltrados = useMemo(
@@ -73,6 +77,10 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
           setRequerimientoAEliminar(null);
         }}
         onOpenChange={(open) => { if (!open) setRequerimientoAEliminar(null); }}
+      />
+      <ModalRegistrarPago
+        requerimiento={pagoARegistrar}
+        onOpenChange={(open) => { if (!open) setPagoARegistrar(null); }}
       />
     </>
   );

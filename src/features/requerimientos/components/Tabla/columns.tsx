@@ -13,6 +13,7 @@ export const createColumns = (
   onEditar: (requerimiento: Requerimiento) => void,
   onVerDetalle: (requerimiento: Requerimiento) => void,
   onEliminar: (requerimiento: Requerimiento) => void,
+  onRegistrarPago: (requerimiento: Requerimiento) => void,
   onActualizarEstado: (id: number, estadoId: number) => void,
   onActualizarResponsable: (id: number, responsableId: number) => void,
 ): ColumnDef<Requerimiento>[] => [
@@ -104,6 +105,7 @@ export const createColumns = (
         onEditar={onEditar}
         onVerDetalle={onVerDetalle}
         onEliminar={onEliminar}
+        onRegistrarPago={onRegistrarPago}
       />
     ),
   },

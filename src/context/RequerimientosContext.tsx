@@ -11,6 +11,7 @@ type RequerimientosContextType = {
   agregarRequerimiento: (data: RequerimientoFormData) => void;
   editarRequerimiento: (actualizado: Requerimiento) => void;
   eliminarRequerimiento: (id: number) => void;
+  registrarPago: (idRequerimiento: number, monto: number, medioPago: string, voucher?: string) => void;
 }
 
 type ProviderProps = {
@@ -80,6 +81,36 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
     setRequerimientos((prev) => prev.filter((r) => r.id !== id));
   };
 
+  const registrarPago = (idRequerimiento: number, monto: number, medioPago: string, voucher?: string) => {
+    const montoPago = Number(monto);
+
+    if (!Number.isFinite(montoPago) || montoPago <= 0) return;
+
+    setRequerimientos((prev) =>
+      ordenarFechaAsc(
+        prev.map((req) => {
+          if (req.id !== idRequerimiento) return req;
+
+          const pendienteActual = Math.max(0, req.montoTotal - req.montoPagado);
+          const montoValido = Math.min(montoPago, pendienteActual);
+          const nuevoMontoPagado = req.montoPagado + montoValido;
+          const nuevoMontoPendiente = Math.max(0, req.montoTotal - nuevoMontoPagado);
+          const detallePago = voucher?.trim() ? `Voucher: ${voucher.trim()}` : undefined;
+
+          return {
+            ...req,
+            montoPagado: nuevoMontoPagado,
+            montoPendiente: nuevoMontoPendiente,
+            medioPago,
+            otrosDatos: detallePago
+              ? [req.otrosDatos, detallePago].filter(Boolean).join("\n")
+              : req.otrosDatos,
+          };
+        })
+      )
+    );
+  };
+
   return (
     <RequerimientosContext.Provider value={{ 
       requerimientos, 
@@ -87,7 +118,8 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
       actualizarResponsable, 
       agregarRequerimiento,
       editarRequerimiento,
-      eliminarRequerimiento
+      eliminarRequerimiento,
+      registrarPago
     }}>
       {children}
     </RequerimientosContext.Provider>

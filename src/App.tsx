@@ -4,7 +4,7 @@ import BuscadorRequerimientos from "./features/requerimientos/components/Toolbar
 import FiltroEstado from "./features/requerimientos/components/Toolbar/FiltroEstado";
 import TablaRequerimientos from "@/features/requerimientos/components/Tabla/TablaRequerimientos"
 import { useState } from "react";
-import ModalNuevoRequerimiento from "./features/requerimientos/components/ModalNuevoRequerimiento";
+import ModalNuevoRequerimiento from "./features/requerimientos/components/Modals/ModalNuevoRequerimiento";
 
 export function App() {
   const [globalFilter, setGlobalFilter] = useState("");
@@ -14,7 +14,7 @@ export function App() {
   return (
     <div className="flex w-full min-h-svh p-6">
       <div className="flex min-w-0 w-full flex-col gap-4 text-sm leading-loose max-h-[calc(100vh-3rem)] overflow-hidden">
-        <h1 className="text-2xl font-bold">Gestor de Tareas</h1>
+        <h1 className="text-2xl font-bold">Gestor de Requerimientos</h1>
 
         <Toolbar>
           <div className="flex gap-2 flex-direction-row w-3xl">
