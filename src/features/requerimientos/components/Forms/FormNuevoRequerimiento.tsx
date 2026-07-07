@@ -129,9 +129,9 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
                   </SelectContent>
 
                 </Select>
-                )}
-                />
-              <FieldError errors={[errors.responsableId]} />
+              )}
+            />
+            <FieldError errors={[errors.responsableId]} />
           </Field>
           
           
