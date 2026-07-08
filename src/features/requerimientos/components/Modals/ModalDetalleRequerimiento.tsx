@@ -91,15 +91,15 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow >
-                  <TableCell>{formatearFecha("01-01-26")}</TableCell>
-                  <TableCell>{formatearMoneda(0)}</TableCell>
+                <TableRow>
+                  <TableCell>{formatearFecha("26-01-01")}</TableCell>
+                  <TableCell>{formatearMoneda(1000)}</TableCell>
                   <TableCell>Débito #123</TableCell>
                 </TableRow>
-                <TableRow >
-                  <TableCell>{formatearFecha("02-02-26")}</TableCell>
-                  <TableCell>{formatearMoneda(0)}</TableCell>
-                  <TableCell>Débito #456</TableCell>
+                <TableRow>
+                  <TableCell>{formatearFecha("26-02-02")}</TableCell>
+                  <TableCell>{formatearMoneda(5000)}</TableCell>
+                  <TableCell>Transferencia</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
