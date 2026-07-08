@@ -1,11 +1,11 @@
 export interface Requerimiento {
-  id: number;
+  id: string;
   fecha: string;
   clienteEmpresa: string;
   numeroCotizacion: string;
   detalleDescripcion: string;
-  responsableId: number;
-  estadoId: number;
+  responsableId: string;
+  estadoId: string;
   montoTotal: number;
   montoPagado: number;
   montoPendiente: number;

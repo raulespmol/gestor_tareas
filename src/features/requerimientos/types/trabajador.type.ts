@@ -1,4 +1,4 @@
 export interface Trabajador {
-  id: number;
+  id: string;
   nombre: string;
 }
