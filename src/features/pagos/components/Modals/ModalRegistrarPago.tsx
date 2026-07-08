@@ -20,7 +20,7 @@ const ModalRegistrarPago = ({ requerimiento, onOpenChange }: Props) => {
       open={requerimiento !== null}
       onOpenChange={onOpenChange}
     >
-      <DialogContent className="sm:max-w-xl">
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Registrar Pago - Requerimiento {requerimiento?.id}</DialogTitle>
           <DialogDescription className="sr-only">

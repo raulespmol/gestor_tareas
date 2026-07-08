@@ -6,12 +6,12 @@ import type { RequerimientoFormData } from "@/features/requerimientos/schemas/re
 
 type RequerimientosContextType = {
   requerimientos: Requerimiento[];
-  actualizarEstado: (idRequerimiento: number, nuevoEstadoId: number) => void;
-  actualizarResponsable: (idRequerimiento: number, nuevoResponsableId: number) => void;
+  actualizarEstado: (idRequerimiento: string, nuevoEstadoId: string) => void;
+  actualizarResponsable: (idRequerimiento: string, nuevoResponsableId: string) => void;
   agregarRequerimiento: (data: RequerimientoFormData) => void;
   editarRequerimiento: (actualizado: Requerimiento) => void;
-  eliminarRequerimiento: (id: number) => void;
-  registrarPago: (idRequerimiento: number, monto: number, medioPago: string, voucher?: string) => void;
+  eliminarRequerimiento: (id: string) => void;
+  actualizarMontos: (requerimientoId: string, montoPagado: number) => void;
 }
 
 type ProviderProps = {
@@ -50,13 +50,13 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
     guardarRequerimientos(requerimientos);
   }, [requerimientos])
 
-  const actualizarEstado = (idRequerimiento: number, nuevoEstadoId: number) => {
+  const actualizarEstado = (idRequerimiento: string, nuevoEstadoId: string) => {
     setRequerimientos((prev) => 
       prev.map(req => req.id === idRequerimiento ? {...req, estadoId: nuevoEstadoId} : req)
     );
   };
 
-  const actualizarResponsable = (idRequerimiento: number, nuevoResponsableId: number) => {
+  const actualizarResponsable = (idRequerimiento: string, nuevoResponsableId: string) => {
     setRequerimientos((prev) => 
       prev.map(req => req.id === idRequerimiento ? {...req, responsableId: nuevoResponsableId} : req)
     );
@@ -64,7 +64,7 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
 
   const agregarRequerimiento = (data: RequerimientoFormData) => {
     const nuevoRequerimiento: Requerimiento = {
-      id: Date.now(), // TEMPORAL
+      id: Date.now().toString(), // TEMPORAL
       ...data,
       montoPendiente: (data.montoTotal - data.montoPagado)
     };
@@ -77,39 +77,21 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
     );
   };
 
-  const eliminarRequerimiento = (id: number) => {
+  const eliminarRequerimiento = (id: string) => {
     setRequerimientos((prev) => prev.filter((r) => r.id !== id));
   };
 
-  const registrarPago = (idRequerimiento: number, monto: number, medioPago: string, voucher?: string) => {
-    const montoPago = Number(monto);
-
-    if (!Number.isFinite(montoPago) || montoPago <= 0) return;
-
-    setRequerimientos((prev) =>
-      ordenarFechaAsc(
-        prev.map((req) => {
-          if (req.id !== idRequerimiento) return req;
-
-          const pendienteActual = Math.max(0, req.montoTotal - req.montoPagado);
-          const montoValido = Math.min(montoPago, pendienteActual);
-          const nuevoMontoPagado = req.montoPagado + montoValido;
-          const nuevoMontoPendiente = Math.max(0, req.montoTotal - nuevoMontoPagado);
-          const detallePago = voucher?.trim() ? `Voucher: ${voucher.trim()}` : undefined;
-
-          return {
-            ...req,
-            montoPagado: nuevoMontoPagado,
-            montoPendiente: nuevoMontoPendiente,
-            medioPago,
-            otrosDatos: detallePago
-              ? [req.otrosDatos, detallePago].filter(Boolean).join("\n")
-              : req.otrosDatos,
-          };
-        })
-      )
-    );
-  };
+ const actualizarMontos = (requerimientoId: string, montoPagado: number) => {
+  setRequerimientos((prev) =>
+    prev.map((r) =>
+      r.id === requerimientoId
+        ? { ...r,  
+            montoPagado: r.montoPagado + montoPagado, 
+            montoPendiente: r.montoPendiente - montoPagado }
+        : r
+    )
+  );
+};
 
   return (
     <RequerimientosContext.Provider value={{ 
@@ -119,7 +101,7 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
       agregarRequerimiento,
       editarRequerimiento,
       eliminarRequerimiento,
-      registrarPago
+      actualizarMontos
     }}>
       {children}
     </RequerimientosContext.Provider>

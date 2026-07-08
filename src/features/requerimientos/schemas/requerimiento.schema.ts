@@ -13,9 +13,9 @@ export const requerimientoSchema = z
 
     detalleDescripcion: z.string().trim(),
 
-    responsableId: z.number(),
+    responsableId: z.string(),
 
-    estadoId: z.number(),
+    estadoId: z.string(),
 
     montoTotal: z
       .number({

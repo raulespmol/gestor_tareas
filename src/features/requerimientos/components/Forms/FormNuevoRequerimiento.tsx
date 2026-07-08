@@ -112,7 +112,7 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
               render={({ field }) => (
                 <Select
                   value={field.value?.toString()}
-                  onValueChange={(value) => field.onChange(Number(value))}
+                  onValueChange={(value) => field.onChange(value)}
                 >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Seleccionar..." />
@@ -146,7 +146,7 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
               render={({ field }) => (
                 <Select
                   value={field.value?.toString()}
-                  onValueChange={(value) => field.onChange(Number(value))}
+                  onValueChange={(value) => field.onChange(value)}
                 >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Seleccionar..." />

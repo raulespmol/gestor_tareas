@@ -4,13 +4,26 @@ import { createRoot } from "react-dom/client"
 import "./index.css"
 import App from "./App.tsx"
 import { ThemeProvider } from "@/components/theme-provider.tsx"
-import { RequerimientosProvider } from "@/context/RequerimientosContext.tsx";
+import { RequerimientosProvider } from "@/context/RequerimientosContext";
+import { useRequerimientos } from "@/context/RequerimientosContext";
+import { PagosProvider } from "@/context/PagosContext"
+
+const Providers = ({ children }: { children: React.ReactNode }) => {
+  const { actualizarMontos } = useRequerimientos();
+  return (
+    <PagosProvider onPagoAgregado={actualizarMontos}>
+      {children}
+    </PagosProvider>
+  );
+};
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RequerimientosProvider>
       <ThemeProvider>
-        <App />
+        <Providers>
+          <App />
+        </Providers>
       </ThemeProvider>
     </RequerimientosProvider>
   </StrictMode>
