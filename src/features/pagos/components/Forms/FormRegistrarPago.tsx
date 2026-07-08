@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import {
   registrarPagoSchema,
   type RegistrarPagoFormData
-} from "@/features/requerimientos/schemas/registrarPago.schema";
+} from "@/features/pagos/schemas/registrarPago.schema";
 
 import { mediosPago } from "@/data/placeholder/mediosPago";
 
@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
-import type { Requerimiento } from "../../types/requerimiento.type";
+import type { Requerimiento } from "../../../requerimientos/types/requerimiento.type";
 
 type RegistrarPagoFormProps = {
   requerimiento: Requerimiento;

@@ -7,7 +7,7 @@ import { camposBusqueda } from "../../utils/camposBusqueda";
 import ModalEditarRequerimiento from "../Modals/ModalEditarRequerimiento";
 import ModalDetalleRequerimiento from "../Modals/ModalDetalleRequerimiento";
 import ModalConfirmarEliminar from "../Modals/ModalConfirmarEliminar";
-import ModalRegistrarPago from "../Modals/ModalRegistrarPago";
+import ModalRegistrarPago from "../../../pagos/components/Modals/ModalRegistrarPago";
 
 import type { Requerimiento } from "../../types/requerimiento.type";
 
