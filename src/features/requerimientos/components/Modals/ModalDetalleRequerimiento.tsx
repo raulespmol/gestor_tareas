@@ -19,6 +19,9 @@ import { formatearFecha } from "@/utils/formatearFecha";
 import { formatearMoneda } from "@/utils/formatearMoneda";
 import { trabajadores } from "@/data/placeholder/trabajadores";
 import { estados } from "@/data/placeholder/estados";
+import { mediosPago } from "@/data/placeholder/mediosPago";
+
+import { usePagos } from "@/context/PagosContext";
 
 import type { Requerimiento } from "../../types/requerimiento.type";
 
@@ -42,8 +45,11 @@ const Campo = ({ label, valor }: CampoProps) => (
 const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
   if (!requerimiento) return null;
 
+  const { pagosPorRequerimiento } = usePagos()
+
   const estado = estados.find((e) => e.id === requerimiento.estadoId)?.nombre;
   const responsable = trabajadores.find((t) => t.id === requerimiento.responsableId)?.nombre;
+  const pagos = pagosPorRequerimiento(requerimiento.id)
 
   return (
     <Dialog open={requerimiento !== null} onOpenChange={onOpenChange}>
@@ -91,16 +97,26 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell>{formatearFecha("26-01-01")}</TableCell>
-                  <TableCell>{formatearMoneda(1000)}</TableCell>
-                  <TableCell>Débito #123</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>{formatearFecha("26-02-02")}</TableCell>
-                  <TableCell>{formatearMoneda(5000)}</TableCell>
-                  <TableCell>Transferencia</TableCell>
-                </TableRow>
+                {pagos.length > 0 ? (
+                  pagos.map((pago) => {
+                    const medioLabel = mediosPago.find((m) => m.value === pago.medioPago)?.label ?? pago.medioPago;
+                    return (
+                      <TableRow key={pago.id}>
+                        <TableCell>{formatearFecha(pago.fecha)}</TableCell>
+                        <TableCell>{formatearMoneda(pago.monto)}</TableCell>
+                        <TableCell>
+                          {medioLabel}{pago.voucher ? ` #${pago.voucher}` : ""}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={3} className="text-center text-muted-foreground">
+                      Sin pagos registrados
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </div>

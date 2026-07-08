@@ -2,9 +2,9 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
-  requerimientoSchema,
+  nuevoRequerimientoSchema,
   type RequerimientoFormData
-} from "@/features/requerimientos/schemas/requerimiento.schema";
+} from "@/features/requerimientos/schemas/nuevoRequerimiento.schema";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,19 +28,14 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
     handleSubmit,
     reset,
     control,
-    watch,
     formState: { errors }
   } = useForm<RequerimientoFormData>({
-    resolver: zodResolver(requerimientoSchema),
+    resolver: zodResolver(nuevoRequerimientoSchema),
 
     defaultValues: defaultRequerimientoForm,
   });
 
   const { agregarRequerimiento } = useRequerimientos();
-
-  const montoTotal = watch("montoTotal");
-  const montoPagado = watch("montoPagado");
-  const montoPendiente = montoTotal - montoPagado
 
   const onSubmit = (data: RequerimientoFormData) => {
     agregarRequerimiento(data);
@@ -184,44 +179,9 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
 
             <FieldError errors={[errors.montoTotal]} />
           </Field>
-
-          <Field className="col-span-1">
-            <FieldLabel>
-              Pagado
-            </FieldLabel>
-
-            <Input 
-              type="text"
-              inputMode="numeric"
-              {...register("montoPagado", {
-                setValueAs: (v) => Number(v || 0),
-              })}
-            />
-
-            <FieldError errors={[errors.montoPagado]} />
-          </Field>
-
-          <Field className="col-span-1">
-            <FieldLabel>
-              Pendiente
-            </FieldLabel>
-            <Input 
-              value={montoPendiente}
-              disabled/>
-          </Field>
         </div>
 
         <div className="grid grid-cols-2 gap-4 mt-4">
-          <Field className="col-span-1">
-            <FieldLabel>
-              Medio de Pago
-            </FieldLabel>
-            <Input
-              type="text"
-              {...register("medioPago")}
-              placeholder="Transf. / Efectivo / Debito"
-            />
-          </Field>
           <Field className="col-span-1">
             <FieldLabel>
               N° Factura

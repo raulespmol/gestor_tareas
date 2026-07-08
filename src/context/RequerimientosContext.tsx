@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { requerimientosData } from "@/data/placeholder/requerimientos";
 import { ordenarFechaAsc } from "@/features/requerimientos/utils/ordenarFecha";
 import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
-import type { RequerimientoFormData } from "@/features/requerimientos/schemas/requerimiento.schema";
+import type { RequerimientoFormData } from "@/features/requerimientos/schemas/nuevoRequerimiento.schema";
 
 type RequerimientosContextType = {
   requerimientos: Requerimiento[];
@@ -66,10 +66,13 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
     const nuevoRequerimiento: Requerimiento = {
       id: Date.now().toString(), // TEMPORAL
       ...data,
-      montoPendiente: (data.montoTotal - data.montoPagado)
-    };
+      montoPendiente: data.montoTotal,
+      montoPagado: 0,
+      medioPago: "",
+    }
+    
     setRequerimientos((prev) => ordenarFechaAsc([...prev, nuevoRequerimiento]))
-  };
+  }
 
   const editarRequerimiento = (actualizado: Requerimiento) => {
     setRequerimientos((prev) =>
