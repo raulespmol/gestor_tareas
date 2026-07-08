@@ -10,16 +10,16 @@ import {
 import { estados } from "@/data/placeholder/estados";
 
 type Props = {
-  estadoId: number;
-  requerimientoId: number;
-  onChange: (requerimientoId: number, nuevoEstadoId: number) => void;
+  estadoId: string;
+  requerimientoId: string;
+  onChange: (requerimientoId: string, nuevoEstadoId: string) => void;
 };
 
 const SelectEstado = memo(({ estadoId, requerimientoId, onChange }: Props) => {
   return (
     <Select
       value={estadoId.toString()}
-      onValueChange={(e) => onChange(requerimientoId, parseInt(e))}
+      onValueChange={(e) => onChange(requerimientoId, e)}
     >
       <SelectTrigger size="sm" className="w-full text-xs">
         <SelectValue />
@@ -27,7 +27,7 @@ const SelectEstado = memo(({ estadoId, requerimientoId, onChange }: Props) => {
       <SelectContent>
         <SelectGroup>
           {estados.map((s) => (
-            <SelectItem key={s.id} value={s.id.toString()}>
+            <SelectItem key={s.id} value={s.id}>
               {s.nombre}
             </SelectItem>
           ))}

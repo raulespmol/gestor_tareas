@@ -10,16 +10,16 @@ import {
 import { trabajadores } from "@/data/placeholder/trabajadores";
 
 type Props = {
-  responsableId: number;
-  requerimientoId: number;
-  onChange: (requerimientoId: number, nuevoResponsableId: number) => void;
+  responsableId: string;
+  requerimientoId: string;
+  onChange: (requerimientoId: string, nuevoResponsableId: string) => void;
 };
 
 const SelectResponsable = memo(({ responsableId, requerimientoId, onChange }: Props) => {
   return (
     <Select
       value={responsableId.toString()}
-      onValueChange={(e) => onChange(requerimientoId, parseInt(e))}
+      onValueChange={(e) => onChange(requerimientoId, e)}
     >
       <SelectTrigger size="sm" className="w-full text-xs">
         <SelectValue />
@@ -27,7 +27,7 @@ const SelectResponsable = memo(({ responsableId, requerimientoId, onChange }: Pr
       <SelectContent>
         <SelectGroup>
           {trabajadores.map((t) => (
-            <SelectItem key={t.id} value={t.id.toString()}>
+            <SelectItem key={t.id} value={t.id}>
               {t.nombre}
             </SelectItem>
           ))}
