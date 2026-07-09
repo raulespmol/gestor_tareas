@@ -14,8 +14,8 @@ export const createColumns = (
   onVerDetalle: (requerimiento: Requerimiento) => void,
   onEliminar: (requerimiento: Requerimiento) => void,
   onRegistrarPago: (requerimiento: Requerimiento) => void,
-  onActualizarEstado: (id: number, estadoId: number) => void,
-  onActualizarResponsable: (id: number, responsableId: number) => void,
+  onActualizarEstado: (id: string, estadoId: string) => void,
+  onActualizarResponsable: (id: string, responsableId: string) => void,
 ): ColumnDef<Requerimiento>[] => [
   {
     accessorKey: "fecha",

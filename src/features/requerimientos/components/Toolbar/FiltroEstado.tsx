@@ -7,14 +7,14 @@ import { estados } from "@/data/placeholder/estados";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  value: number[];
-  onChange: (value: number[]) => void;
+  value: string[];
+  onChange: (value: string[]) => void;
 };
 
 export default function FiltroEstado({ value, onChange }: Props) {
   const [open, setOpen] = useState(false);
 
-  const toggleEstado = (id: number) => {
+  const toggleEstado = (id: string) => {
     onChange(
       value.includes(id)
         ? value.filter((v) => v !== id)

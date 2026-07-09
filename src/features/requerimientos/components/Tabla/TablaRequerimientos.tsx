@@ -13,7 +13,7 @@ import type { Requerimiento } from "../../types/requerimiento.type";
 
 type TablaRequerimientosProps = {
   globalFilter: string;
-  filtroEstados: number[];
+  filtroEstados: string[];
 };
 
 const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimientosProps) => {
@@ -29,10 +29,10 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
   const handleEliminar = useCallback((r: Requerimiento) => setRequerimientoAEliminar(r), []);
   const handleRegistrarPago = useCallback((r: Requerimiento) => setPagoARegistrar(r), []);
   const handleActualizarEstado = useCallback(
-    (id: number, estadoId: number) => actualizarEstado(id, estadoId), []
+    (id: string, estadoId: string) => actualizarEstado(id, estadoId), []
   );
   const handleActualizarResponsable = useCallback(
-    (id: number, responsableId: number) => actualizarResponsable(id, responsableId), []
+    (id: string, responsableId: string) => actualizarResponsable(id, responsableId), []
   );  
 
  const columns = useMemo(

@@ -9,7 +9,7 @@ import ModalNuevoRequerimiento from "./features/requerimientos/components/Modals
 export function App() {
   const [globalFilter, setGlobalFilter] = useState("");
   const [modalAbierto, setModalAbierto] = useState(false);
-  const [filtroEstados, setFiltroEstados] = useState<number[]>([]);
+  const [filtroEstados, setFiltroEstados] = useState<string[]>([]);
 
   return (
     <div className="flex w-full min-h-svh p-6">

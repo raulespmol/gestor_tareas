@@ -12,7 +12,7 @@ import type { Requerimiento } from "../../types/requerimiento.type";
 
 type Props = {
   requerimiento: Requerimiento | null;
-  onConfirmar: (id: number) => void;
+  onConfirmar: (id: string) => void;
   onOpenChange: (open: boolean) => void;
 };
 
