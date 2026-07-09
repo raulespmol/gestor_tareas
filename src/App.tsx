@@ -20,7 +20,7 @@ export function App() {
         </div>
       </div>
 
-      <div className="bg-muted/30 p-4">
+      <div className="bg-popover p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
           <Toolbar>
             <div className="flex gap-2 flex-direction-row w-3xl">
@@ -40,7 +40,7 @@ export function App() {
         </div>
       </div>
   
-      <div className="bg-background p-4 flex-1 min-h-0">
+      <div className="bg-popover p-4 flex-1 min-h-0">
         <TablaRequerimientos globalFilter={globalFilter} filtroEstados={filtroEstados}/>
       </div>
 
