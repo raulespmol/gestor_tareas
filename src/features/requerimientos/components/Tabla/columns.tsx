@@ -20,7 +20,7 @@ export const createColumns = (
   {
     accessorKey: "fecha",
     header: "Fecha",
-    size: 80,
+    size: 70,
     cell: ({ getValue }) =>
       formatearFecha(String(getValue())
     )
@@ -28,7 +28,7 @@ export const createColumns = (
   {
     accessorKey: "clienteEmpresa",
     header: "Cliente",
-    size: 300,
+    size: 250,
   },
   {
     accessorKey: "numeroCotizacion",
@@ -48,7 +48,7 @@ export const createColumns = (
   {
     accessorKey: "estadoId",
     header: "Estado",
-    size: 150,
+    size: 130,
     cell: ({ row }) => (
       <SelectEstado
         estadoId={row.original.estadoId}
@@ -60,7 +60,7 @@ export const createColumns = (
   {
     accessorKey: "responsableId",
     header: "Responsable",
-    size: 200,
+    size: 160,
     cell: ({ row }) => (
       <SelectResponsable
         responsableId={row.original.responsableId}
@@ -72,21 +72,21 @@ export const createColumns = (
   {
     accessorKey: "montoTotal",
     header: "Total",
-    size: 100,
+    size: 70,
     cell: ({ getValue }) =>
       formatearMoneda(Number(getValue()))
   },
   {
     accessorKey: "montoPagado",
     header: "Pagado",
-    size: 100,
+    size: 70,
     cell: ({ getValue }) =>
       formatearMoneda(Number(getValue()))
   },
   {
     accessorKey: "montoPendiente",
     header: "Pendiente",
-    size: 100,
+    size: 80,
     cell: ({ getValue }) =>
       formatearMoneda(Number(getValue()))
   },

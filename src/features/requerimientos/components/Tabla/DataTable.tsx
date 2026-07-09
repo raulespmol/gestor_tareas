@@ -74,48 +74,41 @@ export function DataTable<TData>({
     size: number,
     isFlexible: boolean
   ): React.CSSProperties => {
-    if (isFlexible) return { flex: "1 1 0", minWidth: 0, width: 0, overflow: "hidden" };
+    if (isFlexible) return { flex: "1 1 0", minWidth: 10, width: 0, overflow: "hidden" };
     return { width: `${size}px`, flex: `0 0 ${size}px` };
   };
 
   return (
-    <div ref={containerRef} className="rounded-md border overflow-auto flex-1">
-      <Table className="w-full">
-        <TableHeader className="sticky top-0 z-20 bg-background">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow
-              key={headerGroup.id}
-              style={{
-                display: "flex",
-                width: "100%",
-                position: "sticky",
-                top: 0,
-                zIndex: 20,
-              }}
-            >
-              {headerGroup.headers.map((header) => {
-                const isCentered = centeredColumns.includes(header.column.id);
-                return (
-                  <TableHead
-                    key={header.id}
-                    style={{
-                      ...getCellStyle(
+    <div className="max-w-7xl mx-auto w-full h-full min-h-0 overflow-hidden">
+      <div
+        ref={containerRef}
+        className="h-full min-h-0 overflow-y-auto overflow-x-hidden rounded-md border bg-background"
+      >
+        <Table className="w-full min-w-full">
+          <TableHeader className="sticky top-0 z-20 bg-secondary">
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow
+                key={headerGroup.id}
+                className="flex w-full"
+              >
+                {headerGroup.headers.map((header) => {
+                  const isCentered = centeredColumns.includes(header.column.id);
+                  return (
+                    <TableHead
+                      key={header.id}
+                      style={getCellStyle(
                         header.getSize(),
                         Boolean((header.column.columnDef.meta?.flex))
-                      ),
-                      position: "sticky",
-                      top: 0,
-                      zIndex: 20,
-                    }}
-                    className={`bg-background flex items-center ${isCentered ? "text-center" : ""}`}
-                  >
-                    {flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
+                      )}
+                      className={`flex items-center overflow-hidden text-ellipsis whitespace-nowrap ${isCentered ? "text-center" : ""}`}
+                    >
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                    </TableHead>
+                  );
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
 
         <TableBody
           style={{
@@ -168,5 +161,6 @@ export function DataTable<TData>({
         </TableBody>
       </Table>
     </div>
+  </div>
   );
 }
