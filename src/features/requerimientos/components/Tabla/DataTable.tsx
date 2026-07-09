@@ -68,8 +68,9 @@ export function DataTable<TData>({
   const virtualRows = virtualizer.getVirtualItems();
   const totalHeight = virtualizer.getTotalSize();
 
-  const centeredColumns = ["numeroCotizacion", "numeroFactura"];
-
+  const centeredColumns = ["numeroCotizacion", "numeroFactura"];  
+  const monospaceColumns = ["fecha", "numeroCotizacion", "montoTotal", "montoPagado", "montoPendiente", "numeroFactura"];
+  
   const getCellStyle = (
     size: number,
     isFlexible: boolean
@@ -142,7 +143,7 @@ export function DataTable<TData>({
                           cell.column.getSize(),
                           Boolean((cell.column.columnDef.meta?.flex))
                         )}
-                        className={`overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center ${isCentered ? "justify-center" : ""}`}
+                        className={`overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center ${isCentered ? "justify-center" : ""} ${monospaceColumns.includes(cell.column.id) ? "font-mono" : ""}`}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
