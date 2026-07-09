@@ -70,7 +70,9 @@ export function DataTable<TData>({
 
   const centeredColumns = ["numeroCotizacion", "numeroFactura"];  
   const monospaceColumns = ["fecha", "numeroCotizacion", "montoTotal", "montoPagado", "montoPendiente", "numeroFactura"];
-  
+  const mutedColumns = ["fecha", "numeroCotizacion", "numeroFactura"];
+
+
   const getCellStyle = (
     size: number,
     isFlexible: boolean
@@ -136,6 +138,8 @@ export function DataTable<TData>({
                 >
                   {row.getVisibleCells().map((cell) => {
                     const isCentered = centeredColumns.includes(cell.column.id);
+                    const isMonospace = monospaceColumns.includes(cell.column.id);
+                    const isMuted = mutedColumns.includes(cell.column.id);
                     return (
                       <TableCell
                         key={cell.id}
@@ -143,7 +147,12 @@ export function DataTable<TData>({
                           cell.column.getSize(),
                           Boolean((cell.column.columnDef.meta?.flex))
                         )}
-                        className={`overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center ${isCentered ? "justify-center" : ""} ${monospaceColumns.includes(cell.column.id) ? "font-mono" : ""}`}
+                        className={
+                          `overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center 
+                          ${isCentered ? "justify-center" : ""} 
+                          ${isMonospace ? "font-mono" : ""} 
+                          ${isMuted ? "text-gray-500" : ""}`
+                        }
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
