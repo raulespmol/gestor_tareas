@@ -88,11 +88,11 @@ export function DataTable<TData>({
         className="h-full min-h-0 overflow-y-auto overflow-x-hidden rounded-md border bg-popover"
       >
         <Table className="w-full min-w-full">
-          <TableHeader className="sticky top-0 z-20 bg-secondary">
+          <TableHeader className="sticky top-0 z-20 bg-background">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className="flex items-center w-full uppercase text-[10px] h-8"
+                className="flex items-center w-full uppercase text-[10px] h-8 bg-card/50"
               >
                 {headerGroup.headers.map((header) => {
                   const isCentered = centeredColumns.includes(header.column.id);

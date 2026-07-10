@@ -8,7 +8,7 @@ import SelectEstado from "@/features/requerimientos/components/SelectEstado"
 import SelectResponsable from "@/features/requerimientos/components/SelectResponsable";
 import { formatearMoneda } from "@/utils/formatearMoneda";
 import { formatearFecha } from "@/utils/formatearFecha";
-import { getEstadoPago, clasesEstadoPago } from "../../utils/colorMonto";
+import { getEstadoPago, textoEstadoPago } from "../../utils/colorMonto";
 
 export const createColumns = (
   onEditar: (requerimiento: Requerimiento) => void,
@@ -82,8 +82,12 @@ export const createColumns = (
     header: "Pagado",
     size: 70,
     cell: ({ row }) => { 
-      const clase = clasesEstadoPago[getEstadoPago(row.original.montoPagado, row.original.montoTotal)];
-      return <span className={clase}>{formatearMoneda(row.original.montoPagado)}</span>;
+      const variant = getEstadoPago(row.original.montoPagado, row.original.montoTotal);
+      return (
+        <span className={textoEstadoPago({ variant })}>
+          {formatearMoneda(row.original.montoPagado)}
+        </span>
+      );
     }
   },
   {
@@ -91,8 +95,12 @@ export const createColumns = (
     header: "Pendiente",
     size: 80,
     cell: ({ row }) => { 
-      const clase = clasesEstadoPago[getEstadoPago(row.original.montoPagado, row.original.montoTotal)];
-      return <span className={clase}>{formatearMoneda(row.original.montoPendiente)}</span>;
+      const variant = getEstadoPago(row.original.montoPagado, row.original.montoTotal);
+      return (
+        <span className={textoEstadoPago({ variant })}>
+          {formatearMoneda(row.original.montoPendiente)}
+        </span>
+      );
     }
   },
   {

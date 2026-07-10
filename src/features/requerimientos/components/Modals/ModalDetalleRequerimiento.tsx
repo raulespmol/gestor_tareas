@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -5,7 +6,6 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-
 import {
   Table,
   TableBody,
@@ -14,6 +14,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Separator } from "@/components/ui/separator"
+
+import { CardMonto } from "@/features/requerimientos/components/CardMonto";
+
+import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
 
 import { formatearFecha } from "@/utils/formatearFecha";
 import { formatearMoneda } from "@/utils/formatearMoneda";
@@ -24,6 +29,8 @@ import { mediosPago } from "@/data/placeholder/mediosPago";
 import { usePagos } from "@/context/PagosContext";
 
 import type { Requerimiento } from "../../types/requerimiento.type";
+import { Calendar, EllipsisIcon, FileText, Tag, TextAlignStart, User } from "lucide-react";
+
 
 type Props = {
   requerimiento: Requerimiento | null;
@@ -33,12 +40,16 @@ type Props = {
 type CampoProps = {
   label: string;
   valor?: string;
+  icon?: ReactNode;
 };
 
-const Campo = ({ label, valor }: CampoProps) => (
-  <div className="flex flex-col gap-1">
-    <span className="text-xs text-muted-foreground">{label}</span>
-    <span className="text-sm">{valor || "—"}</span>
+const Campo = ({ label, valor, icon }: CampoProps) => (
+  <div className="flex gap-2">
+    {icon && <div className="p-1 bg-muted rounded flex items-center">{icon}</div>}
+    <div className="flex flex-col">
+      <span className="text-[10px] text-muted-foreground uppercase">{label}</span>
+      <span className="text-sm">{valor || "—"}</span>
+    </div>
   </div>
 );
 
@@ -51,40 +62,93 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
   const responsable = trabajadores.find((t) => t.id === requerimiento.responsableId)?.nombre;
   const pagos = pagosPorRequerimiento(requerimiento.id)
 
+  const estadoPago = getEstadoPago(requerimiento.montoPagado, requerimiento.montoTotal);
+
   return (
     <Dialog open={requerimiento !== null} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl">
+      <DialogContent className="sm:max-w-xl p-6">
         <DialogHeader>
-          <DialogTitle>Requerimiento {requerimiento.id}</DialogTitle>
+          <DialogTitle>Requerimiento {requerimiento.clienteEmpresa}</DialogTitle>
           <DialogDescription className="sr-only">
             Detalle del requerimiento seleccionado.
           </DialogDescription>
         </DialogHeader>
 
         <div className="flex flex-col gap-6 py-2">
-
-          <div className="grid grid-cols-3 gap-6">
-            <Campo label="Fecha" valor={formatearFecha(requerimiento.fecha)} />
-            <Campo label="Cliente" valor={requerimiento.clienteEmpresa} />
-            <Campo label="N° Cotización" valor={requerimiento.numeroCotizacion} />
+          <Separator />
+          <div className="grid grid-cols-3 gap-4">
+            <CardMonto 
+              label="Total" 
+              value={requerimiento.montoTotal} 
+            />
+            <CardMonto 
+              label="Pagado" 
+              value={requerimiento.montoPagado} variant={estadoPago} 
+            />
+            <CardMonto 
+              label="Pendiente" 
+              value={requerimiento.montoPendiente} variant={estadoPago} 
+            />
           </div>
 
-          <div className="grid grid-cols-3 gap-6">
-            <Campo label="Estado" valor={estado} />
-            <Campo label="Responsable" valor={responsable} />
-            <Campo label="N° Factura" valor={requerimiento.numeroFactura} />
+          <Separator />
+
+          <div className="grid grid-cols-2 gap-4">
+            <Campo 
+              label="Fecha" 
+              valor={formatearFecha(requerimiento.fecha)} 
+              icon={<Calendar size={16} />}
+            />
+            <Campo 
+              label="Cliente" 
+              valor={requerimiento.clienteEmpresa} 
+              icon={<User size={16} />}
+            />
+          
+            <Campo 
+              label="N° Cotización" 
+              valor={requerimiento.numeroCotizacion} 
+              icon={<FileText size={16} />}
+            />
+            <Campo 
+              label="N° Factura" 
+              valor={requerimiento.numeroFactura} 
+              icon={<FileText size={16} />}
+            />
+
+            <Campo 
+              label="Responsable" 
+              valor={responsable} 
+              icon={<User size={16} />}
+            />
+            <Campo 
+              label="Estado" 
+              valor={estado} 
+              icon={<Tag size={16} />}
+            />
           </div>
+
+          <Separator />
 
           <div>
-            <Campo label="Descripción" valor={requerimiento.detalleDescripcion} />
+            <Campo 
+              label="Descripción" 
+              valor={requerimiento.detalleDescripcion} 
+              icon={<TextAlignStart size={16} />}
+            />
           </div>
           
+          <Separator />
+          
           <div className="grid grid-cols-4 gap-6">
-            <Campo label="Total" valor={formatearMoneda(requerimiento.montoTotal)} />
-            <Campo label="Pagado" valor={formatearMoneda(requerimiento.montoPagado)} />
-            <Campo label="Pendiente" valor={formatearMoneda(requerimiento.montoPendiente)} />
-            <Campo label="Otros Datos" valor={requerimiento.otrosDatos} />
+            <Campo 
+              label="Otros Datos" 
+              valor={requerimiento.otrosDatos} 
+              icon={<EllipsisIcon size={16} />}
+            />
           </div>
+
+          <Separator />
 
           <div>
             <h4 className="text-md mb-2 font-semibold">Historial de Pagos</h4>
