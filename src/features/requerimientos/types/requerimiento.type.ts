@@ -9,7 +9,6 @@ export interface Requerimiento {
   montoTotal: number;
   montoPagado: number;
   montoPendiente: number;
-  medioPago: string;
   numeroFactura: string;
   otrosDatos: string;
 }
