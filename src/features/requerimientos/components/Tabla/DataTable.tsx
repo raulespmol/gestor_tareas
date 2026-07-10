@@ -85,14 +85,14 @@ export function DataTable<TData>({
     <div className="max-w-7xl mx-auto w-full h-full min-h-0 overflow-hidden">
       <div
         ref={containerRef}
-        className="h-full min-h-0 overflow-y-auto overflow-x-hidden rounded-md border bg-background"
+        className="h-full min-h-0 overflow-y-auto overflow-x-hidden rounded-md border bg-popover"
       >
         <Table className="w-full min-w-full">
           <TableHeader className="sticky top-0 z-20 bg-secondary">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className="flex w-full"
+                className="flex items-center w-full uppercase text-[10px] h-8"
               >
                 {headerGroup.headers.map((header) => {
                   const isCentered = centeredColumns.includes(header.column.id);
@@ -103,7 +103,10 @@ export function DataTable<TData>({
                         header.getSize(),
                         Boolean((header.column.columnDef.meta?.flex))
                       )}
-                      className={`flex items-center overflow-hidden text-ellipsis whitespace-nowrap ${isCentered ? "text-center" : ""}`}
+                      className={
+                        `flex items-center overflow-hidden text-ellipsis whitespace-nowrap
+                        ${isCentered ? "text-center" : ""}`
+                      }
                     >
                       {flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>

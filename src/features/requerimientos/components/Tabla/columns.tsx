@@ -8,6 +8,7 @@ import SelectEstado from "@/features/requerimientos/components/SelectEstado"
 import SelectResponsable from "@/features/requerimientos/components/SelectResponsable";
 import { formatearMoneda } from "@/utils/formatearMoneda";
 import { formatearFecha } from "@/utils/formatearFecha";
+import { getEstadoPago, clasesEstadoPago } from "../../utils/colorMonto";
 
 export const createColumns = (
   onEditar: (requerimiento: Requerimiento) => void,
@@ -28,7 +29,7 @@ export const createColumns = (
   {
     accessorKey: "clienteEmpresa",
     header: "Cliente",
-    size: 250,
+    size: 220,
   },
   {
     accessorKey: "numeroCotizacion",
@@ -80,15 +81,19 @@ export const createColumns = (
     accessorKey: "montoPagado",
     header: "Pagado",
     size: 70,
-    cell: ({ getValue }) =>
-      formatearMoneda(Number(getValue()))
+    cell: ({ row }) => { 
+      const clase = clasesEstadoPago[getEstadoPago(row.original.montoPagado, row.original.montoTotal)];
+      return <span className={clase}>{formatearMoneda(row.original.montoPagado)}</span>;
+    }
   },
   {
     accessorKey: "montoPendiente",
     header: "Pendiente",
     size: 80,
-    cell: ({ getValue }) =>
-      formatearMoneda(Number(getValue()))
+    cell: ({ row }) => { 
+      const clase = clasesEstadoPago[getEstadoPago(row.original.montoPagado, row.original.montoTotal)];
+      return <span className={clase}>{formatearMoneda(row.original.montoPendiente)}</span>;
+    }
   },
   {
     accessorKey: "numeroFactura",

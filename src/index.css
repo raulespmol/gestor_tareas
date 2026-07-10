@@ -7,21 +7,23 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    --background: oklch(1.0000 0 0);
-    --foreground: oklch(0.1448 0 0);
-    --card: oklch(0.9702 0 0);
-    --card-foreground: oklch(0.1448 0 0);
-    --popover: oklch(0.9702 0 0);
-    --popover-foreground: oklch(0.1448 0 0);
-    --primary: oklch(0.3811 0.1601 265.0384);
-    --primary-foreground: oklch(0.9851 0 0);
-    --secondary: oklch(0.9310 0 0);
-    --secondary-foreground: oklch(0.2046 0 0);
-    --muted: oklch(0.9310 0 0);
-    --muted-foreground: oklch(0.5208 0 0);
-    --accent: oklch(0.9310 0 0);
-    --accent-foreground: oklch(0.2046 0 0);
-    --destructive: oklch(0.5394 0.2095 21.9650);
+    --font-size: 12px;
+    --background: #f0f2f5;
+    --foreground: #111827;
+    --card: #ffffff;
+    --card-foreground: #111827;
+    --popover: #ffffff;
+    --popover-foreground: #111827;
+    --primary: #2563eb;
+    --primary-foreground: #ffffff;
+    --secondary: #eff6ff;
+    --secondary-foreground: #1d4ed8;
+    --muted: #f3f4f6;
+    --muted-foreground: #6b7280;
+    --accent: #dbeafe;
+    --accent-foreground: #1e40af;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
     --border: oklch(0.8699 0 0);
     --input: oklch(0.8699 0 0);
     --ring: oklch(0.3811 0.1601 265.0384);
