@@ -6,6 +6,8 @@ import {
   type RequerimientoFormData
 } from "@/features/requerimientos/schemas/nuevoRequerimiento.schema";
 
+import { Calendar, User, FileText, DollarSign, TextAlignStart, Tag, Ellipsis, Plus } from "lucide-react"
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
@@ -44,10 +46,11 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
 };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4">
-      <div className="col-span-1 grid grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <Field className="col-span-1">
           <FieldLabel>
+            <Calendar size={16} />
             Fecha
           </FieldLabel>
           <Input
@@ -56,21 +59,10 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
           />
           <FieldError errors={[errors.fecha]} />
         </Field>
-
+        
         <Field className="col-span-1">
           <FieldLabel>
-            N° Cotización
-          </FieldLabel>
-          <Input
-            type="text"
-            {...register("numeroCotizacion")}
-            placeholder="01234"
-          />
-          <FieldError errors={[errors.numeroCotizacion]} />
-        </Field>
-        
-        <Field className="col-span-2">
-          <FieldLabel>
+            <User size={16} />
             Cliente
           </FieldLabel>
 
@@ -81,9 +73,54 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
 
           <FieldError errors={[errors.clienteEmpresa]} />
         </Field>
-
-        <Field className="col-span-2">
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <Field className="col-span-1">
           <FieldLabel>
+            <FileText size={16} />
+            N° Cotización
+          </FieldLabel>
+          <Input
+            type="text"
+            {...register("numeroCotizacion")}
+            placeholder="01234"
+          />
+          <FieldError errors={[errors.numeroCotizacion]} />
+        </Field>
+
+        <Field className="col-span-1">
+          <FieldLabel>
+            <DollarSign size={16} />
+            Total
+          </FieldLabel>
+
+          <Input 
+            type="text"
+            inputMode="numeric"
+            {...register("montoTotal", {
+              setValueAs: (v) => Number(v || 0),
+            })}
+          />
+
+          <FieldError errors={[errors.montoTotal]} />
+        </Field>
+        
+        <Field className="col-span-1">
+          <FieldLabel>
+            <FileText size={16} />
+            N° Factura
+          </FieldLabel>
+          <Input
+            type="text"
+            {...register("numeroFactura")}
+            placeholder="01234"
+          />
+        </Field>
+      </div>
+
+      <Field className="col-span-2">
+          <FieldLabel>
+            <TextAlignStart size={16} />
             Descripción
           </FieldLabel>
 
@@ -93,12 +130,12 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
             placeholder="Adhesivo / Tela / Greyback ..."
           />
         </Field>
-      </div>
 
       <div className="col-span-1">
         <div className="grid grid-cols-2 gap-4 mb-4">
           <Field className="col-span-1">
             <FieldLabel>
+              <User size={16} />
               Responsable
             </FieldLabel>
             <Controller
@@ -133,6 +170,7 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
 
           <Field className="col-span-1">
             <FieldLabel>
+              <Tag size={16} />
               Estado
             </FieldLabel>
             <Controller
@@ -164,38 +202,12 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
           </Field>
         </div>
         <div className="grid grid-cols-3 gap-4">
-          <Field className="col-span-1">
-            <FieldLabel>
-              Total
-            </FieldLabel>
-
-            <Input 
-              type="text"
-              inputMode="numeric"
-              {...register("montoTotal", {
-                setValueAs: (v) => Number(v || 0),
-              })}
-            />
-
-            <FieldError errors={[errors.montoTotal]} />
-          </Field>
+          
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mt-4">
-          <Field className="col-span-1">
-            <FieldLabel>
-              N° Factura
-            </FieldLabel>
-            <Input
-              type="text"
-              {...register("numeroFactura")}
-              placeholder="01234"
-            />
-          </Field>
-        </div>
-
-        <Field className="col-span-2 mt-4">
+        <Field className="col-span-2 mb-4">
           <FieldLabel>
+            <Ellipsis size={16} />
             Otros Datos
           </FieldLabel>
           <Input
@@ -204,11 +216,11 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
             placeholder="Telefono / OC / RUT"
           />
         </Field>
-        
       </div>
 
       <div className="col-span-2 flex justify-end">
         <Button type="submit">
+          <Plus size={16} />
           Agregar
         </Button>
       </div>
