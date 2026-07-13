@@ -134,11 +134,8 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
           </div>
 
           <Separator />
-
-          <div>
-            <h4 className="text-md mb-2 font-semibold">Historial de Pagos</h4>
-            <HistorialPagos requerimiento={requerimiento} />
-          </div>
+          
+          <HistorialPagos requerimiento={requerimiento} />
 
         </div>
       </DialogContent>
