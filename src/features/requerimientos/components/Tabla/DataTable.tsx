@@ -72,7 +72,6 @@ export function DataTable<TData>({
   const monospaceColumns = ["fecha", "numeroCotizacion", "montoTotal", "montoPagado", "montoPendiente", "numeroFactura"];
   const mutedColumns = ["fecha", "numeroCotizacion", "numeroFactura"];
 
-
   const getCellStyle = (
     size: number,
     isFlexible: boolean
@@ -151,10 +150,11 @@ export function DataTable<TData>({
                           Boolean((cell.column.columnDef.meta?.flex))
                         )}
                         className={
-                          `overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center capitalize
+                          `overflow-hidden text-ellipsis whitespace-nowrap text-xs px-2 py-0.5 flex items-center
                           ${isCentered && "justify-center" } 
                           ${isMonospace && "font-mono" } 
-                          ${isMuted && "text-gray-500" }`
+                          ${isMuted && "text-gray-500" }
+                          `
                         }
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}

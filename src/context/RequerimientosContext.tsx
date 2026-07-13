@@ -68,7 +68,6 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
       ...data,
       montoPendiente: data.montoTotal,
       montoPagado: 0,
-      medioPago: "",
     }
     
     setRequerimientos((prev) => ordenarFechaAsc([...prev, nuevoRequerimiento]))
