@@ -21,7 +21,7 @@ export const CardMonto = ({ label, value, variant }: montoCardProps) => {
       <span 
         className={`
           text-xs uppercase
-          ${variant ? textoEstadoPago({ variant }) : "text-text-muted-foreground"}
+          ${variant ? textoEstadoPago({ variant }) : "text-muted-foreground"}
         `}
       >
         {label}
