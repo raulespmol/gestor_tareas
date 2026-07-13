@@ -5,6 +5,7 @@ import FiltroEstado from "./features/requerimientos/components/Toolbar/FiltroEst
 import TablaRequerimientos from "@/features/requerimientos/components/Tabla/TablaRequerimientos"
 import { useState } from "react";
 import ModalNuevoRequerimiento from "./features/requerimientos/components/Modals/ModalNuevoRequerimiento";
+import { Plus } from "lucide-react";
 
 export function App() {
   const [globalFilter, setGlobalFilter] = useState("");
@@ -34,7 +35,7 @@ export function App() {
               />
             </div>
             <Button onClick={() => setModalAbierto(true)}>
-              Agregar Requerimiento
+              <Plus size={16}/> Agregar Requerimiento
             </Button>
           </Toolbar>
         </div>

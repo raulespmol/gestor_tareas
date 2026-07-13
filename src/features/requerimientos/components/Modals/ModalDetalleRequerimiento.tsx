@@ -140,7 +140,7 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
           
           <Separator />
           
-          <div className="grid grid-cols-4 gap-6">
+          <div>
             <Campo 
               label="Otros Datos" 
               valor={requerimiento.otrosDatos} 
