@@ -7,8 +7,10 @@ import {
   type RegistrarPagoFormData
 } from "@/features/pagos/schemas/registrarPago.schema";
 
-import { mediosPago } from "@/data/placeholder/mediosPago";
+import { CardMonto } from "@/features/requerimientos/components/CardMonto";
 
+import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
+import { mediosPago } from "@/data/placeholder/mediosPago";
 import { usePagos } from "@/context/PagosContext";
 
 import { Button } from "@/components/ui/button";
@@ -16,7 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
 import type { Requerimiento } from "../../../requerimientos/types/requerimiento.type";
-import { formatearMoneda } from "@/utils/formatearMoneda";
+import { Calendar, CreditCard, DollarSign, ScrollText } from "lucide-react";
+import { Separator } from "@/components/ui/separator"
 
 type RegistrarPagoFormProps = {
   requerimiento: Requerimiento;
@@ -70,38 +73,31 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
     }
   }, [isVoucherEnabled, setValue]);
 
-  type CampoProps = {
-    label: string;
-    valor?: string;
-  };
-
-  const Campo = ({ label, valor }: CampoProps) => (
-    <div className="flex flex-col gap-1">
-      <span className="text-xs text-muted-foreground">{label}</span>
-      <span className="text-sm">{valor || "—"}</span>
-    </div>
-  );
+  const estadoPago = getEstadoPago(requerimiento.montoPagado, requerimiento.montoTotal);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <div className="grid grid-cols-3 gap-4">
-        <Campo 
+        <CardMonto 
           label="Total" 
-          valor={formatearMoneda(requerimiento.montoTotal)} 
+          value={requerimiento.montoTotal} 
         />
-        <Campo 
+        <CardMonto 
           label="Pagado" 
-          valor={formatearMoneda(requerimiento.montoPagado)} 
+          value={requerimiento.montoPagado} variant={estadoPago} 
         />
-        <Campo 
+        <CardMonto 
           label="Pendiente" 
-          valor={formatearMoneda(requerimiento.montoTotal - requerimiento.montoPagado)} 
+          value={requerimiento.montoPendiente} variant={estadoPago} 
         />
       </div>
+
+      <Separator />
 
       <div className="grid grid-cols-2 gap-4">
         <Field className="col-span-1">
           <FieldLabel>
+            <Calendar size={16} />
             Fecha
           </FieldLabel>
           <Input
@@ -113,6 +109,7 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
 
         <Field className="col-span-1">
           <FieldLabel>
+            <DollarSign size={16} />
             Monto a Pagar
           </FieldLabel>
           <Input
@@ -127,6 +124,7 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
       <div className="grid grid-cols-2 gap-4">
         <Field className="col-span-1">
           <FieldLabel>
+            <CreditCard size={16} />
             Medio de Pago
           </FieldLabel>
           <Controller
@@ -160,6 +158,7 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
         
         <Field className="col-span-1">
           <FieldLabel>
+            <ScrollText size={16} />
             N° Voucher
           </FieldLabel>
 

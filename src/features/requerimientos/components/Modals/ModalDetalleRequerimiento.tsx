@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import type { Requerimiento } from "../../types/requerimiento.type";
+
 import {
   Dialog,
   DialogContent,
@@ -6,31 +8,17 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator"
+import { Calendar, EllipsisIcon, FileText, Tag, TextAlignStart, User } from "lucide-react";
 
 import { CardMonto } from "@/features/requerimientos/components/CardMonto";
+import { HistorialPagos } from "@/features/pagos/components/HistorialPagos";
 
 import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
 
 import { formatearFecha } from "@/utils/formatearFecha";
-import { formatearMoneda } from "@/utils/formatearMoneda";
 import { trabajadores } from "@/data/placeholder/trabajadores";
 import { estados } from "@/data/placeholder/estados";
-import { mediosPago } from "@/data/placeholder/mediosPago";
-
-import { usePagos } from "@/context/PagosContext";
-
-import type { Requerimiento } from "../../types/requerimiento.type";
-import { Calendar, EllipsisIcon, FileText, Tag, TextAlignStart, User } from "lucide-react";
-
 
 type Props = {
   requerimiento: Requerimiento | null;
@@ -56,11 +44,8 @@ const Campo = ({ label, valor, icon }: CampoProps) => (
 const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
   if (!requerimiento) return null;
 
-  const { pagosPorRequerimiento } = usePagos()
-
   const estado = estados.find((e) => e.id === requerimiento.estadoId)?.nombre;
   const responsable = trabajadores.find((t) => t.id === requerimiento.responsableId)?.nombre;
-  const pagos = pagosPorRequerimiento(requerimiento.id)
 
   const estadoPago = getEstadoPago(requerimiento.montoPagado, requerimiento.montoTotal);
 
@@ -152,37 +137,7 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
 
           <div>
             <h4 className="text-md mb-2 font-semibold">Historial de Pagos</h4>
-            <Table className="border">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Fecha</TableHead>
-                  <TableHead>Monto</TableHead>
-                  <TableHead>Medio de Pago</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {pagos.length > 0 ? (
-                  pagos.map((pago) => {
-                    const medioLabel = mediosPago.find((m) => m.value === pago.medioPago)?.label ?? pago.medioPago;
-                    return (
-                      <TableRow key={pago.id}>
-                        <TableCell>{formatearFecha(pago.fecha)}</TableCell>
-                        <TableCell>{formatearMoneda(pago.monto)}</TableCell>
-                        <TableCell>
-                          {medioLabel}{pago.voucher ? ` #${pago.voucher}` : ""}
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={3} className="text-center text-muted-foreground">
-                      Sin pagos registrados
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+            <HistorialPagos requerimiento={requerimiento} />
           </div>
 
         </div>

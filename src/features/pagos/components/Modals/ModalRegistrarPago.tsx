@@ -5,9 +5,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator"
+
 import type { Requerimiento } from "../../../requerimientos/types/requerimiento.type";
 
 import { FormRegistrarPago } from "@/features/pagos/components/Forms/FormRegistrarPago";
+import { HistorialPagos } from "../HistorialPagos";
 
 type Props = {
   requerimiento: Requerimiento | null;
@@ -28,10 +31,18 @@ const ModalRegistrarPago = ({ requerimiento, onOpenChange }: Props) => {
           </DialogDescription>
         </DialogHeader>
         {requerimiento && (
-          <FormRegistrarPago 
-            requerimiento={requerimiento}
-            onSuccess={() => onOpenChange(false)} 
-          />
+          <>
+            <FormRegistrarPago 
+              requerimiento={requerimiento}
+              onSuccess={() => onOpenChange(false)} 
+            />
+
+            <Separator />
+            
+            <HistorialPagos 
+              requerimiento={requerimiento}
+            />
+          </>
         )}
 
       </DialogContent>
