@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { estados } from "@/data/placeholder/estados";
+import { BadgeEstado } from "./BadgeEstado";
 
 type Props = {
   estadoId: string;
@@ -18,6 +19,7 @@ type Props = {
 const SelectEstado = memo(({ estadoId, requerimientoId, onChange }: Props) => {
   return (
     <Select
+      
       value={estadoId.toString()}
       onValueChange={(e) => onChange(requerimientoId, e)}
     >
@@ -28,7 +30,9 @@ const SelectEstado = memo(({ estadoId, requerimientoId, onChange }: Props) => {
         <SelectGroup>
           {estados.map((s) => (
             <SelectItem key={s.id} value={s.id}>
-              {s.nombre}
+              <BadgeEstado color={s.color}>
+                {s.label}
+              </BadgeEstado>
             </SelectItem>
           ))}
         </SelectGroup>

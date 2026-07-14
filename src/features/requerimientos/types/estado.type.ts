@@ -1,4 +1,6 @@
 export interface Estado {
   id: string;
-  nombre: string;
+  key: string
+  label: string;
+  color: string
 }

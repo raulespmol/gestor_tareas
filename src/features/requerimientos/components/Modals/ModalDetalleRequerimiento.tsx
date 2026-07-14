@@ -19,6 +19,7 @@ import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
 import { formatearFecha } from "@/utils/formatearFecha";
 import { trabajadores } from "@/data/placeholder/trabajadores";
 import { estados } from "@/data/placeholder/estados";
+import { BadgeEstado } from "../BadgeEstado";
 
 type Props = {
   requerimiento: Requerimiento | null;
@@ -27,7 +28,7 @@ type Props = {
 
 type CampoProps = {
   label: string;
-  valor?: string;
+  valor?: string | ReactNode
   icon?: ReactNode;
 };
 
@@ -44,7 +45,7 @@ const Campo = ({ label, valor, icon }: CampoProps) => (
 const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
   if (!requerimiento) return null;
 
-  const estado = estados.find((e) => e.id === requerimiento.estadoId)?.nombre;
+  const estado = estados.find((e) => e.id === requerimiento.estadoId);
   const responsable = trabajadores.find((t) => t.id === requerimiento.responsableId)?.nombre;
 
   const estadoPago = getEstadoPago(requerimiento.montoPagado, requerimiento.montoTotal);
@@ -108,7 +109,10 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
             />
             <Campo 
               label="Estado" 
-              valor={estado} 
+              valor={
+                <BadgeEstado color={estado ? estado.color : ""}>
+                  {estado?.label}
+                </BadgeEstado>  } 
               icon={<Tag size={16} />}
             />
           </div>
