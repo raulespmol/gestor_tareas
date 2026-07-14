@@ -23,9 +23,10 @@ type RequerimientoFormProps = {
   requerimiento?: Requerimiento | null
   defaultValues: RequerimientoFormData;
   onSave: (data: RequerimientoFormData) => void;
+  errorMontoTotal?: string;
 };
 
-export const FormRequerimiento = ({ requerimiento, defaultValues, onSave }: RequerimientoFormProps) => {
+export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorMontoTotal }: RequerimientoFormProps) => {
   const {
     register,
     handleSubmit,
@@ -101,7 +102,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave }: Requ
             })}
           />
 
-          <FieldError errors={[errors.montoTotal]} />
+          <FieldError errors={[errors.montoTotal, errorMontoTotal ? { message: errorMontoTotal } : undefined]} />
         </Field>
         
         <Field className="col-span-1">

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Dialog,
   DialogContent,
@@ -6,6 +8,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import type { Requerimiento } from "../../types/requerimiento.type";
+import { formatearMoneda } from "@/utils/formatearMoneda";
 
 import { FormRequerimiento } from "@/features/requerimientos/components/Forms/FormRequerimiento";
 
@@ -18,15 +21,31 @@ type Props = {
 };
 
 const ModalEditarRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
+  const [errorMontoTotal, setErrorMontoTotal] = useState<string | undefined>();
   const { editarRequerimiento } = useRequerimientos()
 
+  useEffect(() => {
+    setErrorMontoTotal(undefined);
+  }, [requerimiento]);
+
   const handleSave = (data: RequerimientoFormData) => {
-  editarRequerimiento({
-    ...requerimiento!,
-    ...data
-  });
-  onOpenChange(false);
-};
+    if (!requerimiento) return;
+    if (data.montoTotal < requerimiento.montoPagado){
+      setErrorMontoTotal(
+        `El total no puede ser menor al monto ya pagado (${formatearMoneda(requerimiento.montoPagado)})`
+      )
+      return;
+    }
+
+    setErrorMontoTotal(undefined)
+    editarRequerimiento({
+      ...requerimiento,
+      ...data,
+      montoPendiente: data.montoTotal - requerimiento.montoPagado,
+    });
+
+    onOpenChange(false);
+  };
 
   return (
     <Dialog
@@ -45,6 +64,7 @@ const ModalEditarRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
             requerimiento={requerimiento}
             defaultValues={requerimiento}
             onSave={handleSave}
+            errorMontoTotal={errorMontoTotal}
           />
         )}
       </DialogContent>
