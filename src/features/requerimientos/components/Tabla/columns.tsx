@@ -4,11 +4,11 @@ import type { Requerimiento } from "@/features/requerimientos/types/requerimient
 
 import DropdownAcciones from "./DropdownAcciones";
 
-import SelectEstado from "@/features/requerimientos/components/SelectEstado"
 import SelectResponsable from "@/features/requerimientos/components/SelectResponsable";
 import { formatearMoneda } from "@/utils/formatearMoneda";
 import { formatearFecha } from "@/utils/formatearFecha";
 import { getEstadoPago, textoEstadoPago } from "../../utils/colorMonto";
+import { DropdownEstado } from "../DropdownEstado";
 
 export const createColumns = (
   onEditar: (requerimiento: Requerimiento) => void,
@@ -51,7 +51,7 @@ export const createColumns = (
     header: "Estado",
     size: 130,
     cell: ({ row }) => (
-      <SelectEstado
+      <DropdownEstado
         estadoId={row.original.estadoId}
         requerimientoId={row.original.id}
         onChange={onActualizarEstado}

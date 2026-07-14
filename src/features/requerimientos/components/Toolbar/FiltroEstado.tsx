@@ -70,7 +70,7 @@ export default function FiltroEstado({ value, onChange }: Props) {
                   className="gap-2"
                 >
                   <Check className={cn("h-4 w-4", value.includes(estado.id) ? "opacity-100" : "opacity-0")} />
-                  {estado.nombre}
+                  {estado.label}
                 </CommandItem>
               ))}
             </CommandGroup>

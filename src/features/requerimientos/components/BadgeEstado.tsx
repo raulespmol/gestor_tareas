@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 type BadgeEstadoProps = {
   children: ReactNode;
-  color: string 
+  color?: string 
 };
 
 export const BadgeEstado = ({ color, children }: BadgeEstadoProps) => {

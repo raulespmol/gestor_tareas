@@ -5,7 +5,7 @@ export const estados: Estado[] = [
     id: "0",
     key:"proceso",
     label: "En proceso",
-    color: "bg-grey-50 text-grey-700 border-grey-700 dark:bg-grey-950 dark:text-grey-300"
+    color: "bg-gray-50 text-gray-700 border-gray-700 dark:bg-gray-950 dark:text-gray-300"
   },
 
   { 
