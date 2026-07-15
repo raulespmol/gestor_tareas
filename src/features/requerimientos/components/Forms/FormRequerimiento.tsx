@@ -18,6 +18,7 @@ import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@
 
 import { trabajadores } from "@/data/placeholder/trabajadores";
 import { estados } from "@/data/placeholder/estados";
+import { DotEstado } from "../DotEstado";
 
 type RequerimientoFormProps = {
   requerimiento?: Requerimiento | null
@@ -190,7 +191,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
                         key={e.id}
                         value={e.id.toString()}
                       >
-                        {e.nombre}
+                        <DotEstado estado={e}/>
                       </SelectItem>
                     ))}
                   </SelectContent>
