@@ -125,7 +125,9 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
           <div>
             <Campo 
               label="Descripción" 
-              valor={requerimiento.detalleDescripcion} 
+              valor={
+                <p className="whitespace-pre-wrap text-sm">{requerimiento.detalleDescripcion}</p>
+              } 
               icon={<TextAlignStart size={16} />}
             />
           </div>
