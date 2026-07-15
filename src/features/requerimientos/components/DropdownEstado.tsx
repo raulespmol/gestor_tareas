@@ -3,17 +3,18 @@ import { memo } from "react";
 import { BadgeEstado } from "./BadgeEstado";
 import { estados } from "@/data/placeholder/estados";
 import { Check } from "lucide-react";
+import { coloresEstado } from "../constants/coloresEstado";
+import type { Estado } from "../types/estado.type";
 
 type EstadoDotProps = {
-  color?: string,
-  label: string
+  estado: Estado
 }
 
-const EstadoDot = ({ color, label }: EstadoDotProps) => {
+const EstadoDot = ({ estado }: EstadoDotProps) => {
   return (
     <div className="flex items-center gap-2">
-      <div className={`size-2 rounded-full ${color}`} />
-      <span>{label}</span>
+      <div className={coloresEstado[estado.color].dot} />
+      <span>{estado.label}</span>
     </div>
   )
 }
@@ -43,7 +44,7 @@ export const DropdownEstado = memo(
       <DropdownMenuTrigger asChild>
         <button>
           <BadgeEstado
-            color={estadoActual?.color}
+            color={estadoActual!.color}       
           >
             {estadoActual?.label}
           </BadgeEstado>
@@ -66,7 +67,7 @@ export const DropdownEstado = memo(
             }
             className="flex justify-between cursor-pointer"
           >
-            <EstadoDot color={estado.color} label={estado.label} />
+            <EstadoDot estado={estado} />
 
             {estado.id === estadoId && (
               <Check className="size-4" />

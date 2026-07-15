@@ -1,6 +1,8 @@
-export interface Estado {
+import type { EstadoColor } from "../constants/coloresEstado";
+
+export type Estado = {
   id: string;
-  key: string
+  key: string;
   label: string;
-  color: string
-}
+  color: EstadoColor;
+};
