@@ -3,21 +3,7 @@ import { memo } from "react";
 import { BadgeEstado } from "./BadgeEstado";
 import { estados } from "@/data/placeholder/estados";
 import { Check } from "lucide-react";
-import { coloresEstado } from "../constants/coloresEstado";
-import type { Estado } from "../types/estado.type";
-
-type EstadoDotProps = {
-  estado: Estado
-}
-
-const EstadoDot = ({ estado }: EstadoDotProps) => {
-  return (
-    <div className="flex items-center gap-2">
-      <div className={coloresEstado[estado.color].dot} />
-      <span>{estado.label}</span>
-    </div>
-  )
-}
+import { DotEstado } from "./DotEstado";
 
 type DropdownEstadoProps = {
   estadoId: string;
@@ -67,7 +53,7 @@ export const DropdownEstado = memo(
             }
             className="flex justify-between cursor-pointer"
           >
-            <EstadoDot estado={estado} />
+            <DotEstado estado={estado} />
 
             {estado.id === estadoId && (
               <Check className="size-4" />
