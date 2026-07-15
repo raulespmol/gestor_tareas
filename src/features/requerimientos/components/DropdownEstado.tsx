@@ -21,16 +21,14 @@ export const DropdownEstado = memo(
   onChange,
 }: DropdownEstadoProps) => {
 
-  const estadoActual = estados.find(
-    e => e.id === estadoId
-  );
+  const estadoActual = estados.find(e => e.id === estadoId) ?? estados[0];
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button>
           <BadgeEstado
-            color={estadoActual!.color}       
+            color={estadoActual?.color}       
           >
             {estadoActual?.label}
           </BadgeEstado>

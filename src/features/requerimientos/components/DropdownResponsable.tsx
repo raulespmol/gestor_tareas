@@ -12,8 +12,7 @@ type DropdownResponsableProps = {
 
 export const DropdownResponsable = memo(
   ({ responsableId, requerimientoId, onChange }: DropdownResponsableProps) => {
-    const responsableActual =
-      trabajadores.find((trabajador) => trabajador.id === responsableId) ?? trabajadores[0];
+    const responsableActual = trabajadores.find((t) => t.id === responsableId) ?? trabajadores[0];
 
     return (
       <DropdownMenu>
