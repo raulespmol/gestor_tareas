@@ -5,26 +5,29 @@ import {
   nuevoRequerimientoSchema,
   type RequerimientoFormData
 } from "@/features/requerimientos/schemas/nuevoRequerimiento.schema";
+import type { Requerimiento } from "../../types/requerimiento.type";
 
-import { Calendar, User, FileText, DollarSign, TextAlignStart, Tag, Ellipsis, Plus } from "lucide-react"
+import { Calendar, User, FileText, DollarSign, TextAlignStart, Tag, Ellipsis, Plus, Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
 
-import {useRequerimientos} from "@/context/RequerimientosContext";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
 
 import { trabajadores } from "@/data/placeholder/trabajadores";
 import { estados } from "@/data/placeholder/estados";
-import { defaultRequerimientoForm } from "@/features/requerimientos/constants/defaultRequerimientoForm"
+import { DotEstado } from "../DotEstado";
 
 type RequerimientoFormProps = {
-  onSuccess: () => void;
+  requerimiento?: Requerimiento | null
+  defaultValues: RequerimientoFormData;
+  onSave: (data: RequerimientoFormData) => void;
+  errorMontoTotal?: string;
 };
 
-export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) => {
+export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorMontoTotal }: RequerimientoFormProps) => {
   const {
     register,
     handleSubmit,
@@ -33,20 +36,18 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
     formState: { errors }
   } = useForm<RequerimientoFormData>({
     resolver: zodResolver(nuevoRequerimientoSchema),
-
-    defaultValues: defaultRequerimientoForm,
+    defaultValues,
   });
 
-  const { agregarRequerimiento } = useRequerimientos();
+  const mode = requerimiento ? "edit" : "create"
 
-  const onSubmit = (data: RequerimientoFormData) => {
-    agregarRequerimiento(data);
-    reset(defaultRequerimientoForm);
-    onSuccess();
-};
+  const handleFormSubmit = (data: RequerimientoFormData) => {
+    onSave(data)
+    reset(defaultValues)
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-4">
       <div className="grid grid-cols-2 gap-4">
         <Field className="col-span-1">
           <FieldLabel>
@@ -102,7 +103,7 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
             })}
           />
 
-          <FieldError errors={[errors.montoTotal]} />
+          <FieldError errors={[errors.montoTotal, errorMontoTotal ? { message: errorMontoTotal } : undefined]} />
         </Field>
         
         <Field className="col-span-1">
@@ -190,7 +191,7 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
                         key={e.id}
                         value={e.id.toString()}
                       >
-                        {e.nombre}
+                        <DotEstado estado={e}/>
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -220,8 +221,8 @@ export const FormNuevoRequerimiento = ({ onSuccess }: RequerimientoFormProps) =>
 
       <div className="col-span-2 flex justify-end">
         <Button type="submit">
-          <Plus size={16} />
-          Agregar
+          {mode === "create" ? <Plus /> : <Check />}
+          {mode === "create" ? "Agregar" : "Guardar"}
         </Button>
       </div>
 

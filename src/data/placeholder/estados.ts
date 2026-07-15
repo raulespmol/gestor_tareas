@@ -1,13 +1,67 @@
 import type { Estado } from "@/features/requerimientos/types/estado.type";
 
 export const estados: Estado[] = [
-  { id: "0", nombre: "En proceso" },
-  { id: "1", nombre: "Cotizar" },
-  { id: "2", nombre: "Diseño" },
-  { id: "3", nombre: "Impresión" },
-  { id: "4", nombre: "Taller" },
-  { id: "5", nombre: "Por entregar" },
-  { id: "6", nombre: "Instalación" },
-  { id: "7", nombre: "Externo" },
-  { id: "8", nombre: "Entregado" },
+  { 
+    id: "0",
+    key:"proceso",
+    label: "En proceso",
+    color: "gray"
+  },
+
+  { 
+    id: "1",
+    key:"cotizar",
+    label: "Cotizar",
+    color: "red"
+  },
+
+  { 
+    id: "2",
+    key:"diseño",
+    label: "Diseño",
+    color: "sky"
+  },
+
+  { 
+    id: "3",
+    key:"impresion",
+    label: "Impresión",
+    color: "sky"
+  },
+
+  { 
+    id: "4",
+    key:"taller",
+    label: "Taller",
+    color: "sky"
+  },  
+
+  {
+    id: "5",
+    key:"entregar",
+    label: "Por entregar",
+    color: "orange"
+  },
+
+  { 
+    id: "6",
+    key:"instalacion",
+    label: "Instalación",
+    color: "purple"
+  },
+
+  { 
+    id: "7",
+    key:"externo",
+    label: "Externo",
+    color: "purple"
+  },
+
+  { 
+    id: "8",
+    key:"entregado",
+    label: "Entregado",
+    color: "green"
+  },
+
 ];

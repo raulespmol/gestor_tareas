@@ -6,14 +6,28 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import { FormNuevoRequerimiento } from "@/features/requerimientos/components/Forms/FormNuevoRequerimiento";
+import type { RequerimientoFormData } from "../../schemas/nuevoRequerimiento.schema";
+
+import { FormRequerimiento } from "@/features/requerimientos/components/Forms/FormRequerimiento";
+import { defaultRequerimientoForm } from "../../constants/defaultRequerimientoForm";
+import { useRequerimientos } from "@/context/RequerimientosContext";
+
 
 type Props = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 };
 
+
+
 const ModalNuevoRequerimiento = ({ open, onOpenChange }: Props) => {
+  const { agregarRequerimiento } = useRequerimientos();
+
+  const handleSave = (data: RequerimientoFormData) => {
+    agregarRequerimiento(data);
+    onOpenChange(false);
+  };
+
   return (
     <Dialog
       open={open}
@@ -25,8 +39,10 @@ const ModalNuevoRequerimiento = ({ open, onOpenChange }: Props) => {
             Nuevo Requerimiento
           </DialogTitle>
         </DialogHeader>
-
-        <FormNuevoRequerimiento onSuccess={() => onOpenChange(false)} />
+        <FormRequerimiento 
+          defaultValues={defaultRequerimientoForm}
+          onSave={handleSave}
+        />
       </DialogContent>
       <DialogDescription className="sr-only">
         Ingrese la información del nuevo requerimiento.

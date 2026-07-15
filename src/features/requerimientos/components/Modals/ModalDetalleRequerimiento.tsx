@@ -19,6 +19,8 @@ import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
 import { formatearFecha } from "@/utils/formatearFecha";
 import { trabajadores } from "@/data/placeholder/trabajadores";
 import { estados } from "@/data/placeholder/estados";
+import { BadgeEstado } from "../BadgeEstado";
+import { BadgeResponsable } from "../BadgeResponsable";
 
 type Props = {
   requerimiento: Requerimiento | null;
@@ -27,7 +29,7 @@ type Props = {
 
 type CampoProps = {
   label: string;
-  valor?: string;
+  valor?: string | ReactNode
   icon?: ReactNode;
 };
 
@@ -44,7 +46,7 @@ const Campo = ({ label, valor, icon }: CampoProps) => (
 const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
   if (!requerimiento) return null;
 
-  const estado = estados.find((e) => e.id === requerimiento.estadoId)?.nombre;
+  const estado = estados.find((e) => e.id === requerimiento.estadoId);
   const responsable = trabajadores.find((t) => t.id === requerimiento.responsableId)?.nombre;
 
   const estadoPago = getEstadoPago(requerimiento.montoPagado, requerimiento.montoTotal);
@@ -103,12 +105,17 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
 
             <Campo 
               label="Responsable" 
-              valor={responsable} 
+              valor={
+                <BadgeResponsable>{responsable}</BadgeResponsable>
+              } 
               icon={<User size={16} />}
             />
             <Campo 
               label="Estado" 
-              valor={estado} 
+              valor={
+                <BadgeEstado color={estado!.color}>
+                  {estado?.label}
+                </BadgeEstado>  } 
               icon={<Tag size={16} />}
             />
           </div>
@@ -134,11 +141,8 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
           </div>
 
           <Separator />
-
-          <div>
-            <h4 className="text-md mb-2 font-semibold">Historial de Pagos</h4>
-            <HistorialPagos requerimiento={requerimiento} />
-          </div>
+          
+          <HistorialPagos requerimiento={requerimiento} />
 
         </div>
       </DialogContent>

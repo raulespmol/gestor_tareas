@@ -95,7 +95,7 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
       <Separator />
 
       <div className="grid grid-cols-2 gap-4">
-        <Field className="col-span-1">
+        <Field className="col-span-1 flex justify-end">
           <FieldLabel>
             <Calendar size={16} />
             Fecha
@@ -107,10 +107,19 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
           <FieldError errors={[errors.fecha]} />
         </Field>
 
-        <Field className="col-span-1">
+        <Field className="col-span-1 flex justify-end">
           <FieldLabel>
             <DollarSign size={16} />
             Monto a Pagar
+            <Button
+              type="button"
+              onClick={() => setValue("monto", montoMaximo)}
+              size={"xs"}
+              variant={"default"}
+              // className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors"
+            >
+              Pagar pendiente
+            </Button>
           </FieldLabel>
           <Input
             type="number"
