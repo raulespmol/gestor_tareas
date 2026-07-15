@@ -20,6 +20,7 @@ import { formatearFecha } from "@/utils/formatearFecha";
 import { trabajadores } from "@/data/placeholder/trabajadores";
 import { estados } from "@/data/placeholder/estados";
 import { BadgeEstado } from "../BadgeEstado";
+import { BadgeResponsable } from "../BadgeResponsable";
 
 type Props = {
   requerimiento: Requerimiento | null;
@@ -104,13 +105,15 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
 
             <Campo 
               label="Responsable" 
-              valor={responsable} 
+              valor={
+                <BadgeResponsable>{responsable}</BadgeResponsable>
+              } 
               icon={<User size={16} />}
             />
             <Campo 
               label="Estado" 
               valor={
-                <BadgeEstado color={estado ? estado.color : ""}>
+                <BadgeEstado color={estado!.color}>
                   {estado?.label}
                 </BadgeEstado>  } 
               icon={<Tag size={16} />}

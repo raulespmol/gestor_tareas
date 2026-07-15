@@ -4,11 +4,11 @@ import type { Requerimiento } from "@/features/requerimientos/types/requerimient
 
 import DropdownAcciones from "./DropdownAcciones";
 
-import SelectResponsable from "@/features/requerimientos/components/SelectResponsable";
 import { formatearMoneda } from "@/utils/formatearMoneda";
 import { formatearFecha } from "@/utils/formatearFecha";
 import { getEstadoPago, textoEstadoPago } from "../../utils/colorMonto";
 import { DropdownEstado } from "../DropdownEstado";
+import { DropdownResponsable } from "../DropdownResponsable";
 
 export const createColumns = (
   onEditar: (requerimiento: Requerimiento) => void,
@@ -63,7 +63,7 @@ export const createColumns = (
     header: "Responsable",
     size: 160,
     cell: ({ row }) => (
-      <SelectResponsable
+      <DropdownResponsable
         responsableId={row.original.responsableId}
         requerimientoId={row.original.id}
         onChange={onActualizarResponsable}
