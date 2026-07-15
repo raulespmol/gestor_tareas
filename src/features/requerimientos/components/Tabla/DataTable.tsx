@@ -71,6 +71,7 @@ export function DataTable<TData>({
   const centeredColumns = ["numeroCotizacion", "numeroFactura"];  
   const monospaceColumns = ["fecha", "numeroCotizacion", "montoTotal", "montoPagado", "montoPendiente", "numeroFactura"];
   const mutedColumns = ["fecha", "numeroCotizacion", "numeroFactura"];
+  const rightAlignColumns = ["montoTotal", "montoPagado", "montoPendiente" ]
 
   const getCellStyle = (
     size: number,
@@ -103,7 +104,7 @@ export function DataTable<TData>({
                         Boolean((header.column.columnDef.meta?.flex))
                       )}
                       className={
-                        `flex items-center overflow-hidden text-ellipsis whitespace-nowrap
+                        `flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap
                         ${isCentered ? "text-center" : ""}`
                       }
                     >
@@ -142,6 +143,7 @@ export function DataTable<TData>({
                     const isCentered = centeredColumns.includes(cell.column.id);
                     const isMonospace = monospaceColumns.includes(cell.column.id);
                     const isMuted = mutedColumns.includes(cell.column.id);
+                    const isRightAligned = rightAlignColumns.includes(cell.column.id)
                     return (
                       <TableCell
                         key={cell.id}
@@ -154,6 +156,7 @@ export function DataTable<TData>({
                           ${isCentered && "justify-center" } 
                           ${isMonospace && "font-mono" } 
                           ${isMuted && "text-gray-500" }
+                          ${isRightAligned && "justify-end" }
                           `
                         }
                       >
