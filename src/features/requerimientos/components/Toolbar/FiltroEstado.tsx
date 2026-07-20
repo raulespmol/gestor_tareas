@@ -22,9 +22,7 @@ export default function FiltroEstado({ value, onChange }: Props) {
     );
   };
 
-  const label = value.length > 0
-    ? `Estado (${value.length})`
-    : "Estado";
+  const hasValue = value.length > 0
 
   const todosSeleccionados = value.length === estados.length;
 
@@ -32,8 +30,9 @@ export default function FiltroEstado({ value, onChange }: Props) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" className="gap-2">
-          {label}
-          {value.length > 0
+          Estado
+          {hasValue && <span className="font-mono">({value.length})</span>}
+          {hasValue
             ? <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" onClick={(e) => { e.stopPropagation(); onChange([]); }} />
             : <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
           }

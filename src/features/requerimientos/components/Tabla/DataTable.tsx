@@ -35,6 +35,7 @@ interface DataTableProps<TData> {
   data: TData[];
   globalFilter: string;
   getSearchText: (row: TData) => string;
+  onRowClick?: (row: TData) => void;
 }
 
 export function DataTable<TData>({
@@ -42,6 +43,7 @@ export function DataTable<TData>({
   data,
   globalFilter,
   getSearchText,
+  onRowClick,
 }: DataTableProps<TData>) {
 
   const table = useReactTable({
@@ -92,7 +94,7 @@ export function DataTable<TData>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className="flex items-center w-full uppercase text-[10px] h-8 bg-card/50"
+                className="flex items-center w-full uppercase text-[10px] h-8 bg-card/50 pointer-events-none"
               >
                 {headerGroup.headers.map((header) => {
                   const isCentered = centeredColumns.includes(header.column.id);
@@ -137,6 +139,27 @@ export function DataTable<TData>({
                     top: `${virtualRow.start}px`,
                     width: "100%",
                     display: "flex",
+                  }}
+                  className="cursor-pointer hover:bg-secondary/80"
+                  role={onRowClick ? "button" : undefined}
+                  tabIndex={onRowClick ? 0 : undefined}
+                  onClick={(e) => {
+                    if (!onRowClick) return;
+                    const clickedInteractive = (e.target as HTMLElement)?.closest(
+                      "button, a, input, textarea, select, [data-no-row-click]"
+                    );
+                    if (clickedInteractive) return;
+                    onRowClick(row.original);
+                  }}
+                  onKeyDown={(e) => {
+                    if (!onRowClick) return;
+                    if (e.key === "Enter" || e.key === " ") {
+                      const focusedInteractive = (e.target as HTMLElement)?.closest(
+                        "button, a, input, textarea, select, [data-no-row-click]"
+                      );
+                      if (focusedInteractive) return;
+                      onRowClick(row.original);
+                    }
                   }}
                 >
                   {row.getVisibleCells().map((cell) => {

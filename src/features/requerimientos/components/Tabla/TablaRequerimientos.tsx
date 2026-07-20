@@ -61,6 +61,7 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
         data={requerimientosFiltrados}
         globalFilter={globalFilter}
         getSearchText={camposBusqueda}
+        onRowClick={handleVerDetalle}
       />
       <ModalEditarRequerimiento
         requerimiento={requerimientoAEditar}
