@@ -69,6 +69,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
 
           <Input
             {...register("clienteEmpresa")}
+            autoFocus
             placeholder="Nombre / Razón Social"
           />
 
