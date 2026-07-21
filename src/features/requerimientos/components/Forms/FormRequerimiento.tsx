@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
 
 import { trabajadores } from "@/data/placeholder/trabajadores";
+import { formatearMonedaInput, parsearMonedaInput } from "@/utils/formatearMoneda";
 import { estados } from "@/data/placeholder/estados";
 import { DotEstado } from "../DotEstado";
 
@@ -85,7 +86,8 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
           <Input
             type="text"
             {...register("numeroCotizacion")}
-            placeholder="01234"
+            placeholder="0123"
+            className="font-mono"
           />
           <FieldError errors={[errors.numeroCotizacion]} />
         </Field>
@@ -96,12 +98,19 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
             Total
           </FieldLabel>
 
-          <Input 
-            type="text"
-            inputMode="numeric"
-            {...register("montoTotal", {
-              setValueAs: (v) => Number(v || 0),
-            })}
+          <Controller
+            control={control}
+            name="montoTotal"
+            render={({ field }) => (
+              <Input
+                type="text"
+                inputMode="numeric"
+                value={formatearMonedaInput(field.value)}
+                onChange={(event) => field.onChange(parsearMonedaInput(event.target.value))}
+                onBlur={() => field.onBlur()}
+                className="font-mono"
+              />
+            )}
           />
 
           <FieldError errors={[errors.montoTotal, errorMontoTotal ? { message: errorMontoTotal } : undefined]} />
@@ -115,7 +124,8 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
           <Input
             type="text"
             {...register("numeroFactura")}
-            placeholder="01234"
+            placeholder="0123"
+            className="font-mono"
           />
         </Field>
       </div>

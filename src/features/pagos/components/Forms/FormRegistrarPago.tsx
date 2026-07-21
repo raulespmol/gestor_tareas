@@ -20,6 +20,7 @@ import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@
 import type { Requerimiento } from "../../../requerimientos/types/requerimiento.type";
 import { Calendar, CreditCard, DollarSign, ScrollText } from "lucide-react";
 import { Separator } from "@/components/ui/separator"
+import { formatearMonedaInput, parsearMonedaInput } from "@/utils/formatearMoneda";
 
 type RegistrarPagoFormProps = {
   requerimiento: Requerimiento;
@@ -116,15 +117,25 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
               onClick={() => setValue("monto", montoMaximo)}
               size={"xs"}
               variant={"default"}
-              // className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors"
             >
               Pagar pendiente
             </Button>
           </FieldLabel>
-          <Input
-            type="number"
-            max={montoMaximo}
-            {...register("monto", {valueAsNumber: true})}
+          <Controller
+            control={control}
+            name="monto"
+            render={({ field }) => (
+              <Input
+                type="text"
+                inputMode="numeric"
+                max={montoMaximo}
+                value={formatearMonedaInput(field.value)}
+                onChange={(event) => field.onChange(parsearMonedaInput(event.target.value))}
+                onBlur={() => field.onBlur()}
+                className="font-mono"
+                autoFocus
+              />
+            )}
           />
           <FieldError errors={[errors.monto]} />
         </Field>
@@ -174,6 +185,7 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
           <Input
             {...register("voucher")}
             disabled={!isVoucherEnabled}
+            className="font-mono"
           />
           <FieldError errors={[errors.voucher]} />
         </Field>

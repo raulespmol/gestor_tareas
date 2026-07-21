@@ -61,7 +61,11 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
         data={requerimientosFiltrados}
         globalFilter={globalFilter}
         getSearchText={camposBusqueda}
-        onRowClick={handleVerDetalle}
+        onCellClick={(row, columnId) => {
+          if (columnId === "detalleDescripcion") {
+            handleVerDetalle(row);
+          }
+        }}
       />
       <ModalEditarRequerimiento
         requerimiento={requerimientoAEditar}

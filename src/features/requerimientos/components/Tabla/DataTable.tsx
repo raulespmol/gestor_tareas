@@ -35,7 +35,7 @@ interface DataTableProps<TData> {
   data: TData[];
   globalFilter: string;
   getSearchText: (row: TData) => string;
-  onRowClick?: (row: TData) => void;
+  onCellClick?: (row: TData, columnId: string) => void;
 }
 
 export function DataTable<TData>({
@@ -43,7 +43,7 @@ export function DataTable<TData>({
   data,
   globalFilter,
   getSearchText,
-  onRowClick,
+  onCellClick,
 }: DataTableProps<TData>) {
 
   const table = useReactTable({
@@ -140,33 +140,15 @@ export function DataTable<TData>({
                     width: "100%",
                     display: "flex",
                   }}
-                  className="cursor-pointer hover:bg-secondary/80"
-                  role={onRowClick ? "button" : undefined}
-                  tabIndex={onRowClick ? 0 : undefined}
-                  onClick={(e) => {
-                    if (!onRowClick) return;
-                    const clickedInteractive = (e.target as HTMLElement)?.closest(
-                      "button, a, input, textarea, select, [data-no-row-click]"
-                    );
-                    if (clickedInteractive) return;
-                    onRowClick(row.original);
-                  }}
-                  onKeyDown={(e) => {
-                    if (!onRowClick) return;
-                    if (e.key === "Enter" || e.key === " ") {
-                      const focusedInteractive = (e.target as HTMLElement)?.closest(
-                        "button, a, input, textarea, select, [data-no-row-click]"
-                      );
-                      if (focusedInteractive) return;
-                      onRowClick(row.original);
-                    }
-                  }}
+                  className="hover:bg-secondary/80"
                 >
                   {row.getVisibleCells().map((cell) => {
                     const isCentered = centeredColumns.includes(cell.column.id);
                     const isMonospace = monospaceColumns.includes(cell.column.id);
                     const isMuted = mutedColumns.includes(cell.column.id);
-                    const isRightAligned = rightAlignColumns.includes(cell.column.id)
+                    const isRightAligned = rightAlignColumns.includes(cell.column.id);
+                    const isDescriptionCell = cell.column.id === "detalleDescripcion";
+
                     return (
                       <TableCell
                         key={cell.id}
@@ -180,8 +162,24 @@ export function DataTable<TData>({
                           ${isMonospace && "font-mono" } 
                           ${isMuted && "text-gray-500" }
                           ${isRightAligned && "justify-end" }
+                          ${isDescriptionCell ? "cursor-pointer hover:bg-secondary/40" : ""}
                           `
                         }
+                        role={isDescriptionCell ? "button" : undefined}
+                        tabIndex={isDescriptionCell ? 0 : undefined}
+                        onClick={(e) => {
+                          if (!isDescriptionCell || !onCellClick) return;
+                          e.stopPropagation();
+                          onCellClick(row.original, cell.column.id);
+                        }}
+                        onKeyDown={(e) => {
+                          if (!isDescriptionCell || !onCellClick) return;
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            onCellClick(row.original, cell.column.id);
+                          }
+                        }}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
