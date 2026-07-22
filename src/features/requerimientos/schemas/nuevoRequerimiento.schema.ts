@@ -6,34 +6,34 @@ export const nuevoRequerimientoSchema = z
       .string()
       .min(1, "La fecha es obligatoria"),
 
-    clienteEmpresa: z
+    cliente: z
       .string()
       .trim()
       .min(1, "El cliente es obligatorio"),
 
-    numeroCotizacion: z
+    cotizacion: z
       .string()
       .trim(),
 
-    detalleDescripcion: z
+    descripcion: z
       .string()
       .trim(),
 
-    responsableId: z
+    responsable_id: z
       .string(),
 
-    estadoId: z
+    estado_id: z
       .string(),
 
-    montoTotal: z
+    monto_total: z
       .number({
         error: "Ingrese un monto válido",
       })
       .min(0, "El monto no puede ser negativo"),
 
-    numeroFactura: z.string().trim(),
+    factura: z.string().trim(),
 
-    otrosDatos: z.string().trim(),
+    otros_datos: z.string().trim(),
   })
 
 export type RequerimientoFormData = z.infer<typeof nuevoRequerimientoSchema>;

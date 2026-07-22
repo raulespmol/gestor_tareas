@@ -70,10 +70,10 @@ export function DataTable<TData>({
   const virtualRows = virtualizer.getVirtualItems();
   const totalHeight = virtualizer.getTotalSize();
 
-  const centeredColumns = ["numeroCotizacion", "numeroFactura"];  
-  const monospaceColumns = ["fecha", "numeroCotizacion", "montoTotal", "montoPagado", "montoPendiente", "numeroFactura"];
-  const mutedColumns = ["fecha", "numeroCotizacion", "numeroFactura"];
-  const rightAlignColumns = ["montoTotal", "montoPagado", "montoPendiente" ]
+  const centeredColumns = ["cotizacion", "factura"];  
+  const monospaceColumns = ["fecha", "cotizacion", "monto_total", "monto_pagado", "monto_pendiente", "factura"];
+  const mutedColumns = ["fecha", "cotizacion", "factura"];
+  const rightAlignColumns = ["monto_total", "monto_pagado", "monto_pendiente" ]
 
   const getCellStyle = (
     size: number,

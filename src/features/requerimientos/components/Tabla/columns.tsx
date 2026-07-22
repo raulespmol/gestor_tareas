@@ -27,51 +27,51 @@ export const createColumns = (
     )
   },
   {
-    accessorKey: "clienteEmpresa",
+    accessorKey: "cliente",
     header: "Cliente",
     size: 210,
   },
   {
-    accessorKey: "numeroCotizacion",
+    accessorKey: "cotizacion",
     header: "COT",
     size: 60,
   },
   {
-    accessorKey: "detalleDescripcion",
+    accessorKey: "descripcion",
     header: "Descripción",
     meta: { flex: true },
     cell: ({ row }) => (
       <div className="w-full truncate">
-        {row.original.detalleDescripcion}
+        {row.original.descripcion}
       </div>
     ),
   },
   {
-    accessorKey: "estadoId",
+    accessorKey: "estado_id",
     header: "Estado",
     size: 95,
     cell: ({ row }) => (
       <DropdownEstado
-        estadoId={row.original.estadoId}
+        estadoId={row.original.estado_id}
         requerimientoId={row.original.id}
         onChange={onActualizarEstado}
       />
     ),
   },
   {
-    accessorKey: "responsableId",
+    accessorKey: "responsable_id",
     header: "Responsable",
     size: 125,
     cell: ({ row }) => (
       <DropdownResponsable
-        responsableId={row.original.responsableId}
+        responsableId={row.original.responsable_id}
         requerimientoId={row.original.id}
         onChange={onActualizarResponsable}
       />
     ),
   },
   {
-    accessorKey: "montoTotal",
+    accessorKey: "monto_total",
     header: "Total",
     size: 75,
     cell: ({ getValue }) =>
@@ -82,10 +82,10 @@ export const createColumns = (
     header: "Pagado",
     size: 75,
     cell: ({ row }) => { 
-      const variant = getEstadoPago(row.original.montoPagado, row.original.montoTotal);
+      const variant = getEstadoPago(row.original.monto_pagado, row.original.monto_total);
       return (
         <span className={textoEstadoPago({ variant })}>
-          {formatearMoneda(row.original.montoPagado)}
+          {formatearMoneda(row.original.monto_pagado)}
         </span>
       );
     }
@@ -95,10 +95,10 @@ export const createColumns = (
     header: "Pendiente",
     size: 75,
     cell: ({ row }) => { 
-      const variant = getEstadoPago(row.original.montoPagado, row.original.montoTotal);
+      const variant = getEstadoPago(row.original.monto_pagado, row.original.monto_total);
       return (
         <span className={textoEstadoPago({ variant })}>
-          {formatearMoneda(row.original.montoPendiente)}
+          {formatearMoneda(row.original.monto_pendiente)}
         </span>
       );
     }

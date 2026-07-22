@@ -1,5 +1,5 @@
+import { supabase } from "@/utils/supabase";
 import { createContext, useContext, useEffect, useState } from "react";
-import { requerimientosData } from "@/data/placeholder/requerimientos";
 import { ordenarFechaAsc } from "@/features/requerimientos/utils/ordenarFecha";
 import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
 import type { RequerimientoFormData } from "@/features/requerimientos/schemas/nuevoRequerimiento.schema";
@@ -11,7 +11,7 @@ type RequerimientosContextType = {
   agregarRequerimiento: (data: RequerimientoFormData) => void;
   editarRequerimiento: (actualizado: Requerimiento) => void;
   eliminarRequerimiento: (id: string) => void;
-  actualizarMontos: (requerimientoId: string, montoPagado: number) => void;
+  actualizarMontos: (requerimiento_id: string, monto_pagado: number) => void;
 }
 
 type ProviderProps = {
@@ -20,54 +20,58 @@ type ProviderProps = {
 
 const RequerimientosContext = createContext<RequerimientosContextType | null>(null);
 
-const cargarRequerimientos = (): Requerimiento[] => {
+const cargarRequerimientos = async (): Promise<Requerimiento[]> => {
   try {
-    const data = localStorage.getItem("requerimientos");
-    const requerimientos = data ? JSON.parse(data) : requerimientosData;
+    const { data, error } = await supabase
+      .from("requerimientos_resumen")
+      .select("*");
 
-    return ordenarFechaAsc(requerimientos)
-  } catch (error) {
-    console.error("Error al cargar requerimientos:", error);
-    return ordenarFechaAsc(requerimientosData)
-
-  }
-}
-
-const guardarRequerimientos = (requerimientos: Requerimiento[]) => {
-  setTimeout(() => {
-    try {
-      localStorage.setItem("requerimientos", JSON.stringify(requerimientos));
-    } catch (error) {
-      console.error("Error al guardar requerimientos:", error);
+    if (error) {
+      throw error;
     }
-  }, 0);
+    console.log(data)
+    return ordenarFechaAsc(data);
+
+  } catch (error: unknown) {
+
+    if (error instanceof Error) {
+      console.error("Error al obtener los requerimientos:", error.message);
+    } else {
+      console.error("Ocurrió un error al obtener los requerimientos.", error);
+    }
+    return [];
+  }
 };
 
 export const RequerimientosProvider = ({children}: ProviderProps) => {
-  const [requerimientos, setRequerimientos] = useState<Requerimiento[]>(cargarRequerimientos);
+  const [requerimientos, setRequerimientos] = useState<Requerimiento[]>([]);
 
   useEffect(() => {
-    guardarRequerimientos(requerimientos);
-  }, [requerimientos])
+    const cargar = async () => {
+      const data = await cargarRequerimientos();
+      setRequerimientos(data);
+    };
+
+    cargar();
+  }, []);
 
   const actualizarEstado = (idRequerimiento: string, nuevoEstadoId: string) => {
     setRequerimientos((prev) => 
-      prev.map(req => req.id === idRequerimiento ? {...req, estadoId: nuevoEstadoId} : req)
+      prev.map(req => req.id === idRequerimiento ? {...req, estado_id: nuevoEstadoId} : req)
     );
   };
 
   const actualizarResponsable = (idRequerimiento: string, nuevoResponsableId: string) => {
     setRequerimientos((prev) => 
-      prev.map(req => req.id === idRequerimiento ? {...req, responsableId: nuevoResponsableId} : req)
+      prev.map(req => req.id === idRequerimiento ? {...req, responsable_id: nuevoResponsableId} : req)
     );
   };
 
   const agregarRequerimiento = (data: RequerimientoFormData) => {
     const nuevoRequerimiento: Requerimiento = {
-      id: Date.now().toString(), // TEMPORAL
       ...data,
-      montoPendiente: data.montoTotal,
-      montoPagado: 0,
+      monto_pendiente: data.monto_total,
+      monto_pagado: 0,
     }
     
     setRequerimientos((prev) => ordenarFechaAsc([...prev, nuevoRequerimiento]))
@@ -83,13 +87,13 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
     setRequerimientos((prev) => prev.filter((r) => r.id !== id));
   };
 
- const actualizarMontos = (requerimientoId: string, montoPagado: number) => {
+ const actualizarMontos = (requerimiento_id: string, monto_pagado: number) => {
   setRequerimientos((prev) =>
     prev.map((r) =>
-      r.id === requerimientoId
+      r.id === requerimiento_id
         ? { ...r,  
-            montoPagado: r.montoPagado + montoPagado, 
-            montoPendiente: r.montoPendiente - montoPagado }
+            monto_pagado: r.monto_pagado + monto_pagado, 
+            monto_pendiente: r.monto_pendiente - monto_pagado }
         : r
     )
   );
