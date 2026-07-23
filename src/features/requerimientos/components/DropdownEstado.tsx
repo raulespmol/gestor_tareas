@@ -2,6 +2,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { memo } from "react";
 import { BadgeEstado } from "./BadgeEstado";
 import { estados } from "@/data/placeholder/estados";
+import { colorPorEstado } from "../constants/colorPorEstado";
+
 import { Check } from "lucide-react";
 import { DotEstado } from "./DotEstado";
 
@@ -22,13 +24,14 @@ export const DropdownEstado = memo(
 }: DropdownEstadoProps) => {
 
   const estadoActual = estados.find(e => e.id === estadoId) ?? estados[0];
+  const color = colorPorEstado[estadoActual.key] ?? "gray";
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button>
           <BadgeEstado
-            color={estadoActual?.color}       
+            color={color}       
           >
             {estadoActual?.label}
           </BadgeEstado>
@@ -51,7 +54,9 @@ export const DropdownEstado = memo(
             }
             className="flex justify-between cursor-pointer"
           >
-            <DotEstado estado={estado} />
+            <DotEstado 
+              estado={estado}
+            />
 
             {estado.id === estadoId && (
               <Check className="size-4" />
