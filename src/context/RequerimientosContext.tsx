@@ -3,7 +3,7 @@ import { ordenarFechaAsc } from "@/features/requerimientos/utils/ordenarFecha";
 import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
 import type { RequerimientoFormData } from "@/features/requerimientos/schemas/nuevoRequerimiento.schema";
 
-import { obtenerRequerimientos } from "@/services/requerimientos.service";
+import { obtenerRequerimientos } from "@/features/requerimientos/services/requerimientos.service";
 
 type RequerimientosContextType = {
   requerimientos: Requerimiento[];
