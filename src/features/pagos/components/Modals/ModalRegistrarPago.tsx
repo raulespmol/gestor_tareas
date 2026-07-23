@@ -25,7 +25,7 @@ const ModalRegistrarPago = ({ requerimiento, onOpenChange }: Props) => {
     >
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Registrar Pago - Requerimiento {requerimiento?.id}</DialogTitle>
+          <DialogTitle>Registrar Pago - Requerimiento {requerimiento?.cliente}</DialogTitle>
           <DialogDescription className="sr-only">
             Ingrese la información del pago.
           </DialogDescription>
