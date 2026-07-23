@@ -1,8 +1,9 @@
-import { supabase } from "@/utils/supabase";
 import { createContext, useContext, useEffect, useState } from "react";
 import { ordenarFechaAsc } from "@/features/requerimientos/utils/ordenarFecha";
 import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
 import type { RequerimientoFormData } from "@/features/requerimientos/schemas/nuevoRequerimiento.schema";
+
+import { obtenerRequerimientos } from "@/services/requerimientos.service";
 
 type RequerimientosContextType = {
   requerimientos: Requerimiento[];
@@ -20,42 +21,24 @@ type ProviderProps = {
 
 const RequerimientosContext = createContext<RequerimientosContextType | null>(null);
 
-const cargarRequerimientos = async (): Promise<Requerimiento[]> => {
-  try {
-    const { data, error } = await supabase
-      .from("requerimientos_resumen")
-      .select("*");
-
-    if (error) {
-      throw error;
-    }
-    console.log(data)
-    return ordenarFechaAsc(data);
-
-  } catch (error: unknown) {
-
-    if (error instanceof Error) {
-      console.error("Error al obtener los requerimientos:", error.message);
-    } else {
-      console.error("Ocurrió un error al obtener los requerimientos.", error);
-    }
-    return [];
-  }
-};
-
 export const RequerimientosProvider = ({children}: ProviderProps) => {
   const [requerimientos, setRequerimientos] = useState<Requerimiento[]>([]);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const cargar = async () => {
-      const data = await cargarRequerimientos();
-      setRequerimientos(data);
-    };
-
-    cargar();
+    cargarRequerimientos();
   }, []);
 
-  const actualizarEstado = (idRequerimiento: string, nuevoEstadoId: string) => {
+  const cargarRequerimientos = async () => {
+    // setIsLoading(true);
+
+    const data = await obtenerRequerimientos();
+
+    setRequerimientos(data);
+    // setIsLoading(false);
+  };
+
+  const actualizarEstado = (id_requerimiento: string, nuevo_id_estado: string) => {
     setRequerimientos((prev) => 
       prev.map(req => req.id === id_requerimiento ? {...req, estado_id: nuevo_id_estado} : req)
     );
@@ -70,13 +53,7 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
   };
 
   const agregarRequerimiento = (data: RequerimientoFormData) => {
-    const nuevoRequerimiento: Requerimiento = {
-      ...data,
-      monto_pendiente: data.monto_total,
-      monto_pagado: 0,
-    }
-    
-    setRequerimientos((prev) => ordenarFechaAsc([...prev, nuevoRequerimiento]))
+    //INSERT SUPABASE
   }
 
   const editarRequerimiento = (actualizado: Requerimiento) => {
