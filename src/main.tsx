@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider.tsx"
 import { RequerimientosProvider } from "@/context/RequerimientosContext";
 import { useRequerimientos } from "@/context/RequerimientosContext";
 import { PagosProvider } from "@/context/PagosContext"
+import { CatalogosProvider } from "@/context/CatalogosContext"
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   const { actualizarMontos } = useRequerimientos();
@@ -20,11 +21,13 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RequerimientosProvider>
-      <ThemeProvider>
-        <Providers>
-          <App />
-        </Providers>
-      </ThemeProvider>
+      <CatalogosProvider>
+        <ThemeProvider>
+          <Providers>
+            <App />
+          </Providers>
+        </ThemeProvider>
+      </CatalogosProvider>
     </RequerimientosProvider>
   </StrictMode>
 )

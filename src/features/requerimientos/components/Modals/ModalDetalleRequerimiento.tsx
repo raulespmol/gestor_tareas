@@ -17,7 +17,7 @@ import { HistorialPagos } from "@/features/pagos/components/HistorialPagos";
 import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
 
 import { formatearFecha } from "@/utils/formatearFecha";
-import { trabajadores } from "@/data/placeholder/trabajadores";
+import { useCatalogos } from "@/context/CatalogosContext";
 import { estados } from "@/data/placeholder/estados";
 import { BadgeEstado } from "../BadgeEstado";
 import { BadgeResponsable } from "../BadgeResponsable";
@@ -46,6 +46,7 @@ const Campo = ({ label, valor, icon }: CampoProps) => (
 const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
   if (!requerimiento) return null;
 
+  const { trabajadores } = useCatalogos();
   const estado = estados.find((e) => e.id === requerimiento.estado_id);
   const responsable = trabajadores.find((t) => t.id === requerimiento.responsable_id)?.nombre;
 

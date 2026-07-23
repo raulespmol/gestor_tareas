@@ -1,4 +1,4 @@
-import type { Trabajador } from "@/features/requerimientos/types/trabajador.type";
+import type { Trabajador } from "@/catalogos/trabajadores/trabajador.type";
 
 export const trabajadores: Trabajador[] = [
   { id: "0", nombre: "Sin asignar" },

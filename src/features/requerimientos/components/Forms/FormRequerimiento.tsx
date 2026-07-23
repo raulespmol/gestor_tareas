@@ -16,7 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
 
-import { trabajadores } from "@/data/placeholder/trabajadores";
+import { useCatalogos } from "@/context/CatalogosContext";
 import { formatearMonedaInput, parsearMonedaInput } from "@/utils/formatearMoneda";
 import { estados } from "@/data/placeholder/estados";
 import { DotEstado } from "../DotEstado";
@@ -41,6 +41,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
   });
 
   const mode = requerimiento ? "edit" : "create"
+  const { trabajadores } = useCatalogos();
 
   const handleFormSubmit = (data: RequerimientoFormData) => {
     onSave(data)

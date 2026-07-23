@@ -1,5 +1,5 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { trabajadores } from "@/data/placeholder/trabajadores";
+import { useCatalogos } from "@/context/CatalogosContext";
 import { Check } from "lucide-react";
 import { memo } from "react";
 import { BadgeResponsable } from "./BadgeResponsable";
@@ -12,7 +12,8 @@ type DropdownResponsableProps = {
 
 export const DropdownResponsable = memo(
   ({ responsableId, requerimientoId, onChange }: DropdownResponsableProps) => {
-    const responsableActual = trabajadores.find((t) => t.id === responsableId) ?? trabajadores[0];
+    const { trabajadores } = useCatalogos();
+    const responsableActual = trabajadores.find((t) => t.id === responsableId) ?? trabajadores[0] ?? { id: "0", nombre: "Sin asignar" };
 
     return (
       <DropdownMenu>
