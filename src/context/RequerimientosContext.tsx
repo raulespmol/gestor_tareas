@@ -6,8 +6,8 @@ import type { RequerimientoFormData } from "@/features/requerimientos/schemas/nu
 
 type RequerimientosContextType = {
   requerimientos: Requerimiento[];
-  actualizarEstado: (idRequerimiento: string, nuevoEstadoId: string) => void;
-  actualizarResponsable: (idRequerimiento: string, nuevoResponsableId: string) => void;
+  actualizarEstado: (id_requerimiento: string, nuevo_id_estado: string) => void;
+  actualizarResponsable: (id_requerimiento: string, nuevo_id_responsable: string) => void;
   agregarRequerimiento: (data: RequerimientoFormData) => void;
   editarRequerimiento: (actualizado: Requerimiento) => void;
   eliminarRequerimiento: (id: string) => void;
@@ -57,13 +57,15 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
 
   const actualizarEstado = (idRequerimiento: string, nuevoEstadoId: string) => {
     setRequerimientos((prev) => 
-      prev.map(req => req.id === idRequerimiento ? {...req, estado_id: nuevoEstadoId} : req)
+      prev.map(req => req.id === id_requerimiento ? {...req, estado_id: nuevo_id_estado} : req)
     );
   };
 
-  const actualizarResponsable = (idRequerimiento: string, nuevoResponsableId: string) => {
+  const actualizarResponsable = (id_requerimiento: string, nuevo_id_responsable: string) => {
     setRequerimientos((prev) => 
-      prev.map(req => req.id === idRequerimiento ? {...req, responsable_id: nuevoResponsableId} : req)
+      prev.map(req => req.id === id_requerimiento ? {...req, responsable_id: nuevo_id_responsable
+  
+      } : req)
     );
   };
 

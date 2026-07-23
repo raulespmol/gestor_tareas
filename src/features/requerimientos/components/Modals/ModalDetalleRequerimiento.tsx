@@ -46,16 +46,16 @@ const Campo = ({ label, valor, icon }: CampoProps) => (
 const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
   if (!requerimiento) return null;
 
-  const estado = estados.find((e) => e.id === requerimiento.estadoId);
-  const responsable = trabajadores.find((t) => t.id === requerimiento.responsableId)?.nombre;
+  const estado = estados.find((e) => e.id === requerimiento.estado_id);
+  const responsable = trabajadores.find((t) => t.id === requerimiento.responsable_id)?.nombre;
 
-  const estadoPago = getEstadoPago(requerimiento.montoPagado, requerimiento.montoTotal);
+  const estadoPago = getEstadoPago(requerimiento.monto_pagado, requerimiento.monto_total);
 
   return (
     <Dialog open={requerimiento !== null} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-xl p-6">
         <DialogHeader>
-          <DialogTitle>Requerimiento {requerimiento.clienteEmpresa}</DialogTitle>
+          <DialogTitle>Requerimiento {requerimiento.cliente}</DialogTitle>
           <DialogDescription className="sr-only">
             Detalle del requerimiento seleccionado.
           </DialogDescription>
@@ -66,15 +66,15 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
           <div className="grid grid-cols-3 gap-4">
             <CardMonto 
               label="Total" 
-              value={requerimiento.montoTotal} 
+              value={requerimiento.monto_total} 
             />
             <CardMonto 
               label="Pagado" 
-              value={requerimiento.montoPagado} variant={estadoPago} 
+              value={requerimiento.monto_pagado} variant={estadoPago} 
             />
             <CardMonto 
               label="Pendiente" 
-              value={requerimiento.montoPendiente} variant={estadoPago} 
+              value={requerimiento.monto_pendiente} variant={estadoPago} 
             />
           </div>
 
@@ -88,18 +88,18 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
             />
             <Campo 
               label="Cliente" 
-              valor={requerimiento.clienteEmpresa} 
+              valor={requerimiento.cliente} 
               icon={<User size={16} />}
             />
           
             <Campo 
               label="N° Cotización" 
-              valor={requerimiento.numeroCotizacion} 
+              valor={requerimiento.cotizacion} 
               icon={<FileText size={16} />}
             />
             <Campo 
               label="N° Factura" 
-              valor={requerimiento.numeroFactura} 
+              valor={requerimiento.factura} 
               icon={<FileText size={16} />}
             />
 
@@ -126,7 +126,7 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
             <Campo 
               label="Descripción" 
               valor={
-                <p className="whitespace-pre-wrap text-sm">{requerimiento.detalleDescripcion}</p>
+                <p className="whitespace-pre-wrap text-sm">{requerimiento.descripcion}</p>
               } 
               icon={<TextAlignStart size={16} />}
             />
@@ -137,7 +137,7 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
           <div>
             <Campo 
               label="Otros Datos" 
-              valor={requerimiento.otrosDatos} 
+              valor={requerimiento.otros_datos} 
               icon={<EllipsisIcon size={16} />}
             />
           </div>

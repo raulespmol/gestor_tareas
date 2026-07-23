@@ -43,7 +43,7 @@ export default function DropdownAcciones({
 
           <DropdownMenuItem
             onSelect={() => onRegistrarPago(requerimiento)}
-            disabled={requerimiento.montoPendiente === 0}
+            disabled={requerimiento.monto_pendiente === 0}
           >
             <DollarSign className="mr-2 h-4 w-4" />
             Registrar pago

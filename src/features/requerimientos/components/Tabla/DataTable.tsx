@@ -147,7 +147,7 @@ export function DataTable<TData>({
                     const isMonospace = monospaceColumns.includes(cell.column.id);
                     const isMuted = mutedColumns.includes(cell.column.id);
                     const isRightAligned = rightAlignColumns.includes(cell.column.id);
-                    const isDescriptionCell = cell.column.id === "detalleDescripcion";
+                    const isDescriptionCell = cell.column.id === "descripcion";
 
                     return (
                       <TableCell

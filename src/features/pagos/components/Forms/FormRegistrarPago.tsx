@@ -32,7 +32,7 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
 
   const montoMaximo = Math.max(
     0,
-    (requerimiento.montoPendiente ?? requerimiento.montoTotal - requerimiento.montoPagado)
+    (requerimiento.monto_pendiente ?? requerimiento.monto_total - requerimiento.monto_pagado)
   );
 
   const {
@@ -74,22 +74,22 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
     }
   }, [isVoucherEnabled, setValue]);
 
-  const estadoPago = getEstadoPago(requerimiento.montoPagado, requerimiento.montoTotal);
+  const estadoPago = getEstadoPago(requerimiento.monto_pagado, requerimiento.monto_total);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <div className="grid grid-cols-3 gap-4">
         <CardMonto 
           label="Total" 
-          value={requerimiento.montoTotal} 
+          value={requerimiento.monto_total} 
         />
         <CardMonto 
           label="Pagado" 
-          value={requerimiento.montoPagado} variant={estadoPago} 
+          value={requerimiento.monto_pagado} variant={estadoPago} 
         />
         <CardMonto 
           label="Pendiente" 
-          value={requerimiento.montoPendiente} variant={estadoPago} 
+          value={requerimiento.monto_pendiente} variant={estadoPago} 
         />
       </div>
 

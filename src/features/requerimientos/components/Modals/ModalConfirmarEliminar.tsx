@@ -25,7 +25,6 @@ const ModalConfirmarEliminar = ({ requerimiento, onConfirmar, onOpenChange }: Pr
           <AlertDialogDescription>
             Esta acción no se puede deshacer. Se eliminará permanentemente el requerimiento de{" "}
             <span className="font-medium text-foreground">
-              {requerimiento?.clienteEmpresa}
             </span>
             .
           </AlertDialogDescription>

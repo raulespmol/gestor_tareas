@@ -69,12 +69,12 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
           </FieldLabel>
 
           <Input
-            {...register("clienteEmpresa")}
+            {...register("cliente")}
             autoFocus
             placeholder="Nombre / Razón Social"
           />
 
-          <FieldError errors={[errors.clienteEmpresa]} />
+          <FieldError errors={[errors.cliente]} />
         </Field>
       </div>
       <div className="grid grid-cols-3 gap-4">
@@ -85,11 +85,11 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
           </FieldLabel>
           <Input
             type="text"
-            {...register("numeroCotizacion")}
+            {...register("cotizacion")}
             placeholder="0123"
             className="font-mono"
           />
-          <FieldError errors={[errors.numeroCotizacion]} />
+          <FieldError errors={[errors.cotizacion]} />
         </Field>
 
         <Field className="col-span-1">
@@ -100,7 +100,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
 
           <Controller
             control={control}
-            name="montoTotal"
+            name="monto_total"
             render={({ field }) => (
               <Input
                 type="text"
@@ -113,7 +113,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
             )}
           />
 
-          <FieldError errors={[errors.montoTotal, errorMontoTotal ? { message: errorMontoTotal } : undefined]} />
+          <FieldError errors={[errors.monto_total, errorMontoTotal ? { message: errorMontoTotal } : undefined]} />
         </Field>
         
         <Field className="col-span-1">
@@ -123,7 +123,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
           </FieldLabel>
           <Input
             type="text"
-            {...register("numeroFactura")}
+            {...register("factura")}
             placeholder="0123"
             className="font-mono"
           />
@@ -138,6 +138,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
 
           <Textarea
             {...register("detalleDescripcion")}
+            {...register("descripcion")}
             className="resize-none h-27.5"
             placeholder="Adhesivo / Tela / Greyback ..."
           />
@@ -152,7 +153,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
             </FieldLabel>
             <Controller
               control={control}
-              name="responsableId"
+              name="responsable_id"
               render={({ field }) => (
                 <Select
                   value={field.value?.toString()}
@@ -175,7 +176,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
                 </Select>
               )}
             />
-            <FieldError errors={[errors.responsableId]} />
+            <FieldError errors={[errors.responsable_id]} />
           </Field>
           
           
@@ -187,7 +188,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
             </FieldLabel>
             <Controller
               control={control}
-              name="estadoId"
+              name="estado_id"
               render={({ field }) => (
                 <Select
                   value={field.value?.toString()}
@@ -210,7 +211,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
                 </Select>
                 )}
                 />
-              <FieldError errors={[errors.estadoId]} />
+              <FieldError errors={[errors.estado_id]} />
           </Field>
         </div>
         <div className="grid grid-cols-3 gap-4">
@@ -225,6 +226,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
           <Input
             type="text"
             {...register("otrosDatos")}
+            {...register("otros_datos")}
             placeholder="Telefono / OC / RUT"
           />
         </Field>

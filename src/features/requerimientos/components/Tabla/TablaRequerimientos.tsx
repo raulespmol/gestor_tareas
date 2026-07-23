@@ -50,7 +50,7 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
   const requerimientosFiltrados = useMemo(
     () => filtroEstados.length === 0
       ? requerimientos
-      : requerimientos.filter((r) => filtroEstados.includes(r.estadoId)),
+      : requerimientos.filter((r) => filtroEstados.includes(r.estado_id)),
     [requerimientos, filtroEstados]
   );
 
@@ -62,7 +62,7 @@ const TablaRequerimientos = ({ globalFilter, filtroEstados }: TablaRequerimiento
         globalFilter={globalFilter}
         getSearchText={camposBusqueda}
         onCellClick={(row, columnId) => {
-          if (columnId === "detalleDescripcion") {
+          if (columnId === "descripcion") {
             handleVerDetalle(row);
           }
         }}

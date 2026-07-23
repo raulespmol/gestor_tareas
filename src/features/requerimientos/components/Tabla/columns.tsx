@@ -78,7 +78,7 @@ export const createColumns = (
       formatearMoneda(Number(getValue()))
   },
   {
-    accessorKey: "montoPagado",
+    accessorKey: "monto_pagado",
     header: "Pagado",
     size: 75,
     cell: ({ row }) => { 
@@ -91,7 +91,7 @@ export const createColumns = (
     }
   },
   {
-    accessorKey: "montoPendiente",
+    accessorKey: "monto_pendiente",
     header: "Pendiente",
     size: 75,
     cell: ({ row }) => { 
@@ -104,7 +104,7 @@ export const createColumns = (
     }
   },
   {
-    accessorKey: "numeroFactura",
+    accessorKey: "factura",
     header: "FAC",
     size: 60,
   },

@@ -30,9 +30,9 @@ const ModalEditarRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
 
   const handleSave = (data: RequerimientoFormData) => {
     if (!requerimiento) return;
-    if (data.montoTotal < requerimiento.montoPagado){
+    if (data.monto_total < requerimiento.monto_pagado){
       setErrorMontoTotal(
-        `El total no puede ser menor al monto ya pagado (${formatearMoneda(requerimiento.montoPagado)})`
+        `El total no puede ser menor al monto ya pagado (${formatearMoneda(requerimiento.monto_pagado)})`
       )
       return;
     }
@@ -41,7 +41,7 @@ const ModalEditarRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
     editarRequerimiento({
       ...requerimiento,
       ...data,
-      montoPendiente: data.montoTotal - requerimiento.montoPagado,
+      monto_pendiente: data.monto_total - requerimiento.monto_pagado,
     });
 
     onOpenChange(false);
