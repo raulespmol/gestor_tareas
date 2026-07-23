@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Requerimiento } from "../../types/requerimiento.type";
+import { useCatalogos } from "@/context/CatalogosContext";
 
 import {
   Dialog,
@@ -10,17 +11,14 @@ import {
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator"
 import { Calendar, EllipsisIcon, FileText, Tag, TextAlignStart, User } from "lucide-react";
-
 import { CardMonto } from "@/features/requerimientos/components/CardMonto";
 import { HistorialPagos } from "@/features/pagos/components/HistorialPagos";
-
-import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
-
-import { formatearFecha } from "@/utils/formatearFecha";
-import { useCatalogos } from "@/context/CatalogosContext";
-import { estados } from "@/data/placeholder/estados";
 import { BadgeEstado } from "../BadgeEstado";
 import { BadgeResponsable } from "../BadgeResponsable";
+
+import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
+import { formatearFecha } from "@/utils/formatearFecha";
+import { colorPorEstado } from "../../constants/colorPorEstado";
 
 type Props = {
   requerimiento: Requerimiento | null;
@@ -46,11 +44,24 @@ const Campo = ({ label, valor, icon }: CampoProps) => (
 const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
   if (!requerimiento) return null;
 
-  const { trabajadores } = useCatalogos();
-  const estado = estados.find((e) => e.id === requerimiento.estado_id);
-  const responsable = trabajadores.find((t) => t.id === requerimiento.responsable_id)?.nombre;
+  const { trabajadores, estados } = useCatalogos();
 
-  const estadoPago = getEstadoPago(requerimiento.monto_pagado, requerimiento.monto_total);
+  const responsable = trabajadores.find(
+    (t) => t.id === requerimiento.responsable_id
+  );
+
+  const estado = estados.find(
+    (e) => e.id === requerimiento.estado_id
+  );
+
+  const colorEstado = estado
+  ? colorPorEstado[estado.key] ?? "gray"
+  : "gray";
+  
+  const estadoPago = getEstadoPago(
+    requerimiento.monto_pagado, 
+    requerimiento.monto_total
+  );
 
   return (
     <Dialog open={requerimiento !== null} onOpenChange={onOpenChange}>
@@ -107,15 +118,17 @@ const ModalDetalleRequerimiento = ({ requerimiento, onOpenChange }: Props) => {
             <Campo 
               label="Responsable" 
               valor={
-                <BadgeResponsable>{responsable}</BadgeResponsable>
+                <BadgeResponsable>
+                  {responsable?.nombre ?? "Sin asignar"}
+                </BadgeResponsable>
               } 
               icon={<User size={16} />}
             />
             <Campo 
               label="Estado" 
               valor={
-                <BadgeEstado color={estado!.color}>
-                  {estado?.label}
+                <BadgeEstado color={colorEstado}>
+                  {estado?.label ?? "Sin estado"}
                 </BadgeEstado>  } 
               icon={<Tag size={16} />}
             />

@@ -18,7 +18,6 @@ import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@
 
 import { useCatalogos } from "@/context/CatalogosContext";
 import { formatearMonedaInput, parsearMonedaInput } from "@/utils/formatearMoneda";
-import { estados } from "@/data/placeholder/estados";
 import { DotEstado } from "../DotEstado";
 
 type RequerimientoFormProps = {
@@ -41,7 +40,7 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
   });
 
   const mode = requerimiento ? "edit" : "create"
-  const { trabajadores } = useCatalogos();
+  const { trabajadores, estados } = useCatalogos();
 
   const handleFormSubmit = (data: RequerimientoFormData) => {
     onSave(data)

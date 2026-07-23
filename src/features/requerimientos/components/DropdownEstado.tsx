@@ -1,10 +1,11 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { memo } from "react";
-import { BadgeEstado } from "./BadgeEstado";
-import { estados } from "@/data/placeholder/estados";
+import { useCatalogos } from "@/context/CatalogosContext";
+
 import { colorPorEstado } from "../constants/colorPorEstado";
 
+import { BadgeEstado } from "./BadgeEstado";
 import { Check } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { DotEstado } from "./DotEstado";
 
 type DropdownEstadoProps = {
@@ -23,6 +24,8 @@ export const DropdownEstado = memo(
   onChange,
 }: DropdownEstadoProps) => {
 
+  const { estados } = useCatalogos()
+
   const estadoActual = estados.find(e => e.id === estadoId) ?? estados[0];
   const color = colorPorEstado[estadoActual.key] ?? "gray";
 
@@ -30,9 +33,7 @@ export const DropdownEstado = memo(
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button>
-          <BadgeEstado
-            color={color}       
-          >
+          <BadgeEstado color={color}>
             {estadoActual?.label}
           </BadgeEstado>
         </button>
@@ -46,21 +47,11 @@ export const DropdownEstado = memo(
 
           <DropdownMenuItem
             key={estado.id}
-            onClick={() =>
-              onChange(
-                requerimientoId,
-                estado.id
-              )
-            }
+            onClick={() => onChange(requerimientoId, estado.id)}
             className="flex justify-between cursor-pointer"
           >
-            <DotEstado 
-              estado={estado}
-            />
-
-            {estado.id === estadoId && (
-              <Check className="size-4" />
-            )}
+            <DotEstado estado={estado}/>
+            {estado.id === estadoId && (<Check className="size-4" />)}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

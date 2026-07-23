@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useCatalogos } from "@/context/CatalogosContext";
+
 import { Check, ChevronDown, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
-import { estados } from "@/data/placeholder/estados";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -13,6 +14,8 @@ type Props = {
 
 export default function FiltroEstado({ value, onChange }: Props) {
   const [open, setOpen] = useState(false);
+
+  const { estados } = useCatalogos()
 
   const toggleEstado = (id: string) => {
     onChange(
