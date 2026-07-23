@@ -11,7 +11,6 @@ import { CardMonto } from "@/features/requerimientos/components/CardMonto";
 
 import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
 import { mediosPago } from "@/data/placeholder/mediosPago";
-import { usePagos } from "@/context/PagosContext";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,7 +27,9 @@ type RegistrarPagoFormProps = {
 };
 
 export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFormProps) => {
-  const { agregarPago } = usePagos();
+  const agregarPago = (data: {}, id: string) => {
+    console.log(data, id) //TRAER DESDE SERVICE
+  }
 
   const montoMaximo = Math.max(
     0,

@@ -53,6 +53,7 @@ export const RequerimientosProvider = ({children}: ProviderProps) => {
   };
 
   const agregarRequerimiento = (data: RequerimientoFormData) => {
+    console.log(data)
     //INSERT SUPABASE
   }
 

@@ -1,5 +1,8 @@
+import { useState, useEffect } from "react";
 import type { Requerimiento } from "@/features/requerimientos/types/requerimiento.type";
-import { usePagos } from "@/context/PagosContext";
+import type { Pago } from "../types/pago.type";
+
+import { useCatalogos } from "@/context/CatalogosContext";
 
 import {
   Table,
@@ -10,18 +13,28 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { mediosPago } from "@/data/placeholder/mediosPago";
-
 import { formatearMoneda } from "@/utils/formatearMoneda";
 import { formatearFecha } from "@/utils/formatearFecha";
+
+import { obtenerPagosRequerimiento } from "../services/pagos.service";
 
 type HistorialPagosProps = {
   requerimiento: Requerimiento
 }
 
 export const HistorialPagos = ({ requerimiento }: HistorialPagosProps) => {
-  const { pagosPorRequerimiento } = usePagos()
-  const pagos = pagosPorRequerimiento(requerimiento.id)
+  const [pagos, setPagos] = useState<Pago[]>([])
+
+  useEffect(() => {
+    const cargarPagos = async () => {
+      const data = await obtenerPagosRequerimiento(requerimiento.id)
+      setPagos(data)
+    }
+
+    cargarPagos()
+  }, [requerimiento.id])
+
+  const { medios_pago } = useCatalogos()
 
   return (
     <div className="flex flex-col">
@@ -37,6 +50,7 @@ export const HistorialPagos = ({ requerimiento }: HistorialPagosProps) => {
         <TableBody>
           {pagos.length > 0 ? (
             pagos.map((pago) => {
+              const medioPagoLabel = medios_pago.find((m) => m.id === pago.medio_pago_id)?.label ?? pago.medio_pago_id;
               return (
                 <TableRow key={pago.id}>
                   <TableCell>{formatearFecha(pago.fecha)}</TableCell>
