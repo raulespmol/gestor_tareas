@@ -37,13 +37,12 @@ export const HistorialPagos = ({ requerimiento }: HistorialPagosProps) => {
         <TableBody>
           {pagos.length > 0 ? (
             pagos.map((pago) => {
-              const medioLabel = mediosPago.find((m) => m.value === pago.medioPago)?.label ?? pago.medioPago;
               return (
                 <TableRow key={pago.id}>
                   <TableCell>{formatearFecha(pago.fecha)}</TableCell>
                   <TableCell>{formatearMoneda(pago.monto)}</TableCell>
                   <TableCell>
-                    {medioLabel}{pago.voucher ? ` #${pago.voucher}` : ""}
+                    {medioPagoLabel}{pago.voucher ? ` #${pago.voucher}` : ""}
                   </TableCell>
                 </TableRow>
               );

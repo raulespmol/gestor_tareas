@@ -12,7 +12,7 @@ export const createRegistrarPagoSchema = (maxMonto: number) => z.object({
       message: "No puede superar el saldo pendiente",
     }),
 
-  medioPago: z
+  medio_pago: z
     .string()
     .trim()
     .min(1, "El medio de pago es obligatorio"),
@@ -23,7 +23,7 @@ export const createRegistrarPagoSchema = (maxMonto: number) => z.object({
     })
     .superRefine((data, ctx) => {
       const requiereVoucher =
-        data.medioPago === "credito" || data.medioPago === "debito";
+        data.medio_pago === "credito" || data.medio_pago === "debito";
 
       if (requiereVoucher && data.voucher === "") {
         ctx.addIssue({

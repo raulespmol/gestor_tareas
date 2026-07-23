@@ -49,7 +49,7 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
     defaultValues: {
       fecha: new Date().toISOString().split("T")[0],
       monto: 0,
-      medioPago: "",
+      medio_pago: "",
       voucher: "",
     },
   })
@@ -59,13 +59,13 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
     reset({
       fecha: new Date().toISOString().split("T")[0],
       monto: 0,
-      medioPago: "",
+      medio_pago: "",
       voucher: "",
     })
     onSuccess();
   }
 
-  const medioPagoValue = watch("medioPago");
+  const medioPagoValue = watch("medio_pago");
   const isVoucherEnabled = medioPagoValue === "debito" || medioPagoValue === "credito"
 
   useEffect(() => {
@@ -149,7 +149,7 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
           </FieldLabel>
           <Controller
             control={control}
-            name="medioPago"
+            name="medio_pago"
             render={({ field }) => (
               <Select
                 value={field.value?.toString()}
@@ -173,7 +173,7 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
             )}
           />
           
-          <FieldError errors={[errors.medioPago]} />
+          <FieldError errors={[errors.medio_pago]} />
         </Field>
         
         <Field className="col-span-1">

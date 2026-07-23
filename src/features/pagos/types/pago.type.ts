@@ -1,8 +1,8 @@
 export type Pago = {
   id: string;
-  requerimientoId: string;
+  requerimiento_id: string;
   fecha: string;
   monto: number;
-  medioPago: string;
+  medio_pago_id: string;
   voucher: string;
 };
