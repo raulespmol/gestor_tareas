@@ -1,25 +1,23 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
+import { useCatalogos } from "@/context/CatalogosContext";
 
-import {
-  createRegistrarPagoSchema,
-  type RegistrarPagoFormData
-} from "@/features/pagos/schemas/registrarPago.schema";
+import type { Requerimiento } from "../../../requerimientos/types/requerimiento.type";
+import type { RegistrarPagoFormData } from "@/features/pagos/schemas/registrarPago.schema";
+
+import { createRegistrarPagoSchema } from "@/features/pagos/schemas/registrarPago.schema";
+
+import { formatearMonedaInput, parsearMonedaInput } from "@/utils/formatearMoneda";
+import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
 
 import { CardMonto } from "@/features/requerimientos/components/CardMonto";
-
-import { getEstadoPago } from "@/features/requerimientos/utils/colorMonto";
-import { mediosPago } from "@/data/placeholder/mediosPago";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select"
-import type { Requerimiento } from "../../../requerimientos/types/requerimiento.type";
 import { Calendar, CreditCard, DollarSign, ScrollText } from "lucide-react";
 import { Separator } from "@/components/ui/separator"
-import { formatearMonedaInput, parsearMonedaInput } from "@/utils/formatearMoneda";
 
 type RegistrarPagoFormProps = {
   requerimiento: Requerimiento;
@@ -30,6 +28,8 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
   const agregarPago = (data: {}, id: string) => {
     console.log(data, id) //TRAER DESDE SERVICE
   }
+
+  const { medios_pago } = useCatalogos()
 
   const montoMaximo = Math.max(
     0,
@@ -160,12 +160,12 @@ export const FormRegistrarPago = ({ requerimiento, onSuccess }: RegistrarPagoFor
                   <SelectValue placeholder="Seleccionar..." />
                 </SelectTrigger>
                 <SelectContent>
-                  {mediosPago.map(t => (
+                  {medios_pago.map(m => (
                     <SelectItem
-                      key={t.value}
-                      value={t.value}
+                      key={m.key}
+                      value={m.key}
                     >
-                      {t.label}
+                      {m.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
