@@ -137,7 +137,6 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
           </FieldLabel>
 
           <Textarea
-            {...register("detalleDescripcion")}
             {...register("descripcion")}
             className="resize-none h-27.5"
             placeholder="Adhesivo / Tela / Greyback ..."
@@ -225,7 +224,6 @@ export const FormRequerimiento = ({ requerimiento, defaultValues, onSave, errorM
           </FieldLabel>
           <Input
             type="text"
-            {...register("otrosDatos")}
             {...register("otros_datos")}
             placeholder="Telefono / OC / RUT"
           />
