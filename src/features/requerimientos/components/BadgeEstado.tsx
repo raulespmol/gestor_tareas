@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import type { ReactNode } from "react";
-import type { EstadoColor } from "../constants/coloresEstado";
-import { coloresEstado } from "../constants/coloresEstado";
+import type { EstadoColor } from "../../../catalogos/estados/coloresEstado";
+import { coloresEstado } from "../../../catalogos/estados/coloresEstado";
 
 
 type BadgeEstadoProps = {

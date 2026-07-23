@@ -1,4 +1,4 @@
-import type { Estado } from "@/features/requerimientos/types/estado.type";
+import type { Estado } from "@/catalogos/estados/estado.type";
 
 export const estados: Estado[] = [
   { 

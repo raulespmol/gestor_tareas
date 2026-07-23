@@ -1,5 +1,5 @@
-import { coloresEstado } from "../constants/coloresEstado";
-import type { Estado } from "../types/estado.type";
+import { coloresEstado } from "../../../catalogos/estados/coloresEstado";
+import type { Estado } from "../../../catalogos/estados/estado.type";
 
 type EstadoDotProps = {
   estado: Estado
